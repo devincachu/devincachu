@@ -58,7 +58,7 @@ def pip_install():
 @roles('server')
 def create_local_settings():
     with cd(env.project_root):
-        run('%(virtualenv)s/bin/python gerar_settings_local.py %(app_root)s/settings_local.py.example > %(app_root)s/settings_local.py' % env)
+        run('%(virtualenv)s/bin/python gerar_settings_local.py %(app_root)s/settings_local.py.example' % env)
 
 
 @roles('server')
