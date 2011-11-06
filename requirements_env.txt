@@ -3,3 +3,4 @@ django_compressor==1.1.1
 django_htmlmin==0.5
 MySQL-Python==1.2.3
 gunicorn==0.13.4
+Markdown==2.0.3
