@@ -123,6 +123,12 @@ def gerar_2011():
 
 
 @roles('server')
+def createsuperuser():
+    with cd(env.app_root):
+        run("%(virtualenv)s/bin/python manage.py createsuperuser" % env)
+
+
+@roles('server')
 def deploy(db='no', start='no', create_local='no'):
     update_app()
     create_virtualenv_if_need()
