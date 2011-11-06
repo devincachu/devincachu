@@ -50,7 +50,7 @@ def install_csstidy_if_need():
     if not files.exists(django_settings.COMPRESS_CSSTIDY_BINARY):
         with cd('/tmp'):
             run('curl -O "http://ufpr.dl.sourceforge.net/project/csstidy/CSSTidy%20%28C%2B%2B%2C%20stable%29/1.3/csstidy-source-1.4.zip"')
-            run('unzip csstidy-source-1.4.zip && cd csstidy && scons && cp release/csstidy/csstidy %s' % django_settings.COMPRESS_CSSTIDY_BINARY)
+            run('unzip csstidy-source-1.4.zip && cd csstidy && %s/bin/scons && cp release/csstidy/csstidy %s' % (env.virtualenv, django_settings.COMPRESS_CSSTIDY_BINARY))
 
 
 @roles('server')
