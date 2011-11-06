@@ -112,6 +112,7 @@ COMPRESS_ENABLED = not DEBUG
 COMPRESS_OFFLINE = True
 
 KEEP_COMMENTS_ON_MINIFYING = True
+EXCLUDE_FROM_MINIFYING = ('^admin/',)
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
