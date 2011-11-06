@@ -133,7 +133,7 @@ def deploy(db='no', start='no', create_local='no'):
     if db == 'yes':
         syncdb()
 
-    if start:
+    if start == 'yes':
         start_gunicorn()
     else:
         graceful_gunicorn()
