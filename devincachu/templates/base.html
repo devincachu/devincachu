@@ -1,0 +1,91 @@
+{% load compress %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}Dev in Cachu 2012{% endblock %}</title>
+        <meta name="description" content="" />
+
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        {% compress css %}
+            <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" />
+            <link href="{{ STATIC_URL }}css/devincachu.css" rel="stylesheet" />
+        {% endcompress %}
+
+        {% block css %}
+        {% endblock %}
+
+        <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" />
+    </head>
+
+    <body>
+
+        {% block menu %}
+            <div class="topbar">
+                <div class="fill">
+                    <div class="container">
+                        <a class="brand" href="#">Dev in Cachu</a>
+                        <ul class="nav">
+                            <li class="active"><a href="#about">Quando e Onde</a></li>
+                            <li><a href="#contact">Programação</a></li>
+                            <li><a href="#contact">Palestrantes</a></li>
+                            <li><a href="#contact">Inscrição</a></li>
+                            <li><a href="#contact">Patrocínio</a></li>
+                            <li><a href="#contact">Caravanas</a></li>
+                            <li><a href="#contact">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+        <div class="container">
+
+            {% block destaque %}
+                <div class="hero-unit">
+                    <h1>Dev in Cachu<br />21 de Abril de 2012</h1>
+                    <p>Vem aí a segunda edição do principal evento de desenvolvimento de software do sul do Espírito Santo!</p>
+                    <p><a class="btn primary large">Saiba mais &raquo;</a></p>
+                </div>
+            {% endblock %}
+
+            <div class="row">
+                {% block conteudo %}
+                    <div class="span11">
+                        {% block coluna_central %}
+                            <h2>Heading</h2>
+                            <p>Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+                            <p><a class="btn" href="#">View details &raquo;</a></p>
+                        {% endblock %}
+                    </div>
+
+                    <div class="span5">
+                        {% block coluna_lateral %}
+                            <h2>Patrocinadores</h2>
+                            <p>Fulano está patrocinando!</p>
+                            <h2>Idealizadores</h2>
+                            <p>@agnhesi<br />
+                            @franciscosouza<br />
+                            @isaurarangel<br />
+                            @magnomp<br />
+                            @martinusso</p>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+
+            <footer>
+            {% block rodape %}
+                <p>&copy; Organização do Dev in Cachu 2011</p>
+                <p><a href="http://github.com/fsouza/devincachu" target="_blank" title="Código do site do Dev in Cachu">Código disponível no Github</a></p>
+            {% endblock %}
+            </footer>
+
+        </div>
+
+    </body>
+</html>
