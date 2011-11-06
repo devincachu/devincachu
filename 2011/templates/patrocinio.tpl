@@ -3,7 +3,7 @@
 <h1>Seja um patrocinador!</h1> 
 <div id="img-captacao"> 
 <a href="{$root}/static/files/projeto_devincachu.pdf"><img src="{$root}/static/images/pdf-icon.png" width="59" height="91"/></a> 
-<span><a href="{$root}/static/files/projeto_devincachu.pdf">Baixe nosso plano de capta&ccedil;&atilde;o aqui</a></span> 
+<span><a href="{$root}/2011/static/files/projeto_devincachu.pdf">Baixe nosso plano de capta&ccedil;&atilde;o aqui</a></span> 
 </div> 
 <p class="spaces">O patroc&iacute;nio do evento &eacute; direcionado a todas as empresas interessadas em associar sua marca a um seleto grupo de estudantes, profissionais e empresas atuantes no mercado de TI, voltado para o assunto de Desenvolvimento de Software.</p> 
 <p class="spaces">Criado para agregar num s&oacute; local todos os membros da comunidade de desenvolvimento de software sul capixaba, o Dev in Cachu foi o maior evento sobre o tema que j&aacute; ocorreu no sul do Esp&iacute;rito Santo. Ele contar&aacute; com a participa&ccedil;&atilde;o massiva da comunidade de estudantes, profissionais e empreendedores de tecnologia da informa&ccedil;&atilde;o que querem aprofundar nos temas mais relevantes.</p> 

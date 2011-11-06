@@ -17,7 +17,7 @@ $LAB.script("{$root}/static/js/jquery-1.5.2.min.js").wait()
     <body>
         <div id="wrapper">
             <div id="header">
-                <a class="no_bg" href="http://www.devincachu.com.br"><img alt="Dev in Cachu 2011" class="header_logo" src="{$root}/static/images/logo.png" title="Dev in Cachu 2011" /></a>
+                <a class="no_bg" href="http://www.devincachu.com.br/2011"><img alt="Dev in Cachu 2011" class="header_logo" src="{$root}/static/images/logo.png" title="Dev in Cachu 2011" /></a>
                 <img alt="Dev in Cachu 2011" src="{$root}/static/images/dia30deAbril-saocamilo.png" title="Dev in Cachu 2011" />
             </div>
             <div id="nav">
