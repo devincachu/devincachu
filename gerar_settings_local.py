@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 import datetime
 import hashlib
+import os
 import random
 import sys
+
+meu_diretorio = os.path.dirname(__file__)
+arquivo_saida = os.path.join(meu_diretorio, "devincachu", "settings_local.py")
 
 
 def gerar_arquivo(nome_arquivo):
     fp = open(nome_arquivo, 'r')
+    saida = open(arquivo_saida, 'w')
     try:
         conteudo = fp.read()
         kw = {
@@ -15,9 +20,10 @@ def gerar_arquivo(nome_arquivo):
             'db_password': raw_input('Digite a senha do usuário: '),
             'secret_key': hashlib.sha1('%d%s' % (random.randint(0, 100000), datetime.datetime.now().isoformat())).hexdigest(),
         }
-        print conteudo % kw
+        saida.write(conteudo % kw)
     finally:
         fp.close()
+        saida.close()
 
 
 if __name__ == '__main__':
