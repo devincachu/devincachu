@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load markup %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/index.css" type="text/css" media="screen" charset="utf-8"/>
+{% endblock %}
+
 {% block coluna_central %}
     {% for destaque in destaques %}
         <h2>{{ destaque.titulo }}</h2>
