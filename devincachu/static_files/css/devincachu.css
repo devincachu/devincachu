@@ -1,3 +1,8 @@
 body {
     padding-top: 60px;
 }
+
+.idealizadores {
+    list-style-position: inside;
+    margin-left: 5px;
+}

@@ -31,16 +31,16 @@
             <div class="topbar">
                 <div class="fill">
                     <div class="container">
-                        <a class="brand" href="#">Dev in Cachu</a>
+                        <a class="brand" href="/">Dev in Cachu</a>
                         <ul class="nav">
-                            <li class="active"><a href="#about">Quando e Onde</a></li>
-                            <li><a href="#contact">Programação</a></li>
-                            <li><a href="#contact">Palestrantes</a></li>
-                            <li><a href="#contact">Inscrição</a></li>
-                            <li><a href="#contact">Patrocínio</a></li>
-                            <li><a href="#contact">Caravanas</a></li>
-                            <li><a href="#contact">Contato</a></li>
-                            <li><a href="/2011">/2011</a></li>
+                            <li><a href="#" title="Quando e Onde">Quando e Onde</a></li>
+                            <li><a href="#" title="Programação">Programação</a></li>
+                            <li><a href="#" title="Palestrantes">Palestrantes</a></li>
+                            <li><a href="#" title="Inscrição">Inscrição</a></li>
+                            <li><a href="#" title="Patrocínio">Patrocínio</a></li>
+                            <li><a href="#" title="Caravanas">Caravanas</a></li>
+                            <li><a href="#" title="Contato">Contato</a></li>
+                            <li><a href="/2011" title="Dev in Cachu 2011">/2011</a></li>
                         </ul>
                     </div>
                 </div>
@@ -61,22 +61,33 @@
                 {% block conteudo %}
                     <div class="span11">
                         {% block coluna_central %}
-                            <h2>Heading</h2>
-                            <p>Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-                            <p><a class="btn" href="#">View details &raquo;</a></p>
+                            <h2>Vem aí: Dev in Cachu 2012!</h2>
+                            <p>Já começaram os preparativos para o principal evento de desenvolvimento de software do sul do Espírito Santo, o Dev in Cachu!
+                            Em <a href="/2011" title="Dev in Cachu 2011">2011</a>, o evento foi um tremendo sucesso, e estamos trabalhando para que em 2012 não seja diferente!</p>
+                            <p>Em breve teremos mais informações no site :)</p>
                         {% endblock %}
                     </div>
 
                     <div class="span5">
                         {% block coluna_lateral %}
                             <h2>Patrocinadores</h2>
-                            <p>Fulano está patrocinando!</p>
+                            <p>Seja o primeiro</p>
+                            <h3>Diamante</h3>
+                            <p>Seja o primeiro!</p>
+                            <h3>Ouro</h3>
+                            <p>Seja o primeiro!</p>
+                            <h3>Prata</h3>
+                            <p>Seja o primeiro!</p>
+                            <h3>Bronze</h3>
+                            <p>Seja o primeiro!</p>
                             <h2>Idealizadores</h2>
-                            <p>@agnhesi<br />
-                            @franciscosouza<br />
-                            @isaurarangel<br />
-                            @magnomp<br />
-                            @martinusso</p>
+                            <ul class="idealizadores">
+                                <li><a href="http://twitter.com/agnhesi" title="Andressa Agnhesi" rel="nofollow" target="_blank">@agnhesi</a></li>
+                                <li><a href="http://twitter.com/franciscosouza" title="Francisco Souza" rel="nofollow" target="_blank">@franciscosouza</a></li>
+                                <li><a href="http://twitter.com/isaurarangel" title="Isaura Rangel" rel="nofollow" target="_blank">@isaurarangel</a></li>
+                                <li><a href="http://twitter.com/magnomp" title="Magno Machado" rel="nofollow" target="_blank">@magnomp</a></li>
+                                <li><a href="http://twitter.com/martinusso" title="Breno Martinusso" rel="nofollow" target="_blank">@martinusso</a></li>
+                            </ul>
                         {% endblock %}
                     </div>
                 {% endblock %}
