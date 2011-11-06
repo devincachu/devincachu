@@ -118,6 +118,11 @@ def reload_nginx():
 
 
 @roles('server')
+def gerar_2011():
+    run("curl -H 'Host: devincachu.com.br' http://localhost:8085/gerar.php")
+
+
+@roles('server')
 def deploy(db='no', start='no', create_local='no'):
     update_app()
     create_virtualenv_if_need()
