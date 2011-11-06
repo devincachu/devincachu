@@ -14,10 +14,10 @@
         {% compress css %}
             <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" />
             <link href="{{ STATIC_URL }}css/devincachu.css" rel="stylesheet" />
-        {% endcompress %}
 
-        {% block css %}
-        {% endblock %}
+            {% block css %}
+            {% endblock %}
+        {% endcompress %}
 
         <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" />
     </head>
