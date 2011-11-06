@@ -1,2 +1,2 @@
 #!/bin/sh
-java -jar `pwd`/compiler.jar $*
+java -jar `dirname $0`/compiler.jar $*
