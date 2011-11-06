@@ -1,0 +1,17 @@
+DEBUG = False
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '%(db_name)s',
+        'USER': '%(db_user)s',
+        'PASSWORD': '%(db_password)s',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
+MEDIA_URL = 'http://img.devincachu.com.br/media/'
+STATIC_URL = 'http://img.devincachu.com.br/static/'
+
+SECRET_KEY = '%(secret_key)s'
