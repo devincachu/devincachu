@@ -10,4 +10,8 @@ class DestaqueAdmin(admin.ModelAdmin):
     search_fields = ('titulo',)
     form = forms.DestaqueAdminForm
 
+    def save_model(self, request, obj, form, change):
+        obj.autor = request.user
+        obj.save()
+
 admin.site.register(models.Destaque, DestaqueAdmin)
