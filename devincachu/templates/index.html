@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block coluna_central %}
+    {% for destaque in destaques %}
+        <h2>{{ destaque.titulo }}</h2>
+        <div class="metadados">Postado por {{ destaque.autor.first_name }} em {{ destaque.data|date:"d/m/Y à\s H:i:s" }}</div>
+        {{ destaque.conteudo|markdown }}
+    {% endfor %}
+{% endblock %}
