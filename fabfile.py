@@ -38,19 +38,16 @@ def create_virtualenv_if_need():
 
 
 @roles('server')
-def install_scons_if_need():
-    if not files.exists('%(virtualenv)s/bin/scons' % env):
-        with cd('/tmp'):
-            run('curl -O http://ufpr.dl.sourceforge.net/project/scons/scons/2.1.0/scons-2.1.0.tar.gz')
-            run('tar -xzf scons-2.1.0.tar.gz && cd scons-2.1.0 && %(virtualenv)s/bin/python setup.py install' % env)
-
-@roles('server')
 def install_csstidy_if_need():
-    install_scons_if_need()
     if not files.exists(django_settings.COMPRESS_CSSTIDY_BINARY):
         with cd('/tmp'):
             run('curl -O "http://ufpr.dl.sourceforge.net/project/csstidy/CSSTidy%20%28C%2B%2B%2C%20stable%29/1.3/csstidy-source-1.4.zip"')
-            run('unzip csstidy-source-1.4.zip && cd csstidy && %s/bin/scons && cp release/csstidy/csstidy %s' % (env.virtualenv, django_settings.COMPRESS_CSSTIDY_BINARY))
+            with settings(warn_only=True):
+                run("unzip csstidy-source-1.4.zip")
+
+            with cd("csstidy"):
+                run("sed -i 's/#include <string>/#include <string>\\n#include <cstring>/g' csspp_globals.hpp && g++ *.cpp -o csstidy")
+                sudo("cp csstidy %s" %  django_settings.COMPRESS_CSSTIDY_BINARY)
 
 
 @roles('server')
