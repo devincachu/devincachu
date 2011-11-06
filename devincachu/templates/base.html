@@ -19,6 +19,12 @@
             {% endblock %}
         {% endcompress %}
 
+        {% compress js %}
+            {% block js %}
+
+            {% endblock %}
+        {% endcompress %}
+
         <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" />
     </head>
 
