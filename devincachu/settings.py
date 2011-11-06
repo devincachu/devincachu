@@ -1,6 +1,7 @@
 import os
 
 ROOT = os.path.abspath(os.path.dirname(__file__))
+RESOURCES_DIRECTORY = os.path.abspath(os.path.join(ROOT, '..', 'resources'))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -69,13 +70,19 @@ ROOT_URLCONF = 'devincachu.urls'
 
 COMPRESS_ENABLED = not DEBUG
 COMPRESS_OFFLINE = True
+
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.csstidy.CSSTidyFilter',
 )
 COMPRESS_CSSTIDY_BINARY = "/usr/local/bin/csstidy"
 COMPRESS_CSSTIDY_ARGUMENTS = "--template=highest --discard_invalid_properties=false --silent=true"
-COMPRESS_DATA_URI_MAX_SIZE = 10240
+
+COMPRESS_JS_FILTERS = (
+    'compressor.filters.closure.ClosureCompilerFilter',
+)
+COMPRESS_CLOSURE_COMPILER_BINARY = os.path.join(RESOURCES_DIRECTORY, 'compiler.sh')
+COMPRESS_CLOSURE_COMPILER_ARGUMENTS = '--compilation_level ADVANCED_OPTIMIZATIONS --charset UTF-8'
 
 KEEP_COMMENTS_ON_MINIFYING = True
 EXCLUDE_FROM_MINIFYING = ('^admin/',)
