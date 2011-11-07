@@ -12,6 +12,13 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 MEDIA_URL = 'http://img.devincachu.com.br/media/'
 STATIC_URL = 'http://img.devincachu.com.br/static/'
 
