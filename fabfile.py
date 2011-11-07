@@ -62,12 +62,6 @@ def create_local_settings():
 
 
 @roles('server')
-def compress():
-    with cd(env.app_root):
-        run('%(virtualenv)s/bin/python manage.py compress' % env)
-
-
-@roles('server')
 def collect_static_files():
     with cd(env.app_root):
         run('%(virtualenv)s/bin/python manage.py collectstatic -v 0 --noinput' % env)
@@ -138,7 +132,6 @@ def deploy(db='no', start='no', create_local='no'):
     if create_local == 'yes':
         create_local_settings()
 
-    compress()
     collect_static_files()
 
     if db == 'yes':
