@@ -79,8 +79,12 @@ COMPRESS_CSSTIDY_BINARY = "/usr/local/bin/csstidy"
 COMPRESS_CSSTIDY_ARGUMENTS = "--template=highest --discard_invalid_properties=false --silent=true"
 
 COMPRESS_JS_FILTERS = (
-    'compressor.filters.closure.ClosureCompilerFilter',
+    'compressor.filters.yui.YUIJSFilter',
 )
+
+COMPRESS_YUI_BINARY = os.path.join(RESOURCES_DIRECTORY, 'yuicompressor.jar')
+COMPRESS_YUI_JS_ARGUMENTS = '--charset utf-8'
+
 COMPRESS_CLOSURE_COMPILER_BINARY = os.path.join(RESOURCES_DIRECTORY, 'compiler.sh')
 COMPRESS_CLOSURE_COMPILER_ARGUMENTS = '--compilation_level ADVANCED_OPTIMIZATIONS --charset UTF-8'
 
