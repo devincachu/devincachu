@@ -85,11 +85,10 @@ COMPRESS_JS_FILTERS = (
 COMPRESS_YUI_BINARY = os.path.join(RESOURCES_DIRECTORY, 'yuicompressor.jar')
 COMPRESS_YUI_JS_ARGUMENTS = '--charset utf-8'
 
-COMPRESS_CLOSURE_COMPILER_BINARY = os.path.join(RESOURCES_DIRECTORY, 'compiler.sh')
-COMPRESS_CLOSURE_COMPILER_ARGUMENTS = '--compilation_level ADVANCED_OPTIMIZATIONS --charset UTF-8'
-
 KEEP_COMMENTS_ON_MINIFYING = True
 EXCLUDE_FROM_MINIFYING = ('^admin/',)
+
+ROAN_PURGE_URL = "http://beta.devincachu.com.br/purge"
 
 TEMPLATE_DIRS = (
     os.path.join(ROOT, 'templates'),
