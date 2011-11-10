@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import contextlib
 import os
+import sys
 
 from fabric.api import cd, env, roles, run, settings, sudo
 from fabric.contrib import django, files
@@ -15,6 +16,8 @@ env.user = 'devincachu'
 env.roledefs = {
     'server': ['devincachu.com.br'],
 }
+
+sys.path.insert(0, env.root)
 
 django.project('devincachu')
 
