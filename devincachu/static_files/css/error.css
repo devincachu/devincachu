@@ -1,0 +1,21 @@
+body {
+    background-color: rgb(0, 0, 130);
+    color: #FFF;
+    text-align: center;
+}
+
+h1 {
+    color: #FFF;
+    font-family: monospace;
+    margin: 50px 0;
+}
+
+a {
+    display: block;
+    color: #FFF;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #AAA;
+}
