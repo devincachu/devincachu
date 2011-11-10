@@ -5,3 +5,4 @@ MySQL-Python==1.2.3
 gunicorn==0.13.4
 Markdown==2.0.3
 pylibmc==1.2.2
+roan==0.1
