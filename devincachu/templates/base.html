@@ -93,7 +93,10 @@
 
             <footer>
             {% block rodape %}
-                <p>&copy; Organização do Dev in Cachu 2011</p>
+                <p>
+                    &copy; Organização do Dev in Cachu {% now "Y" %}<br />
+                    <em>Praticamente nenhum direito reservado :)</em>
+                </p>
                 <p><a href="http://github.com/fsouza/devincachu" target="_blank" title="Código do site do Dev in Cachu">Código disponível no Github</a></p>
             {% endblock %}
             </footer>
