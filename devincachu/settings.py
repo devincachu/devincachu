@@ -105,6 +105,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'compressor',
     'destaques',
+    'palestras',
 )
 
 LOGGING = {
