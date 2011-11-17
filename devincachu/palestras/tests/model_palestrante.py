@@ -27,6 +27,25 @@ class ModelPalestranteTestCase(unittest.TestCase):
         field = [f for f in models.Palestrante._meta.fields if f.name == 'nome'][0]
         self.assertEquals(100, field.max_length)
 
+    def test_model_palestrante_deve_ter_slug(self):
+        self.assertIn('slug', self.field_names)
+
+    def test_campo_slug_deve_ser_SlugField(self):
+        field = [f for f in models.Palestrante._meta.fields if f.name == 'slug'][0]
+        self.assertIsInstance(field, django_models.SlugField)
+
+    def test_campo_slug_nao_deve_aceitar_blank(self):
+        field = [f for f in models.Palestrante._meta.fields if f.name == 'slug'][0]
+        self.assertFalse(field.blank)
+
+    def test_campo_slug_deve_ter_no_maximo_100_caracteres(self):
+        field = [f for f in models.Palestrante._meta.fields if f.name == 'slug'][0]
+        self.assertEquals(100, field.max_length)
+
+    def test_campo_slug_deve_ser_unico(self):
+        field = [f for f in models.Palestrante._meta.fields if f.name == 'slug'][0]
+        self.assertTrue(field.unique)
+
     def test_model_palestrante_deve_ter_blog(self):
         self.assertIn('blog', self.field_names)
 
