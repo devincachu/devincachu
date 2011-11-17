@@ -92,9 +92,9 @@ class ModelPalestranteTestCase(unittest.TestCase):
         field = [f for f in models.Palestrante._meta.fields if f.name == 'minicurriculo'][0]
         self.assertFalse(field.blank)
 
-    def test_campo_minicurriculo_deve_ter_no_maximo_500_caracteres(self):
+    def test_campo_minicurriculo_deve_ter_no_maximo_1000_caracteres(self):
         field = [f for f in models.Palestrante._meta.fields if f.name == 'minicurriculo'][0]
-        self.assertEquals(500, field.max_length)
+        self.assertEquals(1000, field.max_length)
 
     def test_palestrante_deve_ter_foto(self):
         self.assertIn('foto', self.field_names)
