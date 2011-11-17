@@ -1,0 +1,39 @@
+- model: palestras.Palestrante
+  pk: 1
+  fields:
+    nome: Hannibal Lecter
+    slug: hannibal-lecter
+    minicurriculo: Chianti.
+    foto: palestrantes/hannibal.jpg
+
+- model: palestras.Palestrante
+  pk: 2
+  fields:
+    nome: Vito Corleone
+    slug: vito-corleone
+    minicurriculo: Chianti.
+    foto: palestrantes/vito.jpg
+
+- model: palestras.Palestrante
+  pk: 3
+  fields:
+    nome: James Bond
+    slug: james-bond
+    minicurriculo: Chianti.
+    foto: palestrantes/bond.jpg
+
+- model: palestras.Palestrante
+  pk: 4
+  fields:
+    nome: Forrest Gump
+    slug: forrest-gump
+    minicurriculo: Chianti.
+    foto: palestrantes/forrest.jpg
+
+- model: palestras.Palestrante
+  pk: 5
+  fields:
+    nome: Freddy Krueger
+    slug: freddy-krueger
+    minicurriculo: Chianti.
+    foto: palestrantes/fred.jpg
