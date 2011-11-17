@@ -126,6 +126,11 @@ def createsuperuser():
 
 
 @roles('server')
+def clean_cache():
+    sudo("rm -rf /opt/nginx/cache/data/devincachu/*")
+
+
+@roles('server')
 def deploy(db='no', start='no', create_local='no'):
     update_app()
     create_virtualenv_if_need()
