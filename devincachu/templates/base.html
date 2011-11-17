@@ -94,14 +94,17 @@
             <footer>
             {% block rodape %}
                 <p>
-                    &copy; Organização do Dev in Cachu {% now "Y" %}<br />
+                    &copy; {% now "Y" %} - Organização do Dev in Cachu<br />
                     <em>Praticamente nenhum direito reservado :)</em>
                 </p>
-                <p><a href="http://github.com/fsouza/devincachu" target="_blank" title="Código do site do Dev in Cachu">Código disponível no Github</a></p>
             {% endblock %}
             </footer>
 
         </div>
+
+        <a href="http://github.com/fsouza/devincachu" id="github-ribbon" title="Fork o site do Dev in Cachu no Github!" rel="nofollow" target="_blank">
+            <img src="{{ STATIC_URL }}img/fork-me.png" alt="Fork me on Github" width="149" height="149" />
+        </a>
 
         {% compress js %}
             {% block js %}

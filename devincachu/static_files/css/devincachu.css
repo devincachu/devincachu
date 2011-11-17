@@ -6,3 +6,10 @@ body {
     list-style-position: inside;
     margin-left: 5px;
 }
+
+#github-ribbon img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 99999;
+}
