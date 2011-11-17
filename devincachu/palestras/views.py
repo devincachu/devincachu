@@ -9,3 +9,4 @@ class PalestrantesView(list.ListView):
     context_object_name = 'palestrantes'
     model = models.Palestrante
     template_name = 'palestrantes.html'
+    queryset = models.Palestrante.objects.all().order_by('nome')

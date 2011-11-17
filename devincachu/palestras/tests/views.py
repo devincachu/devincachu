@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
-import unittest
-
+from django import test
 from django.core import urlresolvers as u
+from django.test import client
 from django.views.generic import list
+from lxml import html
 
 from palestras import models, views
 
 
-class PalestrantesViewTestCase(unittest.TestCase):
+class PalestrantesViewTestCase(test.TestCase):
 
     def test_deve_herdar_de_ListView(self):
         assert issubclass(views.PalestrantesView, list.ListView)
@@ -25,3 +26,53 @@ class PalestrantesViewTestCase(unittest.TestCase):
         f = views.PalestrantesView.as_view()
         resolve = u.resolve("/palestrantes")
         self.assertEquals(f.func_code, resolve.func.func_code)
+
+
+class TemplatePalestrantesTestCase(test.TestCase):
+    fixtures = ['palestrantes.yaml']
+
+    def setUp(self):
+        factory = client.RequestFactory()
+        request = factory.get("/palestrantes")
+        view = views.PalestrantesView.as_view()
+        self.response = view(request)
+        self.response.render()
+        self.dom = html.fromstring(self.response.content)
+
+    def test_deve_trazer_listagem_de_palestrantes_em_ul_com_class_palestrante(self):
+        lis = self.dom.xpath('//ul[@class="palestrantes"]/li')
+        self.assertEquals(5, len(lis))
+
+    def test_deve_identificar_de_forma_unica_lis_impares_comecando_em_0(self):
+        lis = self.dom.xpath('//ul[@class="palestrantes"]/li')
+        for i, li in enumerate(lis):
+            if i % 2 == 1:
+                self.assertIn("impar", li.attrib['class'])
+
+    def test_deve_trazer_palestrantes_em_ordem_alfabetica(self):
+        lista_esperada = ["Forrest Gump", "Freddy Krueger", "Hannibal Lecter", "James Bond", "Vito Corleone"]
+        lista_obtida = [p.nome for p in self.response.context_data["palestrantes"]]
+        self.assertEquals(lista_esperada, lista_obtida)
+
+    def test_deve_trazer_link_para_o_blog_caso_o_palestrante_tenha_blog(self):
+        link = self.dom.xpath('//ul[@class="palestrantes"]/li/a[@href="http://bond.com"]')
+        self.assertEquals(1, len(link))
+
+    def test_nao_deve_trazer_link_para_o_blog_caso_o_palestrante_nao_tenha_blog(self):
+        lis = self.dom.xpath('//ul[@class="palestrantes"]/li')
+        li = lis[4]
+        children = li.getchildren()
+        c = 0
+        for child in children:
+            if child.tag == 'a':
+                c += 1
+
+        self.assertEquals(1, c)
+
+    def test_deve_ter_link_para_twitter_caso_o_palestrante_tenha_twitter(self):
+        link = self.dom.xpath('//ul[@class="palestrantes"]/li/a[@href="http://twitter.com/hlecter"]')
+        self.assertEquals(1, len(link))
+
+    def test_deve_ter_link_para_twitter_correto_caso_o_palestrante_tenha_twitter_comecando_em_arroba(self):
+        link = self.dom.xpath('//ul[@class="palestrantes"]/li/a[@href="http://twitter.com/vito"]')
+        self.assertEquals(1, len(link))
