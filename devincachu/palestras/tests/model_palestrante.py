@@ -110,3 +110,16 @@ class ModelPalestranteTestCase(unittest.TestCase):
     def test_campo_foto_nao_deve_aceitar_blank(self):
         field = [f for f in models.Palestrante._meta.fields if f.name == 'foto'][0]
         self.assertFalse(field.blank)
+
+    def test_repr_deve_conter_nome_do_palestrante(self):
+        esperado = '<Palestrante: "Francisco Souza">'
+        palestrante = models.Palestrante(nome="Francisco Souza")
+        self.assertEquals(esperado, repr(palestrante))
+
+    def test_unicode_deve_retornar_nome_do_palestrante(self):
+        palestrante = models.Palestrante(nome="Francisco Souza")
+        self.assertEquals("Francisco Souza", unicode(palestrante))
+
+    def test_str_deve_retornar_nome_do_palestrante(self):
+        palestrante = models.Palestrante(nome="Francisco Souza")
+        self.assertEquals("Francisco Souza", str(palestrante))
