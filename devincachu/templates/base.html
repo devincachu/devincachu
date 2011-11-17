@@ -26,6 +26,7 @@
     </head>
 
     <body>
+        {% url palestrantes as url_palestrantes %}
 
         {% block menu %}
             <div class="topbar">
@@ -35,7 +36,7 @@
                         <ul class="nav">
                             <li><a href="#" title="Quando e Onde">Quando e Onde</a></li>
                             <li><a href="#" title="Programação">Programação</a></li>
-                            <li><a href="#" title="Palestrantes">Palestrantes</a></li>
+                            <li><a href="{{ url_palestrantes }}" title="Palestrantes">Palestrantes</a></li>
                             <li><a href="#" title="Inscrição">Inscrição</a></li>
                             <li><a href="#" title="Patrocínio">Patrocínio</a></li>
                             <li><a href="#" title="Caravanas">Caravanas</a></li>
@@ -53,7 +54,7 @@
                 <div class="hero-unit">
                     <h1>Dev in Cachu 2012</h1>
                     <p>Em maio de 2012, estará de volta o maior evento de desenvolvimento de software do sul do Espírito Santo. Um sábado inteiro de palestras de alto nível, com palestrantes de renome nacional e internacional.</p>
-                    <p><a class="btn primary large" href="#">Conheça os palestrantes &raquo;</a></p>
+                    <p><a class="btn primary large" href="{{ url_palestrantes }}">Conheça os palestrantes &raquo;</a></p>
                 </div>
             {% endblock %}
 
