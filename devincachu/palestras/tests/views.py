@@ -76,3 +76,22 @@ class TemplatePalestrantesTestCase(test.TestCase):
     def test_deve_ter_link_para_twitter_correto_caso_o_palestrante_tenha_twitter_comecando_em_arroba(self):
         link = self.dom.xpath('//ul[@class="palestrantes"]/li/div/a[@href="http://twitter.com/vito"]')
         self.assertEquals(1, len(link))
+
+
+class TemplatePalestranteSemPalestrantesTestCase(test.TestCase):
+
+    def setUp(self):
+        factory = client.RequestFactory()
+        request = factory.get("/palestrantes")
+        view = views.PalestrantesView.as_view()
+        self.response = view(request)
+        self.response.render()
+        self.dom = html.fromstring(self.response.content)
+
+    def test_nao_deve_renderizar_ul(self):
+        ul = self.dom.xpath('//ul[@class="palestrantes"]')
+        self.assertEquals(0, len(ul))
+
+    def test_deve_exibir_mensagem_que_nao_ha_palestrantes(self):
+        msg = "Não há palestrantes ainda :( Envie sua ideia para contato@devincachu.com.br!"
+        self.assertIn(msg, self.response.content)
