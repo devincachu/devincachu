@@ -55,13 +55,13 @@ class TemplatePalestrantesTestCase(test.TestCase):
         self.assertEquals(lista_esperada, lista_obtida)
 
     def test_deve_trazer_link_para_o_blog_caso_o_palestrante_tenha_blog(self):
-        link = self.dom.xpath('//ul[@class="palestrantes"]/li/a[@href="http://bond.com"]')
+        link = self.dom.xpath('//ul[@class="palestrantes"]/li/div/a[@href="http://bond.com"]')
         self.assertEquals(1, len(link))
 
     def test_nao_deve_trazer_link_para_o_blog_caso_o_palestrante_nao_tenha_blog(self):
-        lis = self.dom.xpath('//ul[@class="palestrantes"]/li')
-        li = lis[4]
-        children = li.getchildren()
+        divs = self.dom.xpath('//ul[@class="palestrantes"]/li/div')
+        div = divs[4]
+        children = div.getchildren()
         c = 0
         for child in children:
             if child.tag == 'a':
@@ -70,9 +70,9 @@ class TemplatePalestrantesTestCase(test.TestCase):
         self.assertEquals(1, c)
 
     def test_deve_ter_link_para_twitter_caso_o_palestrante_tenha_twitter(self):
-        link = self.dom.xpath('//ul[@class="palestrantes"]/li/a[@href="http://twitter.com/hlecter"]')
+        link = self.dom.xpath('//ul[@class="palestrantes"]/li/div/a[@href="http://twitter.com/hlecter"]')
         self.assertEquals(1, len(link))
 
     def test_deve_ter_link_para_twitter_correto_caso_o_palestrante_tenha_twitter_comecando_em_arroba(self):
-        link = self.dom.xpath('//ul[@class="palestrantes"]/li/a[@href="http://twitter.com/vito"]')
+        link = self.dom.xpath('//ul[@class="palestrantes"]/li/div/a[@href="http://twitter.com/vito"]')
         self.assertEquals(1, len(link))
