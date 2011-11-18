@@ -1,0 +1,33 @@
+ul.palestrantes {
+    list-style: none;
+    margin-left: 5px;
+}
+
+ul.palestrantes li {
+    clear: left;
+    display: block;
+    margin-bottom: 50px;
+}
+
+ul.palestrantes li h2 {
+    text-shadow: #666 1px 1px 1px;
+}
+
+ul.palestrantes li p {
+    float: left;
+    width: 530px;
+}
+
+ul.palestrantes li img {
+    border-radius: 6px;
+    float: right;
+}
+
+ul.palestrantes li .links-palestrante {
+    clear: left;
+}
+
+ul.palestrantes li .links-palestrante a {
+    float: left;
+    margin: 5px 10px 0 0;
+}
