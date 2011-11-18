@@ -7,7 +7,8 @@ admin.autodiscover()
 
 from destaques import models
 from palestras import views as pviews
-
+from purger import connect
+connect()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
