@@ -3,9 +3,8 @@ import roan
 
 from django.contrib.flatpages import models
 
-flatpage_urls = ("/caravanas/", "/contato/", "/quando-e-onde/", "/inscricao/", "/patrocinio/")
-
 
 def connect():
-    for url in flatpage_urls:
-        roan.purge(url).on_save(models.FlatPage)
+    flatpages = models.FlatPage.objects.all()
+    for f in flatpages:
+        roan.purge(f.url).on_save(models.FlatPage)
