@@ -31,7 +31,7 @@ def update_app():
             run('git pull origin master')
     else:
         with cd(env.base_dir):
-            run('git clone git://github.com/fsouza/devincachu.git')
+            run('git clone git://github.com/devincachu/devincachu.git')
 
 
 @roles('server')
