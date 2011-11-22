@@ -18,3 +18,5 @@ class Chamada(Destaque):
 
 roan.purge("/").on_save(Destaque)
 roan.purge("/").on_delete(Destaque)
+roan.purge("/").on_save(Chamada)
+roan.purge("/").on_delete(Chamada)
