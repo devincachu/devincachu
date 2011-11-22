@@ -14,4 +14,10 @@ class DestaqueAdmin(admin.ModelAdmin):
         obj.autor = request.user
         obj.save()
 
+
+class ChamadaAdmin(DestaqueAdmin):
+    list_display = ('titulo', 'data', 'url_link')
+    form = forms.ChamadaAdminForm
+
 admin.site.register(models.Destaque, DestaqueAdmin)
+admin.site.register(models.Chamada, ChamadaAdmin)

@@ -49,3 +49,27 @@ class DestaqueAdminTestCase(unittest.TestCase):
     def test_deve_gravar_usuario_logado_como_autor_de_destaque(self):
         self.admin.save_model(self.request, self.destaque, None, None)
         self.assertEquals(self.user, self.destaque.autor)
+
+
+class ChamadaAdminTestCase(unittest.TestCase):
+
+    def test_model_Chamada_deve_estar_registro_no_admin(self):
+        self.assertIn(models.Chamada, django_admin.site._registry)
+
+    def test_model_chamada_deve_estar_registrado_com_a_classe_ChamadaAdmin(self):
+        self.assertIsInstance(django_admin.site._registry[models.Chamada], admin.ChamadaAdmin)
+
+    def test_ChamadaAdmin_deve_herdar_de_DestaqueAdmin(self):
+        assert issubclass(admin.ChamadaAdmin, admin.DestaqueAdmin)
+
+    def test_ChamadaAdmin_deve_usar_ChamadaAdminForm(self):
+        self.assertEquals(forms.ChamadaAdminForm, admin.ChamadaAdmin.form)
+
+    def test_titulo_deve_permarnecer_na_listagem(self):
+        self.assertIn('titulo', admin.ChamadaAdmin.list_display)
+
+    def test_data_deve_permernecer_na_listagem(self):
+        self.assertIn('data', admin.ChamadaAdmin.list_display)
+
+    def test_link_deve_estar_na_listagem(self):
+        self.assertIn('url_link', admin.ChamadaAdmin.list_display)
