@@ -97,18 +97,13 @@ class ChamadaTestCase(unittest.TestCase):
     def test_model_chamada_deve_ter_campo_url_link(self):
         self.assertIn('url_link', self.field_names)
 
-    def test_campo_url_link_deve_ser_URLField(self):
+    def test_campo_url_link_deve_ser_CharField(self):
         field = [f for f in models.Chamada._meta.fields if f.name == 'url_link'][0]
-        self.assertIsInstance(field, django_models.URLField)
+        self.assertIsInstance(field, django_models.CharField)
 
     def test_campo_url_link_nao_deve_aceitar_blank(self):
         field = [f for f in models.Chamada._meta.fields if f.name == 'url_link'][0]
         self.assertFalse(field.blank)
-
-    def test_campo_url_link_deve_ter_verify_false(self):
-        field = [f for f in models.Chamada._meta.fields if f.name == 'url_link'][0]
-        validator = field.validators[1]
-        self.assertFalse(validator.verify_exists)
 
     def test_campo_url_link_deve_ter_no_maximo_255_caracteres(self):
         field = [f for f in models.Chamada._meta.fields if f.name == 'url_link'][0]
