@@ -11,3 +11,8 @@ class DestaqueAdminForm(forms.ModelForm):
         widgets = {
             'conteudo': forms.Textarea,
         }
+
+
+class ChamadaAdminForm(forms.ModelForm):
+    class Meta(DestaqueAdminForm.Meta):
+        model = models.Chamada
