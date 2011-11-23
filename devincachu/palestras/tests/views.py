@@ -24,7 +24,7 @@ class PalestrantesViewTestCase(test.TestCase):
 
     def test_deve_estar_mapeado_para_url_palestrantes(self):
         f = views.PalestrantesView.as_view()
-        resolve = u.resolve("/palestrantes")
+        resolve = u.resolve("/palestrantes/")
         self.assertEquals(f.func_code, resolve.func.func_code)
 
 
