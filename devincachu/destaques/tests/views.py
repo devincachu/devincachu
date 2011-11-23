@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from django import test
+import unittest
+
+from django.core import management, urlresolvers
 from django.template import response
 from django.test import client
 from django.views.generic import base
@@ -8,8 +10,15 @@ from lxml import html
 from destaques import models, views
 
 
-class IndexViewTestCase(test.TestCase):
-    fixtures = ('destaques-e-chamadas.yaml',)
+class IndexViewTestCase(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        management.call_command("loaddata", "destaques-e-chamadas.yaml", verbosity=0)
+
+    @classmethod
+    def tearDownClass(cls):
+        management.call_command("flush", interactive=False, verbosity=0)
 
     def setUp(self):
         factory = client.RequestFactory()
@@ -18,6 +27,11 @@ class IndexViewTestCase(test.TestCase):
 
     def test_view_deve_herdar_de_View(self):
         assert issubclass(views.IndexView, base.View)
+
+    def test_deve_responder_pela_url_raiz(self):
+        f = views.IndexView.as_view()
+        r = urlresolvers.resolve('/')
+        self.assertEquals(f.func_name, r.func.func_name)
 
     def test_metodo_obter_destaques_deve_trazer_apenas_instancias_de_Destaque_excluindo_Chamada(self):
         destaques = self.view.obter_destaques()
@@ -78,7 +92,11 @@ class IndexViewTestCase(test.TestCase):
         self.assertEquals(1, len(dom.xpath('//div[@class="hero-unit"]')))
 
 
-class IndexViewSemDados(test.TestCase):
+class IndexViewSemDados(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        management.call_command("flush", interactive=False, verbosity=0)
 
     def setUp(self):
         factory = client.RequestFactory()

@@ -5,15 +5,16 @@ from django.views.generic import list
 from django.contrib import admin
 admin.autodiscover()
 
-from destaques import models
+from destaques import models, views as dviews
 from palestras import views as pviews
+
 from purger import connect
 connect()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^palestrantes/$', pviews.PalestrantesView.as_view(), name='palestrantes'),
-    url(r'^$', list.ListView.as_view(template_name='index.html', queryset=models.Destaque.objects.select_related().filter(chamada__isnull=True).order_by('-data')[:10], context_object_name='destaques'), name='index'),
+    url(r'^$', dviews.IndexView.as_view(), name='index'),
 )
 
 if settings.DEBUG:
