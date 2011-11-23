@@ -63,3 +63,83 @@
   fields:
     titulo_veja_mais: "Conheça os palestrantes"
     url_link: "/palestrantes/"
+
+- model: destaques.Destaque
+  pk: 7
+  fields:
+    titulo: "Bill Gates confirma participação no Dev in Cachu 2012"
+    conteudo: "Impressionante, não?"
+    data: 2010-01-01 12:00:00
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 8
+  fields:
+    titulo: "Bill Gates confirma participação no Dev in Cachu 2013"
+    conteudo: "Impressionante, não?"
+    data: 2011-01-01 13:00:00
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 9
+  fields:
+    titulo: "Bill Gates confirma participação no Dev in Cachu 2014"
+    conteudo: "Impressionante, não?"
+    data: 2012-01-01 12:00:00
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 10
+  fields:
+    titulo: "Bill Gates confirma participação no Dev in Cachu 2015"
+    conteudo: "Impressionante, não?"
+    data: 2013-01-01 12:00:00
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 11
+  fields:
+    titulo: "Bill Gates confirma participação no Dev in Cachu 2016"
+    conteudo: "Impressionante, não?"
+    data: 2014-01-01 12:00:00
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 12
+  fields:
+    titulo: "Bill Gates confirma participação no Dev in Cachu 2017"
+    conteudo: "Impressionante, não?"
+    data: 2016-01-01 12:00:00
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 13
+  fields:
+    titulo: "Bill Gates confirma participação no Dev in Cachu 2018"
+    conteudo: "Impressionante, não?"
+    data: 2017-01-01 12:00:00
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 14
+  fields:
+    titulo: "Bill Gates confirma participação no Dev in Cachu 2019"
+    conteudo: "Impressionante, não?"
+    data: 2018-01-01 12:00:00
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 15
+  fields:
+    titulo: "Bill Gates confirma participação no Dev in Cachu 2020"
+    conteudo: "Impressionante, não?"
+    data: 2019-01-01 12:00:00
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 16
+  fields:
+    titulo: "Bill Gates confirma participação no Dev in Cachu 2021"
+    conteudo: "Impressionante, não?"
+    data: 2020-01-01 12:00:00
+    autor: 10
