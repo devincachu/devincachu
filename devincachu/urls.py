@@ -1,11 +1,10 @@
 from django.conf import settings
 from django.conf.urls.defaults import include, patterns, url
-from django.views.generic import list
 
 from django.contrib import admin
 admin.autodiscover()
 
-from destaques import models, views as dviews
+from destaques import views as dviews
 from palestras import views as pviews
 
 from purger import connect
