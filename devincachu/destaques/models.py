@@ -11,10 +11,19 @@ class Destaque(models.Model):
     autor = models.ForeignKey(auth_models.User)
     data = models.DateTimeField(auto_now=False, auto_now_add=True)
 
+    def __repr__(self):
+        return "<Destaque: %s>" % self.titulo
+
+    def __unicode__(self):
+        return self.titulo
+
 
 class Chamada(Destaque):
     titulo_veja_mais = models.CharField(max_length=40)
     url_link = models.CharField(max_length=255)
+
+    def __repr__(self):
+        return "<Chamada: %s>" % self.titulo
 
 roan.purge("/").on_save(Destaque)
 roan.purge("/").on_delete(Destaque)

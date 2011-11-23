@@ -69,6 +69,18 @@ class DestaqueTestCase(unittest.TestCase):
         field = [f for f in models.Destaque._meta.fields if f.name == 'data'][0]
         self.assertTrue(field.auto_now_add)
 
+    def test_repr_Destaque(self):
+        destaque = models.Destaque(titulo=u"Dev in Cachu", conteudo=u"Oi")
+        self.assertEquals("<Destaque: Dev in Cachu>", destaque.__repr__())
+
+    def test_unicode_Destaque(self):
+        destaque = models.Destaque(titulo=u"Dev in Cachu", conteudo=u"Oi")
+        self.assertEquals(u"Dev in Cachu", destaque.__unicode__())
+
+    def test_str_deve_retornar_o_mesmo_que_unicode(self):
+        destaque = models.Destaque(titulo=u"Dev in Cachu", conteudo=u"Oi")
+        self.assertEquals(destaque.__unicode__(), destaque.__str__())
+
 
 class ChamadaTestCase(unittest.TestCase):
 
@@ -108,3 +120,7 @@ class ChamadaTestCase(unittest.TestCase):
     def test_campo_url_link_deve_ter_no_maximo_255_caracteres(self):
         field = [f for f in models.Chamada._meta.fields if f.name == 'url_link'][0]
         self.assertEquals(255, field.max_length)
+
+    def test_repr_Chamada(self):
+        chamada = models.Chamada(titulo=u"Oi?")
+        self.assertEquals("<Chamada: Oi?>", chamada.__repr__())
