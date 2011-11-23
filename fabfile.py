@@ -131,23 +131,11 @@ def clean_cache():
 
 
 @roles('server')
-def deploy(db='no', start='no', create_local='no'):
+def deploy():
     update_app()
     create_virtualenv_if_need()
     pip_install()
     install_csstidy_if_need()
-
-    if create_local == 'yes':
-        create_local_settings()
-
     collect_static_files()
-
-    if db == 'yes':
-        syncdb()
-
-    if start == 'yes':
-        start_gunicorn()
-    else:
-        graceful_gunicorn()
-
+    graceful_gunicorn()
     reload_nginx()
