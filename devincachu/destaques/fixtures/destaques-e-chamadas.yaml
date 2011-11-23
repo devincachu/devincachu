@@ -1,0 +1,65 @@
+- model: auth.User
+  pk: 10
+  fields:
+    username: shelly
+    password: "sha1$30a14$489a99f976e90808086a11afa9df3288f2b49fca"
+
+- model: destaques.Destaque
+  pk: 1
+  fields:
+    titulo: "Palestra sobre Java"
+    conteudo: "Teremos uma grande palestra sobre Java com o criador do C++!"
+    data: 2011-11-06 10:00:00
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 2
+  fields:
+    titulo: "Palestra sobre C++"
+    conteudo: "Teremos uma grande palestra sobre C++ com o criador do Java!"
+    data: 2011-11-16 21:00:00
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 3
+  fields:
+    titulo: "Palestra sobre C#"
+    conteudo: "Teremos uma grande palestra sobre C# com o próprio Bill Gates!"
+    data: 2011-11-01 21:40:27
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 4
+  fields:
+    titulo: "Palestra sobre Python"
+    conteudo: "Teremos uma palestra mais ou menos legal sobre Python"
+    data: 2011-11-01 21:39:27
+    autor: 10
+
+- model: destaques.Destaque
+  pk: 5
+  fields:
+    titulo: "Dev in Cachu 2012"
+    conteudo: "Em maio de 2012, estará de volta o maior evento de desenvolvimento de software do sul do Espírito Santo. Um sábado inteiro de palestras de alto nível, com palestrantes de renome nacional e internacional."
+    data: 2011-11-22 22:29:30
+    autor: 10
+
+- model: destaques.Chamada
+  pk: 5
+  fields:
+    titulo_veja_mais: "Conheça os palestrantes"
+    url_link: "/palestrantes/"
+
+- model: destaques.Destaque
+  pk: 6
+  fields:
+    titulo: "Dev in Cachu 2011"
+    conteudo: "Em maio de 2011, estará de volta o maior evento de desenvolvimento de software do sul do Espírito Santo. Um sábado inteiro de palestras de alto nível, com palestrantes de renome nacional e internacional."
+    data: 2010-11-22 22:29:30
+    autor: 10
+
+- model: destaques.Chamada
+  pk: 6
+  fields:
+    titulo_veja_mais: "Conheça os palestrantes"
+    url_link: "/palestrantes/"
