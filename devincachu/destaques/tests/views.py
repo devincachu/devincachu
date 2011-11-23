@@ -3,6 +3,7 @@ from django import test
 from django.template import response
 from django.test import client
 from django.views.generic import base
+from lxml import html
 
 from destaques import models, views
 
@@ -70,10 +71,18 @@ class IndexViewTestCase(test.TestCase):
         r = self.view.get(self.request)
         self.assertEquals(chamada, r.context_data['chamada'])
 
+    def test_deve_exibir_div_de_chamada_quando_estiver_no_contexto(self):
+        r = self.view.get(self.request)
+        r.render()
+        dom = html.fromstring(r.content)
+        self.assertEquals(1, len(dom.xpath('//div[@class="hero-unit"]')))
+
 
 class IndexViewSemDados(test.TestCase):
 
     def setUp(self):
+        factory = client.RequestFactory()
+        self.request = factory.get("/")
         self.view = views.IndexView()
 
     def test_metodo_obter_destaques_deve_retornar_lista_vazia_quando_nao_houver_dados(self):
@@ -81,3 +90,9 @@ class IndexViewSemDados(test.TestCase):
 
     def test_metodo_obter_chamada_deve_retornar_None_quando_nao_houver_dados(self):
         self.assertIsNone(self.view.obter_chamada())
+
+    def test_se_nao_houver_chamada_nao_deve_exibir_div(self):
+        r = self.view.get(self.request)
+        r.render()
+        dom = html.fromstring(r.content)
+        self.assertEquals([], dom.xpath('//div[@class="hero-unit"]'))

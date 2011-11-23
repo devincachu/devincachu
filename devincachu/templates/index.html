@@ -5,6 +5,16 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}css/index.css" type="text/css" media="screen" charset="utf-8" />
 {% endblock %}
 
+{% block chamada %}
+    {% if chamada %}
+        <div class="hero-unit">
+            <h1>{{ chamada.titulo }}</h1>
+            <p>{{ chamada.conteudo }}</p>
+            <p><a class="btn primary large" href="{{ chamada.url_link }}" title="{{ chamada.titulo_veja_mais }}">{{ chamada.titulo_veja_mais }} &raquo;</a></p>
+        </div>
+    {% endif %}
+{% endblock %}
+
 {% block coluna_central %}
     {% for destaque in destaques %}
         <h2>{{ destaque.titulo }}</h2>
