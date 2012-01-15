@@ -17,13 +17,19 @@ class PalestranteAdmin(admin.ModelAdmin):
 
 class PalestraAdmin(admin.ModelAdmin):
     form = forms.PalestraAdminForm
-    list_display = ('titulo', 'slug', 'inicio',)
+    list_display = ('titulo', 'slug', 'nomes_palestrantes', 'inicio',)
     list_filter = ('palestrantes',)
     search_fields = ('titulo',)
 
     def save_model(self, request, obj, form, change):
         obj.slug = filters.slugify(obj.titulo)
         obj.save()
+
+    def nomes_palestrantes(self, obj):
+        palestrantes = [p.nome for p in obj.palestrantes.only("nome").all().order_by("nome")]
+        return ", ".join(palestrantes)
+
+    nomes_palestrantes.short_description = u"Palestrante(s)"
 
 
 admin.site.register(models.Palestra, PalestraAdmin)
