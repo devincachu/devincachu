@@ -21,6 +21,10 @@ class PalestraAdmin(admin.ModelAdmin):
     list_filter = ('palestrantes',)
     search_fields = ('titulo',)
 
+    def save_model(self, request, obj, form, change):
+        obj.slug = filters.slugify(obj.titulo)
+        obj.save()
+
 
 admin.site.register(models.Palestra, PalestraAdmin)
 admin.site.register(models.Palestrante, PalestranteAdmin)
