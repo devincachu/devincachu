@@ -79,13 +79,13 @@ def syncdb():
 @roles('server')
 def start_gunicorn():
     with cd(env.app_root):
-        run('%(virtualenv)s/bin/gunicorn_django -p gunicorn.pid --daemon --workers=3' % env)
+        run('%(virtualenv)s/bin/gunicorn_django --pid=gunicorn.pid --daemon --workers=3 --access-logfile=devincachu_access.log --error-logfile=devincachu_error.log' % env)
 
 
 @roles('server')
 def stop_gunicorn():
     with contextlib.nested(cd(env.app_root), settings(warn_only=True)):
-        run('kill -9 `cat gunicorn.pid`')
+        run('kill -TERM `cat gunicorn.pid`')
 
 
 @roles('server')
