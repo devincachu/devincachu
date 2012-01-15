@@ -91,5 +91,5 @@ class ModelPalestraTestCase(unittest.TestCase):
         self.assertEquals(models.Palestrante, field.related.parent_model)
 
     def test_palestrantes_deve_aceitar_blank(self):
-        field = models.Palestrante._meta.get_field_by_name("palestrantes")[0]
+        field = models.Palestra._meta.get_field_by_name("palestrantes")[0]
         self.assertTrue(field.blank)
