@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 
 
@@ -17,9 +18,9 @@ class Palestrante(models.Model):
 
 
 class Palestra(models.Model):
-    titulo = models.CharField(max_length=150)
+    titulo = models.CharField(max_length=150, verbose_name=u"Título")
     slug = models.SlugField(max_length=150, unique=True)
-    descricao = models.CharField(max_length=1000)
-    inicio = models.TimeField()
-    termino = models.TimeField()
-    palestrantes = models.ManyToManyField(Palestrante)
+    descricao = models.CharField(max_length=1000, verbose_name=u"Descrição")
+    inicio = models.TimeField(verbose_name=u"Horário de início")
+    termino = models.TimeField(verbose_name=u"Horário de término")
+    palestrantes = models.ManyToManyField(Palestrante, blank=True)

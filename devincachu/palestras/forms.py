@@ -11,3 +11,12 @@ class PalestranteAdminForm(forms.ModelForm):
         widgets = {
             'minicurriculo': forms.Textarea,
         }
+
+
+class PalestraAdminForm(forms.ModelForm):
+    class Meta:
+        model = models.Palestra
+        exclude = ('slug',)
+        widgets = {
+            'descricao': forms.Textarea,
+        }

@@ -15,4 +15,12 @@ class PalestranteAdmin(admin.ModelAdmin):
         obj.save()
 
 
+class PalestraAdmin(admin.ModelAdmin):
+    form = forms.PalestraAdminForm
+    list_display = ('titulo', 'slug', 'inicio',)
+    list_filter = ('palestrantes',)
+    search_fields = ('titulo',)
+
+
+admin.site.register(models.Palestra, PalestraAdmin)
 admin.site.register(models.Palestrante, PalestranteAdmin)
