@@ -14,3 +14,12 @@ class Palestrante(models.Model):
 
     def __unicode__(self):
         return self.nome
+
+
+class Palestra(models.Model):
+    titulo = models.CharField(max_length=150)
+    slug = models.SlugField(max_length=150, unique=True)
+    descricao = models.CharField(max_length=1000)
+    inicio = models.TimeField()
+    termino = models.TimeField()
+    palestrantes = models.ManyToManyField(Palestrante)
