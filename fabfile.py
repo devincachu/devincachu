@@ -65,8 +65,8 @@ def stop_gunicorn():
 
 
 def graceful_gunicorn():
-    with contextlib.nested(cd(env.app_root), settings(warn_only=True)):
-        run('kill -HUP `cat gunicorn.pid`')
+    with settings(warn_only=True):
+        run('kill -HUP `cat %(app_root)s/gunicorn.pid`' % env)
 
 
 def reload_nginx():
