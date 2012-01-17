@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 import contextlib
 import os
-import sys
 
 from fabric.api import cd, env, run, settings, sudo
-from fabric.contrib import django
-from fabric.utils import abort
 
 env.root = os.path.dirname(__file__)
 env.app = os.path.join(env.root, 'devincachu')
@@ -15,12 +12,6 @@ env.app_root = os.path.join(env.project_root, 'devincachu')
 env.virtualenv = os.path.join(env.project_root, 'env')
 env.shell = '/bin/sh -c'
 
-sys.path.insert(0, env.root)
-
-django.project('devincachu')
-
-from django.conf import settings as django_settings
-
 
 def update_app():
     run('([ -d %(project_root)s ] && cd %(project_root)s && git pull origin master) || (cd %(base_dir)s && git clone git://github.com/devincachu/devincachu.git)' % env)
@@ -28,11 +19,6 @@ def update_app():
 
 def create_virtualenv_if_need():
     run('[ -d %(virtualenv)s ] || virtualenv --no-site-packages --unzip-setuptools %(virtualenv)s' % env)
-
-
-def check_csstidy():
-    if run('test -f %s' % django_settings.COMPRESS_CSSTIDY_BINARY).return_code != 0:
-        abort("Você deve instalar o csstidy no caminho %s!" % django_settings.COMPRESS_CSSTIDY_BINARY)
 
 
 def pip_install():
@@ -66,7 +52,8 @@ def stop_gunicorn():
 
 def graceful_gunicorn():
     with settings(warn_only=True):
-        run('kill -HUP `cat %(app_root)s/gunicorn.pid`' % env)
+        pid = run('cat %(app_root)s/gunicorn.pid' % env)
+        run('kill -HUP %s' % pid)
 
 
 def reload_nginx():
@@ -86,5 +73,4 @@ def deploy():
     update_app()
     create_virtualenv_if_need()
     pip_install()
-    check_csstidy()
     collect_static_files()
