@@ -70,14 +70,12 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'devincachu.urls'
 
-COMPRESS_ENABLED = not DEBUG
+COMPRESS_ENABLED = True
 
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
-    'compressor.filters.csstidy.CSSTidyFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
 )
-COMPRESS_CSSTIDY_BINARY = "/usr/local/bin/csstidy"
-COMPRESS_CSSTIDY_ARGUMENTS = "--template=highest --discard_invalid_properties=false --silent=true"
 
 COMPRESS_JS_FILTERS = (
     'compressor.filters.jsmin.SlimItFilter',
