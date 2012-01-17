@@ -7,3 +7,4 @@ Markdown==2.0.3
 pylibmc==1.2.2
 roan==0.1
 PIL==1.1.7
+slimit==0.5.5

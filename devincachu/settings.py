@@ -80,11 +80,8 @@ COMPRESS_CSSTIDY_BINARY = "/usr/local/bin/csstidy"
 COMPRESS_CSSTIDY_ARGUMENTS = "--template=highest --discard_invalid_properties=false --silent=true"
 
 COMPRESS_JS_FILTERS = (
-    'compressor.filters.yui.YUIJSFilter',
+    'compressor.filters.jsmin.SlimItFilter',
 )
-
-COMPRESS_YUI_BINARY = os.path.join(RESOURCES_DIRECTORY, 'yuicompressor.jar')
-COMPRESS_YUI_JS_ARGUMENTS = '--charset utf-8'
 
 KEEP_COMMENTS_ON_MINIFYING = True
 EXCLUDE_FROM_MINIFYING = ('^admin/',)
