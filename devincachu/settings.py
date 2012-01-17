@@ -70,7 +70,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'devincachu.urls'
 
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = not DEBUG
 
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
