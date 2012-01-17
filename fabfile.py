@@ -2,7 +2,7 @@
 import contextlib
 import os
 
-from fabric.api import cd, env, run, settings, sudo
+from fabric.api import cd, env, run, settings
 
 env.root = os.path.dirname(__file__)
 env.app = os.path.join(env.root, 'devincachu')
@@ -46,8 +46,9 @@ def start_gunicorn():
 
 
 def stop_gunicorn():
-    with contextlib.nested(cd(env.app_root), settings(warn_only=True)):
-        run('kill -TERM `cat gunicorn.pid`')
+    with settings(warn_only=True):
+        pid = run('cat %(app_root)s/gunicorn.pid' % env)
+        run('kill -TERM %s' % pid)
 
 
 def graceful_gunicorn():
@@ -60,13 +61,13 @@ def reload_nginx():
     run("su -m root -c '/usr/local/etc/rc.d/nginx reload'")
 
 
+def clean():
+    run("su -m root -c 'rm -rf /usr/local/etc/nginx/cache/data/devincachu/*'")
+
+
 def createsuperuser():
     with cd(env.app_root):
         run("%(virtualenv)s/bin/python manage.py createsuperuser" % env)
-
-
-def clean_cache():
-    sudo("rm -rf /usr/local/etc/nginx/cache/data/devincachu/*")
 
 
 def deploy():
