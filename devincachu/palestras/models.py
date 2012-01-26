@@ -25,8 +25,9 @@ class Palestra(models.Model):
     termino = models.TimeField(verbose_name=u"Horário de término")
     palestrantes = models.ManyToManyField(Palestrante, blank=True)
 
-    def nomes_palestrantes(self):
-        nomes = [p.nome for p in self.palestrantes.order_by("nome")]
+    def nomes_palestrantes(self, palestrantes=None):
+        palestrantes = palestrantes or self.palestrantes.order_by("nome")
+        nomes = [p.nome for p in palestrantes]
         nomes = ", ".join(nomes)
 
         if "," in nomes:
@@ -40,3 +41,16 @@ class Palestra(models.Model):
 
     def __unicode__(self):
         return self.titulo
+
+    def get_absolute_url_and_link_title(self):
+        palestrantes = self.palestrantes.order_by("nome")
+
+        prefixo = "/".join([p.slug for p in palestrantes])
+
+        if prefixo:
+            url = "/programacao/%s/%s/" % (prefixo, self.slug)
+            trecho = "dos palestrantes" if "/" in prefixo else "do palestrante"
+            titulo = u"Veja mais informações da palestra %s e %s %s" % (self.titulo, trecho, self.nomes_palestrantes(palestrantes))
+            return {'url': url, 'title': titulo}
+
+        return {'url': "#", 'title': self.descricao}

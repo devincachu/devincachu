@@ -21,18 +21,20 @@
                 <th>Programação</th>
             </tr>
             {% for palestra in palestras %}
-                <tr>
-                    <td class="horario">
-                        <a href="#" title="Veja mais informações da palestra {{ palestra.titulo }} e dos palestrantes {{ palestra.nomes_palestrantes }}">
-                            {{ palestra.inicio|time:"H:i" }} - {{ palestra.termino|time:"H:i" }}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#" title="Veja mais informações da palestra {{ palestra.titulo }} e dos palestrantes {{ palestra.nomes_palestrantes }}">
-                            <strong>{{ palestra.titulo }}</strong><span>{{ palestra.nomes_palestrantes }}</span>
-                        </a>
-                    </td>
-                </tr>
+                {% with palestra.get_absolute_url_and_link_title as url_title %}
+                    <tr>
+                        <td class="horario">
+                            <a href="{{ url_title.url }}" title="{{ url_title.title }}">
+                                {{ palestra.inicio|time:"H:i" }} - {{ palestra.termino|time:"H:i" }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ url_title.url }}" title="{{ url_title.title }}">
+                                <strong>{{ palestra.titulo }}</strong><span>{{ palestra.nomes_palestrantes }}</span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endwith %}
             {% endfor %}
         </table>
     {% endif %}
