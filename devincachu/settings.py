@@ -36,6 +36,7 @@ USE_L10N = False
 
 MEDIA_ROOT = os.path.join(ROOT, 'media')
 MEDIA_URL = '/media/'
+BASE_URL = 'http://beta.devincachu.com.br'
 
 STATIC_ROOT = os.path.join(ROOT, 'static')
 STATIC_URL = '/static/'
