@@ -239,7 +239,7 @@ a:hover {
 .row {
   zoom: 1;
   margin-left: -20px;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 .row:before, .row:after {
   display: table;
