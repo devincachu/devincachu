@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import test
+from django.conf import settings
 from django.core import management, urlresolvers as u
 from django.test import client
 from django.views.generic import list
@@ -32,7 +33,7 @@ class TemplatePalestrantesTestCase(test.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        management.call_command("loaddata", "palestrantes.yaml", verbosity=0)
+        management.call_command("loaddata", "palestrantes", verbosity=0)
 
     @classmethod
     def tearDownClass(cls):
@@ -77,6 +78,21 @@ class TemplatePalestrantesTestCase(test.TestCase):
     def test_deve_ter_link_para_twitter_correto_caso_o_palestrante_tenha_twitter_comecando_em_arroba(self):
         link = self.dom.xpath('//ul[@class="palestrantes"]/li/div/a[@href="http://twitter.com/vito"]')
         self.assertEquals(1, len(link))
+
+    def test_canonical_url_deve_ter_barra_no_final(self):
+        esperado = u"%s/palestrantes/" % settings.BASE_URL
+        canonical_url = self.dom.xpath('//link[@rel="canonical"]')[0].attrib["href"]
+        self.assertEquals(esperado, canonical_url)
+
+    def test_keywords_deve_incluir_nomes_de_todos_os_palestrantes_em_ordem_alfabetica(self):
+        esperado = u"dev in cachu, palestrantes, %s" % ", ".join([p.nome for p in models.Palestrante.objects.order_by("nome")])
+        keywords = self.dom.xpath('//meta[@name="keywords"]')[0].attrib["content"]
+        self.assertEquals(esperado, keywords)
+
+    def test_description_deve_descrever_a_pagina_de_palestrantes(self):
+        esperado = u"Palestrantes do Dev in Cachu 2012"
+        description = self.dom.xpath('//meta[@name="description"]')[0].attrib["content"]
+        self.assertEquals(esperado, description)
 
 
 class TemplatePalestranteSemPalestrantesTestCase(test.TestCase):
