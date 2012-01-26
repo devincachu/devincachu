@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/programacao.css" type="text/css" media="screen" charset="utf-8" />
+{% endblock %}
+
+{% block coluna_central %}
+    <h1>Programação</h1>
+
+    {% if palestras %}
+        <table id="grade-de-programacao">
+            <tr>
+                <th>Horário</th>
+                <th>Programação</th>
+            </tr>
+            {% for palestra in palestras %}
+                <tr>
+                    <td class="horario">
+                        <a href="#" title="Veja mais informações da palestra {{ palestra.titulo }} e dos palestrantes {{ palestra.nomes_palestrantes }}">
+                            {{ palestra.inicio|time:"H:i" }} - {{ palestra.termino|time:"H:i" }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" title="Veja mais informações da palestra {{ palestra.titulo }} e dos palestrantes {{ palestra.nomes_palestrantes }}">
+                            <strong>{{ palestra.titulo }}</strong><span>{{ palestra.nomes_palestrantes }}</span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}
