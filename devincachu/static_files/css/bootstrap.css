@@ -239,6 +239,7 @@ a:hover {
 .row {
   zoom: 1;
   margin-left: -20px;
+  margin-top: 30px;
 }
 .row:before, .row:after {
   display: table;
@@ -1289,7 +1290,7 @@ table .headerSortUp.purple, table .headerSortDown.purple {
  * Repeatable UI elements outside the base styles provided from the scaffolding
  * ---------------------------------------------------------------------------- */
 .topbar {
-  height: 40px;
+  height: 78px;
   position: fixed;
   top: 0;
   left: 0;
@@ -1313,7 +1314,7 @@ table .headerSortUp.purple, table .headerSortDown.purple {
 .topbar h3 a, .topbar .brand {
   float: left;
   display: block;
-  padding: 8px 20px 12px;
+  padding: 11px 20px 12px;
   margin-left: -20px;
   color: #ffffff;
   font-size: 20px;
@@ -1416,7 +1417,9 @@ table .headerSortUp.purple, table .headerSortDown.purple {
 .topbar div > ul a, .nav a {
   display: block;
   float: none;
-  padding: 10px 10px 11px;
+  font-size: 18px;
+  height: 100%;
+  padding: 29px 10px;
   line-height: 19px;
   text-decoration: none;
 }
