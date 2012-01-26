@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/palestrantes.css" type="text/css" media="screen" charset="utf-8"/>
+{% endblock %}
+
+{% block coluna_central %}
+    <h1>{{ palestra.titulo }}</h1>
+
+    {{ palestra.descricao|markdown }}
+
+    {% with palestra.palestrantes.all as palestrantes %}
+        {% if palestrantes|length > 1 %}
+            <h2>Palestrantes</h2>
+        {% else %}
+            <h2>Palestrante</h2>
+        {% endif %}
+
+        <ul class="palestrantes">
+            {% for palestrante in palestrantes %}
+                <li>
+                    <h3>{{ palestrante.nome }}</h3>
+                    {{ palestrante.minicurriculo|markdown }}
+                    <img src="{{ MEDIA_URL }}{{ palestrante.foto }}" alt="{{ palestrante.nome }}" width="100" height="100" />
+
+                    <div class="links-palestrante">
+                        {% if palestrante.blog %}
+                            <a href="{{ palestrante.blog }}" rel="nofollow" target="_blank" title="Blog de {{ palestrante.nome }}">Blog</a>
+                        {% endif %}
+                        {% if palestrante.twitter %}
+                            <a href="http://twitter.com/{{ palestrante.twitter|cut:"@" }}" rel="nofollow" target="_blank" title="{{ palestrante.nome }} no Twitter">Twitter</a>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endwith %}
+{% endblock %}
+
