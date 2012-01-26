@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import test
-from django.core import urlresolvers as u
+from django.core import management, urlresolvers as u
 from django.test import client
 from django.views.generic import list
 from lxml import html
@@ -29,7 +29,14 @@ class PalestrantesViewTestCase(test.TestCase):
 
 
 class TemplatePalestrantesTestCase(test.TestCase):
-    fixtures = ['palestrantes.yaml']
+
+    @classmethod
+    def setUpClass(cls):
+        management.call_command("loaddata", "palestrantes.yaml", verbosity=0)
+
+    @classmethod
+    def tearDownClass(cls):
+        management.call_command("flush", verbosity=0, interactive=False)
 
     def setUp(self):
         factory = client.RequestFactory()
