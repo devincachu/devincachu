@@ -104,3 +104,11 @@ class ModelPalestraTestCase(unittest.TestCase):
     def test_nomes_palestrantes_deve_retornar_nomes_dos_palestrantes_com_virgula_e_e(self):
         palestra = models.Palestra.objects.get(pk=1)
         self.assertEquals(u"Hannibal Lecter e Vito Corleone", palestra.nomes_palestrantes())
+
+    def test_deve_ter_representacao_simples_que_utilize_titulo_da_palestra(self):
+        palestra = models.Palestra(titulo=u"Testando aplicações web")
+        self.assertEquals('<Palestra: Testando aplicações web>', repr(palestra))
+
+    def test_deve_exibir_titulo_como_unicode(self):
+        palestra = models.Palestra(titulo=u"Testando aplicações web")
+        self.assertEquals(palestra.titulo, unicode(palestra))

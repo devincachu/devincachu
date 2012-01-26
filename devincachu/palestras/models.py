@@ -34,3 +34,9 @@ class Palestra(models.Model):
             nomes = "%s e %s" % (nomes[:indice], nomes[indice + 2:])
 
         return nomes
+
+    def __repr__(self):
+        return "<Palestra: %s>" % self.titulo
+
+    def __unicode__(self):
+        return self.titulo
