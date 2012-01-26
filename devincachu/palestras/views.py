@@ -10,3 +10,10 @@ class PalestrantesView(list.ListView):
     model = models.Palestrante
     template_name = 'palestrantes.html'
     queryset = models.Palestrante.objects.all().order_by('nome')
+
+
+class ProgramacaoView(list.ListView):
+    context_object_name = 'palestras'
+    model = models.Palestra
+    template_name = 'programacao.html'
+    queryset = models.Palestra.objects.all().order_by('inicio')

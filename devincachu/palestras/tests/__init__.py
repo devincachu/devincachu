@@ -4,3 +4,4 @@ from palestras.tests.forms import *
 from palestras.tests.model_palestra import *
 from palestras.tests.model_palestrante import *
 from palestras.tests.views_palestrante import *
+from palestras.tests.views_programacao import *
