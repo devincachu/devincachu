@@ -84,7 +84,7 @@ COMPRESS_JS_FILTERS = (
 KEEP_COMMENTS_ON_MINIFYING = True
 EXCLUDE_FROM_MINIFYING = ('^admin/',)
 
-ROAN_PURGE_URL = "http://beta.devincachu.com.br/purge"
+ROAN_PURGE_URL = "http://devincachu_purger/purge"
 
 TEMPLATE_DIRS = (
     os.path.join(ROOT, 'templates'),
