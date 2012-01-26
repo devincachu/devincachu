@@ -1,0 +1,37 @@
+- model: palestras.Palestra
+  pk: 1
+  fields:
+    titulo: Escalando aplicações Django
+    slug: escalando-aplicacoes-django
+    descricao: Aprenda a escalar o Django
+    inicio: "08:00:00"
+    termino: "09:00:00"
+    palestrantes: [1, 2]
+
+- model: palestras.Palestra
+  pk: 2
+  fields:
+    titulo: Recepção e credenciamento
+    slug: recepcao-e-credenciamento
+    descricao: Hora de pegar o crachá
+    inicio: "07:00:00"
+    termino: "07:20:00"
+
+- model: palestras.Palestra
+  pk: 3
+  fields:
+    titulo: Arquitetura escalável de aplicação de alto desempenho
+    slug: arquitetura-escalavel-de-aplicacao-de-alto-desempenho
+    descricao: Hora de pensar sobre arquiteturas
+    inicio: "09:00:00"
+    termino: "10:00:00"
+    palestrantes: [3]
+
+- model: palestras.Palestra
+  pk: 4
+  fields:
+    titulo: Almoço
+    slug: almoco
+    descricao: Hora do rango
+    inicio: "10:00:00"
+    termino: "12:00:00"
