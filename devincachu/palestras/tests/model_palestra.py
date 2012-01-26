@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
+from django.core import management
 from django.db import models as django_models
 
 from palestras import models
@@ -10,7 +11,13 @@ class ModelPalestraTestCase(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        management.call_command("loaddata", "palestrantes.yaml", verbosity=0)
+        management.call_command("loaddata", "palestras.yaml", verbosity=0)
         cls.field_names = models.Palestra._meta.get_all_field_names()
+
+    @classmethod
+    def tearDownClass(cls):
+        management.call_command("flush", verbosity=0, interactive=False)
 
     def test_model_palestra_deve_ter_titulo(self):
         self.assertIn("titulo", self.field_names)
@@ -93,3 +100,7 @@ class ModelPalestraTestCase(unittest.TestCase):
     def test_palestrantes_deve_aceitar_blank(self):
         field = models.Palestra._meta.get_field_by_name("palestrantes")[0]
         self.assertTrue(field.blank)
+
+    def test_nomes_palestrantes_deve_retornar_nomes_dos_palestrantes_com_virgula_e_e(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        self.assertEquals(u"Hannibal Lecter e Vito Corleone", palestra.nomes_palestrantes())

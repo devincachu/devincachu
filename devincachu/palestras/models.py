@@ -24,3 +24,13 @@ class Palestra(models.Model):
     inicio = models.TimeField(verbose_name=u"Horário de início")
     termino = models.TimeField(verbose_name=u"Horário de término")
     palestrantes = models.ManyToManyField(Palestrante, blank=True)
+
+    def nomes_palestrantes(self):
+        nomes = [p.nome for p in self.palestrantes.order_by("nome")]
+        nomes = ", ".join(nomes)
+
+        if "," in nomes:
+            indice = nomes.rfind(",")
+            nomes = "%s e %s" % (nomes[:indice], nomes[indice + 2:])
+
+        return nomes
