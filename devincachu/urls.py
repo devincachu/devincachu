@@ -13,6 +13,7 @@ connect()
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^palestrantes/$', pviews.PalestrantesView.as_view(), name='palestrantes'),
+    url(r'^programacao/$', pviews.ProgramacaoView.as_view(), name='programacao'),
     url(r'^$', dviews.IndexView.as_view(), name='index'),
 )
 
