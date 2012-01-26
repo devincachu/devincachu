@@ -11,8 +11,7 @@ class ModelPalestraTestCase(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        management.call_command("loaddata", "palestrantes.yaml", verbosity=0)
-        management.call_command("loaddata", "palestras.yaml", verbosity=0)
+        management.call_command("loaddata", "palestrantes", "palestras", verbosity=0)
         cls.field_names = models.Palestra._meta.get_all_field_names()
 
     @classmethod
