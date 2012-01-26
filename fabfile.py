@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import contextlib
 import os
 
 from fabric.api import cd, env, run, settings
