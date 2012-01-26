@@ -50,12 +50,6 @@ class TemplatePalestrantesTestCase(test.TestCase):
         lis = self.dom.xpath('//ul[@class="palestrantes"]/li')
         self.assertEquals(5, len(lis))
 
-    def test_deve_identificar_de_forma_unica_lis_impares_comecando_em_0(self):
-        lis = self.dom.xpath('//ul[@class="palestrantes"]/li')
-        for i, li in enumerate(lis):
-            if i % 2 == 1:
-                self.assertIn("impar", li.attrib['class'])
-
     def test_deve_trazer_palestrantes_em_ordem_alfabetica(self):
         lista_esperada = ["Forrest Gump", "Freddy Krueger", "Hannibal Lecter", "James Bond", "Vito Corleone"]
         lista_obtida = [p.nome for p in self.response.context_data["palestrantes"]]
