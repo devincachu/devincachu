@@ -37,6 +37,7 @@ USE_L10N = False
 MEDIA_ROOT = os.path.join(ROOT, 'media')
 MEDIA_URL = '/media/'
 BASE_URL = 'http://beta.devincachu.com.br'
+ROAN_PURGE_URL = "%s/purge" % BASE_URL
 
 STATIC_ROOT = os.path.join(ROOT, 'static')
 STATIC_URL = '/static/'
@@ -84,8 +85,6 @@ COMPRESS_JS_FILTERS = (
 
 KEEP_COMMENTS_ON_MINIFYING = True
 EXCLUDE_FROM_MINIFYING = ('^admin/',)
-
-ROAN_PURGE_URL = "http://beta.devincachu.com.br/purge"
 
 TEMPLATE_DIRS = (
     os.path.join(ROOT, 'templates'),
