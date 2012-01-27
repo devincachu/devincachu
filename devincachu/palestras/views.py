@@ -29,6 +29,15 @@ class ProgramacaoView(list.ListView):
     template_name = "programacao.html"
     queryset = models.Palestra.objects.all().order_by("inicio")
 
+    def get_context_data(self, **kwargs):
+        context = super(ProgramacaoView, self).get_context_data(**kwargs)
+        context.update({
+            u"keywords": u"devincachu, dev in cachu 2012, palestras, programação, desenvolvimento de software",
+            u"description": u"Grade de programação do Dev in Cachu 2012",
+            u"canonical_url": "%s/programacao/" % settings.BASE_URL,
+        })
+        return context
+
 
 class PalestraView(detail.DetailView):
     context_object_name = "palestra"

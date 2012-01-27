@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import unittest
 
+from django.conf import settings
 from django.core import management
 from django.test import client
 from django.views.generic import detail, list as vlist
+from lxml import html
 
 from palestras import models, views
 
@@ -39,6 +41,30 @@ class ProgramacaoViewTestCase(unittest.TestCase):
         titulos_esperados = [u"Recepção e credenciamento", u"Escalando aplicações Django", "Arquitetura escalável de aplicação de alto desempenho", u"Almoço"]
         titulos_obtidos = [p.titulo for p in palestras]
         self.assertEquals(titulos_esperados, titulos_obtidos)
+
+    def test_deve_definir_canonical_url(self):
+        esperado = "%s/programacao/" % settings.BASE_URL
+        view = views.ProgramacaoView.as_view()
+        response = view(self.request)
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//link[@rel="canonical"]')[0].attrib["href"])
+
+    def test_deve_ter_meta_keywords(self):
+        esperado = u"devincachu, dev in cachu 2012, palestras, programação, desenvolvimento de software"
+        view = views.ProgramacaoView.as_view()
+        response = view(self.request)
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//meta[@name="keywords"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_ter_meta_description(self):
+        esperado = u"Grade de programação do Dev in Cachu 2012"
+        view = views.ProgramacaoView.as_view()
+        response = view(self.request)
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//meta[@name="description"]')[0].attrib["content"].encode("iso-8859-1"))
 
 
 class PalestraViewTestCase(unittest.TestCase):
