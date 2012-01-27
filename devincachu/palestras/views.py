@@ -47,3 +47,12 @@ class PalestraView(detail.DetailView):
     def get_queryset(self):
         slugs_palestrantes = self.kwargs["palestrantes"].split("/")
         return models.Palestra.objects.filter(slug=self.kwargs["slug"], palestrantes__slug__in=slugs_palestrantes).distinct("pk")
+
+    def get_context_data(self, **kwargs):
+        context = super(PalestraView, self).get_context_data(**kwargs)
+        context.update({
+            u"keywords": "dev in cachu 2012, palestra, %s, %s" % (context["palestra"], context["palestra"].nomes_palestrantes().replace(" e ", ", ")),
+            u"description": context["palestra"].descricao,
+            u"canonical_url": "%s/programacao/%s/%s/" % (settings.BASE_URL, self.kwargs["palestrantes"], self.kwargs["slug"]),
+        })
+        return context

@@ -79,7 +79,7 @@ class PalestraViewTestCase(unittest.TestCase):
 
     def setUp(self):
         factory = client.RequestFactory()
-        self.request = factory.get("/programacao/francisco-souza/django")
+        self.request = factory.get("/programacao/hannibal-lecter/vito-corleone/escalando-aplicacoes-django/")
 
     def test_deve_herdar_de_DetailView(self):
         assert issubclass(views.PalestraView, detail.DetailView)
@@ -110,3 +110,30 @@ class PalestraViewTestCase(unittest.TestCase):
         view = views.PalestraView()
         view.kwargs = {u"slug": palestra.slug, u"palestrantes": "hannibal-lecter/vito-corleone"}
         self.assertEquals(1, view.get_queryset().count())
+
+    def test_deve_definir_canonical_url(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        esperado = "%s/programacao/hannibal-lecter/vito-corleone/%s/" % (settings.BASE_URL, palestra.slug)
+        view = views.PalestraView.as_view()
+        response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//link[@rel="canonical"]')[0].attrib["href"])
+
+    def test_deve_definir_meta_keywords(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        esperado = u"dev in cachu 2012, palestra, %s, %s" % (palestra.titulo, palestra.nomes_palestrantes().replace(" e ", ", "))
+        view = views.PalestraView.as_view()
+        response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//meta[@name="keywords"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_definir_meta_description(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        esperado = palestra.descricao
+        view = views.PalestraView.as_view()
+        response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//meta[@name="description"]')[0].attrib["content"].encode("iso-8859-1"))
