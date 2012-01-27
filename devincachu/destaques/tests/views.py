@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
+from django.conf import settings
 from django.core import management, urlresolvers
 from django.template import response
 from django.test import client
@@ -90,6 +91,27 @@ class IndexViewTestCase(unittest.TestCase):
         r.render()
         dom = html.fromstring(r.content)
         self.assertEquals(1, len(dom.xpath('//div[@class="hero-unit"]')))
+
+    def test_deve_ter_canonical_url_da_home(self):
+        r = self.view.get(self.request)
+        r.render()
+        dom = html.fromstring(r.content)
+        esperado = "%s/" % settings.BASE_URL
+        self.assertEquals(esperado, dom.xpath('//link[@rel="canonical"]')[0].attrib["href"])
+
+    def test_meta_keywords(self):
+        r = self.view.get(self.request)
+        r.render()
+        dom = html.fromstring(r.content)
+        esperado = u"devincachu, dev in cachu 2012, evento de informática, desenvolvimento de software, cachoeiro de itapemirim"
+        self.assertEquals(esperado, dom.xpath('//meta[@name="keywords"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_meta_description(self):
+        r = self.view.get(self.request)
+        r.render()
+        dom = html.fromstring(r.content)
+        esperado = u"Dev in Cachu 2012 - evento sobre desenvolvimento de software no sul do Espírito Santo"
+        self.assertEquals(esperado, dom.xpath('//meta[@name="description"]')[0].attrib["content"].encode("iso-8859-1"))
 
 
 class IndexViewSemDados(unittest.TestCase):

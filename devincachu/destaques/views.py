@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.template import response
 from django.views.generic import base
 
@@ -22,6 +23,9 @@ class IndexView(base.View):
         contexto = {
             'destaques': self.obter_destaques(),
             'chamada': self.obter_chamada(),
+            'canonical_url': u"%s/" % settings.BASE_URL,
+            'keywords': u"devincachu, dev in cachu 2012, evento de informática, desenvolvimento de software, cachoeiro de itapemirim",
+            'description': u"Dev in Cachu 2012 - evento sobre desenvolvimento de software no sul do Espírito Santo",
         }
 
         return response.TemplateResponse(request, "index.html", contexto)
