@@ -44,18 +44,15 @@ class Palestra(models.Model):
     def __unicode__(self):
         return self.titulo
 
-    def get_absolute_url_and_link_title(self):
+    def get_absolute_url(self):
         palestrantes = self.palestrantes.order_by("nome")
 
         prefixo = "/".join([p.slug for p in palestrantes])
 
         if prefixo:
-            url = "/programacao/%s/%s/" % (prefixo, self.slug)
-            trecho = "dos palestrantes" if "/" in prefixo else "do palestrante"
-            titulo = u"Veja mais informações da palestra %s e %s %s" % (self.titulo, trecho, self.nomes_palestrantes(palestrantes))
-            return {'url': url, 'title': titulo}
+            return "/programacao/%s/%s/" % (prefixo, self.slug)
 
-        return {'url': "#", 'title': self.descricao}
+        return "#"
 
 
 roan.purge("/palestrantes/").on_save(Palestrante)

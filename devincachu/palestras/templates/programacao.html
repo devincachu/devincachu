@@ -21,19 +21,21 @@
                 <th>Programação</th>
             </tr>
             {% for palestra in palestras %}
-                {% with palestra.get_absolute_url_and_link_title as url_title %}
-                    <tr>
-                        <td class="horario">
-                            <a href="{{ url_title.url }}" title="{{ url_title.title }}">
-                                {{ palestra.inicio|time:"H:i" }} - {{ palestra.termino|time:"H:i" }}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{{ url_title.url }}" title="{{ url_title.title }}">
-                                <strong>{{ palestra.titulo }}</strong><span>{{ palestra.nomes_palestrantes }}</span>
-                            </a>
-                        </td>
-                    </tr>
+                {% with palestra.get_absolute_url as url %}
+                    {% with palestra.descricao|truncatewords:21 as descricao %}
+                        <tr>
+                            <td class="horario">
+                                <a href="{{ url }}" title="{{ descricao }}">
+                                    {{ palestra.inicio|time:"H:i" }} - {{ palestra.termino|time:"H:i" }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ url }}" title="{{ descricao }}">
+                                    <strong>{{ palestra.titulo }}</strong><span>{{ palestra.nomes_palestrantes }}</span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endwith %}
                 {% endwith %}
             {% endfor %}
         </table>
