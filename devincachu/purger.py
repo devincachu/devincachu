@@ -15,3 +15,5 @@ def connect():
     for p in palestras:
         roan.purge(p.get_absolute_url_and_link_title()['url']).on_save(pmodels.Palestra)
         roan.purge(p.get_absolute_url_and_link_title()['url']).on_delete(pmodels.Palestra)
+        roan.purge(p.get_absolute_url_and_link_title()['url']).on_save(pmodels.Palestrante)
+        roan.purge(p.get_absolute_url_and_link_title()['url']).on_delete(pmodels.Palestrante)
