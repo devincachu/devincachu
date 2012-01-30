@@ -10,6 +10,7 @@
 
 {% block coluna_central %}
     <h1>{{ palestra.titulo }}</h1>
+    <span class="horario"><strong>Horário:</strong> {{ palestra.inicio|time:"H:i" }} - {{ palestra.termino|time:"H:i" }}</span>
 
     {{ palestra.descricao|markdown }}
 

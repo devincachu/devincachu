@@ -31,3 +31,11 @@ ul.palestrantes li .links-palestrante a {
     float: left;
     margin: 5px 10px 0 0;
 }
+
+span.horario {
+    color: #333;
+    display: block;
+    font-size: 12px;
+    margin-bottom: 15px;
+    margin-top: -10px;
+}
