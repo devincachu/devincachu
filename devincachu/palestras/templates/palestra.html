@@ -17,9 +17,14 @@
 
 {% block coluna_central %}
     <h1>{{ palestra.titulo }}</h1>
-    <span class="horario"><strong>Horário:</strong> {{ palestra.inicio|time:"H:i" }} - {{ palestra.termino|time:"H:i" }}</span>
+    <div class="horario"><strong>Horário:</strong> {{ palestra.inicio|time:"H:i" }} - {{ palestra.termino|time:"H:i" }}</div>
+    <div id="gplus" class="social"><div class="g-plusone" data-size="medium"></div></div>
+    <div id="fb" class="social"><div class="fb-like" data-send="false" data-layout="button_count" data-width="45" data-show-faces="false"></div></div>
+    <div id="twitter" class="social"><a href="https://twitter.com/share" class="twitter-share-button" data-via="devincachu" data-hashtags="devincachu">Tweet</a></div>
 
-    {{ palestra.descricao|markdown }}
+    <div class="descricao">
+        {{ palestra.descricao|markdown }}
+    </div>
 
     {% with palestra.palestrantes.all as palestrantes %}
         {% if palestrantes|length > 1 %}
@@ -48,4 +53,3 @@
         </ul>
     {% endwith %}
 {% endblock %}
-

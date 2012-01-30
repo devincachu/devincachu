@@ -32,10 +32,30 @@ ul.palestrantes li .links-palestrante a {
     margin: 5px 10px 0 0;
 }
 
-span.horario {
+div.horario {
     color: #333;
-    display: block;
+    float: left;
     font-size: 12px;
     margin-bottom: 15px;
-    margin-top: -10px;
+}
+
+div.social {
+    float: right;
+    margin-bottom: 15px;
+}
+
+div#gplus.social {
+    width: 50px;
+}
+
+div#fb.social {
+    width: 80px;
+}
+
+div#twitter.social {
+    width: 100px;
+}
+
+div.descricao {
+    clear: both;
 }
