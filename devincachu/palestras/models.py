@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import roan
+
 from django.db import models
 
 
@@ -54,3 +56,7 @@ class Palestra(models.Model):
             return {'url': url, 'title': titulo}
 
         return {'url': "#", 'title': self.descricao}
+
+
+roan.purge("/palestrantes/").on_save(Palestrante)
+roan.purge("/programacao/").on_save(Palestra)
