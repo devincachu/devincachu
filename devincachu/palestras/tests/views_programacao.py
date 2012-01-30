@@ -188,4 +188,4 @@ class PalestraViewTestCase(unittest.TestCase):
         response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
         response.render()
         dom = html.fromstring(response.content)
-        self.assertEquals("100000560629656", dom.xpath('//meta[@property="fb:admins"]')[0].attrib["content"].encode("iso-8859-1"))
+        self.assertEquals("220413784720358", dom.xpath('//meta[@property="fb:app_id"]')[0].attrib["content"].encode("iso-8859-1"))
