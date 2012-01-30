@@ -7,6 +7,14 @@
     background-color: #EEE;
 }
 
+#grade-de-programacao th:first-child {
+    width: 15%;
+}
+
+#grade-de-programacao th:last-child {
+    width: 85%;
+}
+
 #grade-de-programacao th {
     background-color: #222;
     background-image: -ms-linear-gradient(center top, #333, #222);
