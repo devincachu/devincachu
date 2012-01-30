@@ -137,3 +137,55 @@ class PalestraViewTestCase(unittest.TestCase):
         response.render()
         dom = html.fromstring(response.content)
         self.assertEquals(esperado, dom.xpath('//meta[@name="description"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_definir_og_title_com_titulo_da_palestra(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        esperado = palestra.titulo
+        view = views.PalestraView.as_view()
+        response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//meta[@property="og:title"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_definir_og_type_como_activity(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        view = views.PalestraView.as_view()
+        response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals("activity", dom.xpath('//meta[@property="og:type"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_definir_og_url_com_url_da_palestra(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        esperado = "%s/programacao/hannibal-lecter/vito-corleone/%s/" % (settings.BASE_URL, palestra.slug)
+        view = views.PalestraView.as_view()
+        response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//meta[@property="og:url"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_usar_foto_do_primeiro_palestrante_como_og_image(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        palestrante = palestra.palestrantes.all()[:1].get()
+        esperado = "%s%s" % (settings.MEDIA_URL, palestrante.foto)
+        view = views.PalestraView.as_view()
+        response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//meta[@property="og:image"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_usar_devincachu_como_og_sitename(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        view = views.PalestraView.as_view()
+        response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals("Dev in Cachu 2012", dom.xpath('//meta[@property="og:site_name"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_usar_fb_admin_apropriado(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        view = views.PalestraView.as_view()
+        response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals("100000560629656", dom.xpath('//meta[@property="fb:admins"]')[0].attrib["content"].encode("iso-8859-1"))

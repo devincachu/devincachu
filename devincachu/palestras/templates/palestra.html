@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/palestrantes.css" type="text/css" media="screen" charset="utf-8"/>
 {% endblock %}
 
+{% block og %}
+    <meta property="og:title" content="{{ palestra.titulo }}" />
+    <meta property="og:type" content="activity" />
+    <meta property="og:url" content="{{ BASE_URL }}{{ palestra.get_absolute_url }}" />
+    <meta property="og:image" content="{{ MEDIA_URL }}{{ palestra.palestrantes.all.0.foto }}" />
+{% endblock %}
+
 {% block coluna_central %}
     <h1>{{ palestra.titulo }}</h1>
     <span class="horario"><strong>Horário:</strong> {{ palestra.inicio|time:"H:i" }} - {{ palestra.termino|time:"H:i" }}</span>
