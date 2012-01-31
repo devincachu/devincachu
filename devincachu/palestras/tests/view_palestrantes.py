@@ -99,9 +99,9 @@ class TemplatePalestrantesTestCase(test.TestCase):
         title = self.dom.xpath('//meta[@property="og:title"]')[0].attrib["content"]
         self.assertEquals(esperado, title)
 
-    def test_deve_ter_og_type_palestrantes_dentro_do_namespace_devincachu(self):
+    def test_deve_ter_og_type_public_figure(self):
         type = self.dom.xpath('//meta[@property="og:type"]')[0].attrib["content"]
-        self.assertEquals("devincachu:palestrantes", type)
+        self.assertEquals("public_figure", type)
 
     def test_deve_ter_og_url_para_pagina_de_palestrantes(self):
         esperado = u"%s/palestrantes/" % settings.BASE_URL
