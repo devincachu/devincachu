@@ -113,6 +113,41 @@ class IndexViewTestCase(unittest.TestCase):
         esperado = u"Dev in Cachu 2012 - evento sobre desenvolvimento de software no sul do Espírito Santo"
         self.assertEquals(esperado, dom.xpath('//meta[@name="description"]')[0].attrib["content"].encode("iso-8859-1"))
 
+    def test_og_title_deve_ter_nome_e_edicao_do_evento(self):
+        r = self.view.get(self.request)
+        r.render()
+        dom = html.fromstring(r.content)
+        esperado = u"Dev in Cachu 2012"
+        self.assertEquals(esperado, dom.xpath('//meta[@property="og:title"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_og_type_deve_ser_website(self):
+        r = self.view.get(self.request)
+        r.render()
+        dom = html.fromstring(r.content)
+        esperado = u"website"
+        self.assertEquals(esperado, dom.xpath('//meta[@property="og:type"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_og_url_deve_ser_BASE_URL_com_barra_no_final(self):
+        r = self.view.get(self.request)
+        r.render()
+        dom = html.fromstring(r.content)
+        esperado = u"%s/" % settings.BASE_URL
+        self.assertEquals(esperado, dom.xpath('//meta[@property="og:url"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_og_image_deve_ser_logomarca_padrao_do_evento(self):
+        r = self.view.get(self.request)
+        r.render()
+        dom = html.fromstring(r.content)
+        esperado = u"%simg/logo-devincachu-facebook.png" % settings.STATIC_URL
+        self.assertEquals(esperado, dom.xpath('//meta[@property="og:image"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_og_description_deve_trazer_descricao_do_evento(self):
+        r = self.view.get(self.request)
+        r.render()
+        dom = html.fromstring(r.content)
+        esperado = u"Maior evento de desenvolvimento de software do sul do Espírito Santo. Organizado com o objetivo de difundir técnicas e práticas de desenvolvimento de software, trazendo diversos temas"
+        self.assertEquals(esperado, dom.xpath('//meta[@property="og:description"]')[0].attrib["content"].encode("iso-8859-1"))
+
 
 class IndexViewSemDados(unittest.TestCase):
 

@@ -5,6 +5,14 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}css/index.css" type="text/css" media="screen" charset="utf-8" />
 {% endblock %}
 
+{% block og %}
+    <meta property="og:title" content="Dev in Cachu 2012" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ BASE_URL }}/" />
+    <meta property="og:image" content="{{ STATIC_URL }}img/logo-devincachu-facebook.png" />
+    <meta property="og:description" content="Maior evento de desenvolvimento de software do sul do Espírito Santo. Organizado com o objetivo de difundir técnicas e práticas de desenvolvimento de software, trazendo diversos temas" />
+{% endblock %}
+
 {% block chamada %}
     {% if chamada %}
         <div class="hero-unit">
