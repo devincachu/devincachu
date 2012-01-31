@@ -28,11 +28,7 @@
     </div>
 
     {% with palestra.palestrantes.all as palestrantes %}
-        {% if palestrantes|length > 1 %}
-            <h2>Palestrantes</h2>
-        {% else %}
-            <h2>Palestrante</h2>
-        {% endif %}
+        <h2>Palestrante{{ palestrantes.length|pluralize}}</h2>
 
         <ul class="palestrantes">
             {% for palestrante in palestrantes %}
