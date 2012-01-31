@@ -10,7 +10,7 @@ class PalestrantesView(list.ListView):
     context_object_name = "palestrantes"
     model = models.Palestrante
     template_name = "palestrantes.html"
-    queryset = models.Palestrante.objects.all().order_by("nome")
+    queryset = models.Palestrante.objects.filter(listagem=True).order_by("nome")
 
     def get_context_data(self, **kwargs):
         context = super(PalestrantesView, self).get_context_data(**kwargs)

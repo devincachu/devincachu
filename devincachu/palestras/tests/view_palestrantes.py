@@ -49,10 +49,10 @@ class TemplatePalestrantesTestCase(test.TestCase):
 
     def test_deve_trazer_listagem_de_palestrantes_em_ul_com_class_palestrante(self):
         lis = self.dom.xpath('//ul[@class="palestrantes"]/li')
-        self.assertEquals(5, len(lis))
+        self.assertEquals(4, len(lis))
 
-    def test_deve_trazer_palestrantes_em_ordem_alfabetica(self):
-        lista_esperada = ["Forrest Gump", "Freddy Krueger", "Hannibal Lecter", "James Bond", "Vito Corleone"]
+    def test_deve_trazer_palestrantes_marcados_para_aparecer_na_lista_em_ordem_alfabetica(self):
+        lista_esperada = ["Forrest Gump", "Hannibal Lecter", "James Bond", "Vito Corleone"]
         lista_obtida = [p.nome for p in self.response.context_data["palestrantes"]]
         self.assertEquals(lista_esperada, lista_obtida)
 
@@ -62,7 +62,7 @@ class TemplatePalestrantesTestCase(test.TestCase):
 
     def test_nao_deve_trazer_link_para_o_blog_caso_o_palestrante_nao_tenha_blog(self):
         divs = self.dom.xpath('//ul[@class="palestrantes"]/li/div')
-        div = divs[4]
+        div = divs[3]
         children = div.getchildren()
         c = 0
         for child in children:
@@ -85,7 +85,7 @@ class TemplatePalestrantesTestCase(test.TestCase):
         self.assertEquals(esperado, canonical_url)
 
     def test_keywords_deve_incluir_nomes_de_todos_os_palestrantes_em_ordem_alfabetica(self):
-        esperado = u"dev in cachu, palestrantes, %s" % ", ".join([p.nome for p in models.Palestrante.objects.order_by("nome")])
+        esperado = u"dev in cachu, palestrantes, %s" % ", ".join([p.nome for p in models.Palestrante.objects.filter(listagem=True).order_by("nome")])
         keywords = self.dom.xpath('//meta[@name="keywords"]')[0].attrib["content"]
         self.assertEquals(esperado, keywords)
 
@@ -115,7 +115,7 @@ class TemplatePalestrantesTestCase(test.TestCase):
 
     def test_deve_ter_og_description_descrevendo_a_pagina_de_palestrantes(self):
         esperado = u"Veja mais informações dos palestrantes do Dev in Cachu 2012. Conheça quem são e de onde vêm os palestrantes dessa edição"
-        description = self.dom.xpath('//meta[@property="og:description"]')[0].attrib["content"]
+        description = self.dom.xpath('//meta[@property="og:description"]')[0].attrib["content"].encode("iso-8859-1")
         self.assertEquals(esperado, description)
 
 
