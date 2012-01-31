@@ -20,6 +20,9 @@
 {% endblock %}
 
 {% block coluna_central %}
+    <div id="twitter" class="home-social"><a href="https://twitter.com/share" class="twitter-share-button" data-via="devincachu" data-hashtags="devincachu">Tweet</a></div>
+    <div id="fb" class="home-social"><div class="fb-like" data-send="false" data-layout="button_count" data-width="45" data-show-faces="false"></div></div>
+    <div id="gplus" class="home-social"><div class="g-plusone" data-size="medium"></div>
     {% for destaque in destaques %}
         <div class="destaque">
             <h2>{{ destaque.titulo }}</h2>

@@ -3,3 +3,11 @@
     font-size: 11px;
     margin: 3px 0;
 }
+
+div.home-social {
+    float: left;
+}
+
+div.destaque {
+    clear:both;
+}
