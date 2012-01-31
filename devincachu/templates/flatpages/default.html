@@ -9,3 +9,10 @@
 {% block coluna_central %}
     {{ flatpage.content|markdown }}
 {% endblock %}
+
+{% block og %}
+    <meta property="og:title" content="{{ flatpage.title }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ BASE_URL }}{{ flatpage.url }}" />
+    <meta property="og:image" content="{{ STATIC_URL }}img/logo-devincachu-facebook.png" />
+{% endblock %}
