@@ -13,3 +13,7 @@ body {
     top: 0;
     z-index: 99999;
 }
+
+#data-evento {
+    font-size: 30px;
+}
