@@ -13,12 +13,17 @@
 {% block coluna_central %}
     <h1>Programação</h1>
 
-    <p>
+    <div id="twitter" class="home-social"><a href="https://twitter.com/share" class="twitter-share-button" data-via="devincachu" data-hashtags="devincachu">Tweet</a></div>
+    <div id="fb" class="home-social"><div class="fb-like" data-send="false" data-layout="button_count" data-width="45" data-show-faces="false"></div></div>
+    <div id="gplus" class="home-social"><div class="g-plusone" data-size="medium"></div></div>
+
+    <p class="descricao">
         Confira abaixo a programação do Dev in Cachu 2012. Para ver mais informações de uma palestra,
         basta clicar na linha correspondente à palestra. Você terá acesso a uma descrição melhor detalhada
         da palestra o currículo do(s) palestrante(s).
     </p>
     {% if palestras %}
+
         <table id="grade-de-programacao">
             <tr>
                 <th>Horário</th>
