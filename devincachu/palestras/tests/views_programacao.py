@@ -153,7 +153,7 @@ class PalestraViewTestCase(unittest.TestCase):
         response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
         response.render()
         dom = html.fromstring(response.content)
-        self.assertEquals("activity", dom.xpath('//meta[@property="og:type"]')[0].attrib["content"].encode("iso-8859-1"))
+        self.assertEquals("devincachu:palestra", dom.xpath('//meta[@property="og:type"]')[0].attrib["content"].encode("iso-8859-1"))
 
     def test_deve_definir_og_url_com_url_da_palestra(self):
         palestra = models.Palestra.objects.get(pk=1)
@@ -182,7 +182,23 @@ class PalestraViewTestCase(unittest.TestCase):
         dom = html.fromstring(response.content)
         self.assertEquals("Dev in Cachu 2012", dom.xpath('//meta[@property="og:site_name"]')[0].attrib["content"].encode("iso-8859-1"))
 
-    def test_deve_usar_fb_admin_apropriado(self):
+    def test_deve_ter_og_description_com_descricao_da_palestra(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        view = views.PalestraView.as_view()
+        response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(palestra.descricao, dom.xpath('//meta[@property="og:description"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_ter_og_locale_pt_BR(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        view = views.PalestraView.as_view()
+        response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals("pt_BR", dom.xpath('//meta[@property="og:locale"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_usar_fb_app_id_apropriado(self):
         palestra = models.Palestra.objects.get(pk=1)
         view = views.PalestraView.as_view()
         response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
