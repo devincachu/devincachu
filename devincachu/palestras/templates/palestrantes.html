@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/palestrantes.css" type="text/css" media="screen" charset="utf-8"/>
 {% endblock %}
 
+{% block og %}
+    <meta property="og:title" content="Palestrantes do Dev in Cachu 2012" />
+    <meta property="og:type" content="devincachu:palestrantes" />
+    <meta property="og:url" content="{{ BASE_URL }}/palestrantes/" />
+    <meta property="og:image" content="{{ STATIC_URL }}img/logo-devincachu-facebook.png" />
+    <meta property="og:description" content="Veja mais informações dos palestrantes do Dev in Cachu 2012. Conheça quem são e de onde vêm os palestrantes dessa edição" />
+{% endblock %}
+
 {% block coluna_central %}
     <h1>Palestrantes</h1>
 

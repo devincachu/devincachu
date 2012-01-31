@@ -94,6 +94,30 @@ class TemplatePalestrantesTestCase(test.TestCase):
         description = self.dom.xpath('//meta[@name="description"]')[0].attrib["content"]
         self.assertEquals(esperado, description)
 
+    def test_deve_ter_og_title(self):
+        esperado = u"Palestrantes do Dev in Cachu 2012"
+        title = self.dom.xpath('//meta[@property="og:title"]')[0].attrib["content"]
+        self.assertEquals(esperado, title)
+
+    def test_deve_ter_og_type_palestrantes_dentro_do_namespace_devincachu(self):
+        type = self.dom.xpath('//meta[@property="og:type"]')[0].attrib["content"]
+        self.assertEquals("devincachu:palestrantes", type)
+
+    def test_deve_ter_og_url_para_pagina_de_palestrantes(self):
+        esperado = u"%s/palestrantes/" % settings.BASE_URL
+        url = self.dom.xpath('//meta[@property="og:url"]')[0].attrib["content"]
+        self.assertEquals(esperado, url)
+
+    def test_deve_usar_logomarca_padrao_como_og_image(self):
+        esperado = u"%simg/logo-devincachu-facebook.png" % settings.STATIC_URL
+        image = self.dom.xpath('//meta[@property="og:image"]')[0].attrib["content"]
+        self.assertEquals(esperado, image)
+
+    def test_deve_ter_og_description_descrevendo_a_pagina_de_palestrantes(self):
+        esperado = u"Veja mais informações dos palestrantes do Dev in Cachu 2012. Conheça quem são e de onde vêm os palestrantes dessa edição"
+        description = self.dom.xpath('//meta[@property="og:description"]')[0].attrib["content"]
+        self.assertEquals(esperado, description)
+
 
 class TemplatePalestranteSemPalestrantesTestCase(test.TestCase):
 
