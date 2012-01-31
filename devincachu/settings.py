@@ -36,7 +36,7 @@ USE_L10N = False
 
 MEDIA_ROOT = os.path.join(ROOT, 'media')
 MEDIA_URL = '/media/'
-BASE_URL = 'http://beta.devincachu.com.br'
+BASE_URL = 'http://www.devincachu.com.br'
 ROAN_PURGE_URL = "%s/purge" % BASE_URL
 
 STATIC_ROOT = os.path.join(ROOT, 'static')
