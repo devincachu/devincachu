@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/programacao.css" type="text/css" media="screen" charset="utf-8" />
 {% endblock %}
 
+{% block og%}
+    <meta property="og:title" content="Grade de programação do Dev in Cachu 2012" />
+    <meta property="og:type" content="activity" />
+    <meta property="og:url" content="{{ BASE_URL }}/programacao/" />
+    <meta property="og:image" content="{{ STATIC_URL }}img/logo-devincachu-facebook.png" />
+    <meta property="og:description" content="Conheça as atrações e os convidados especiais do Dev in Cachu 2012" />
+{% endblock %}
+
 {% block coluna_central %}
     <h1>Programação</h1>
 

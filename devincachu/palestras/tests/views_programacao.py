@@ -66,6 +66,45 @@ class ProgramacaoViewTestCase(unittest.TestCase):
         dom = html.fromstring(response.content)
         self.assertEquals(esperado, dom.xpath('//meta[@name="description"]')[0].attrib["content"].encode("iso-8859-1"))
 
+    def test_deve_ter_og_description(self):
+        esperado = u"Conheça as atrações e os convidados especiais do Dev in Cachu 2012"
+        view = views.ProgramacaoView.as_view()
+        response = view(self.request)
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//meta[@property="og:description"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_ter_og_title_descrevendo_a_pagin(self):
+        esperado = u"Grade de programação do Dev in Cachu 2012"
+        view = views.ProgramacaoView.as_view()
+        response = view(self.request)
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//meta[@property="og:title"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_ter_og_type_activity(self):
+        view = views.ProgramacaoView.as_view()
+        response = view(self.request)
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(u"activity", dom.xpath('//meta[@property="og:type"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_ter_og_url(self):
+        esperado = "%s/programacao/" % settings.BASE_URL
+        view = views.ProgramacaoView.as_view()
+        response = view(self.request)
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//meta[@property="og:url"]')[0].attrib["content"].encode("iso-8859-1"))
+
+    def test_deve_ter_og_image_apontando_para_logo_do_devincachu(self):
+        esperado = "%simg/logo-devincachu-facebook.png" % settings.STATIC_URL
+        view = views.ProgramacaoView.as_view()
+        response = view(self.request)
+        response.render()
+        dom = html.fromstring(response.content)
+        self.assertEquals(esperado, dom.xpath('//meta[@property="og:image"]')[0].attrib["content"].encode("iso-8859-1"))
+
 
 class PalestraViewTestCase(unittest.TestCase):
 
@@ -147,7 +186,7 @@ class PalestraViewTestCase(unittest.TestCase):
         dom = html.fromstring(response.content)
         self.assertEquals(esperado, dom.xpath('//meta[@property="og:title"]')[0].attrib["content"].encode("iso-8859-1"))
 
-    def test_deve_definir_og_type_como_activity(self):
+    def test_deve_definir_og_type_como_palestra_dentro_do_namespace_devincachu(self):
         palestra = models.Palestra.objects.get(pk=1)
         view = views.PalestraView.as_view()
         response = view(self.request, slug=palestra.slug, palestrantes=u"hannibal-lecter/vito-corleone")
