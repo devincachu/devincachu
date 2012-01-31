@@ -111,6 +111,21 @@ class ModelPalestranteTestCase(unittest.TestCase):
         field = [f for f in models.Palestrante._meta.fields if f.name == 'foto'][0]
         self.assertFalse(field.blank)
 
+    def test_palestrante_deve_ter_flag_de_listagem_na_pagina(self):
+        self.assertIn('listagem', self.field_names)
+
+    def test_flag_de_listagem_deve_ser_do_tipo_boolean(self):
+        field = [f for f in models.Palestrante._meta.fields if f.name == 'listagem'][0]
+        self.assertIsInstance(field, django_models.BooleanField)
+
+    def test_flag_de_listagem_deve_ter_verbose_name_bonitinho(self):
+        field = [f for f in models.Palestrante._meta.fields if f.name == 'listagem'][0]
+        self.assertEquals(u"Exibir na página de palestrantes?", field.verbose_name)
+
+    def test_flag_de_listagem_deve_vir_desmarcado_por_padrao(self):
+        field = [f for f in models.Palestrante._meta.fields if f.name == 'listagem'][0]
+        self.assertEquals(False, field.default)
+
     def test_repr_deve_conter_nome_do_palestrante(self):
         esperado = '<Palestrante: "Francisco Souza">'
         palestrante = models.Palestrante(nome="Francisco Souza")

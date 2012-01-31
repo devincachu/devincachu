@@ -6,6 +6,7 @@
     minicurriculo: Chianti.
     foto: palestrantes/hannibal.jpg
     twitter: hlecter
+    listagem: 1
 
 - model: palestras.Palestrante
   pk: 2
@@ -15,6 +16,7 @@
     minicurriculo: Chianti.
     foto: palestrantes/vito.jpg
     twitter: "@vito"
+    listagem: 1
 
 - model: palestras.Palestrante
   pk: 3
@@ -24,6 +26,7 @@
     minicurriculo: Chianti.
     foto: palestrantes/bond.jpg
     blog: http://bond.com
+    listagem: 1
 
 - model: palestras.Palestrante
   pk: 4
@@ -32,6 +35,7 @@
     slug: forrest-gump
     minicurriculo: Chianti.
     foto: palestrantes/forrest.jpg
+    listagem: 1
 
 - model: palestras.Palestrante
   pk: 5
@@ -40,3 +44,4 @@
     slug: freddy-krueger
     minicurriculo: Chianti.
     foto: palestrantes/fred.jpg
+    listagem: 0

@@ -11,6 +11,7 @@ class Palestrante(models.Model):
     blog = models.URLField(verify_exists=False, max_length=255, blank=True)
     twitter = models.CharField(max_length=50, blank=True)
     foto = models.ImageField(upload_to=u"palestrantes")
+    listagem = models.BooleanField(verbose_name=u"Exibir na página de palestrantes?", default=False)
 
     def __repr__(self):
         return '<Palestrante: "%s">' % self.nome
