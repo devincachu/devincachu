@@ -25,11 +25,10 @@
         {% compress css %}
             <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" media="screen" charset="utf-8" />
             <link href="{{ STATIC_URL }}css/devincachu.css" rel="stylesheet" media="screen" charset="utf-8" />
-
-            {% block css %}
-            {% endblock %}
+            <link href="{{ STATIC_URL }}css/index.css" rel="stylesheet" type="text/css" media="screen" charset="utf-8" />
+            <link href="{{ STATIC_URL }}css/palestrantes.css" rel="stylesheet" type="text/css" media="screen" charset="utf-8"/>
+            <link href="{{ STATIC_URL }}css/programacao.css" rel="stylesheet" type="text/css" media="screen" charset="utf-8" />
         {% endcompress %}
-
 
         <script src="{{ STATIC_URL }}js/head.load.min.js" type="text/javascript" charset="utf-8"></script>
 
