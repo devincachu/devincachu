@@ -42,6 +42,19 @@ class ProgramacaoViewTestCase(unittest.TestCase):
         titulos_obtidos = [p.titulo for p in palestras]
         self.assertEquals(titulos_esperados, titulos_obtidos)
 
+    def test_nao_deve_incluir_tags_html_no_title_da_grade_de_programacao(self):
+        palestra = models.Palestra.objects.get(pk=1)
+        palestra.descricao = u"[Oi](http://www.google.com.br), você vem sempre aqui?"
+        palestra.save()
+
+        view = views.ProgramacaoView.as_view()
+        response = view(self.request)
+        response.render()
+
+        dom = html.fromstring(response.content)
+        title_obtido = dom.xpath('//a[@href="%s"]' % palestra.get_absolute_url())[0].attrib["title"].encode("iso-8859-1")
+        self.assertEquals(u"Oi, você vem sempre aqui?", title_obtido)
+
     def test_deve_definir_canonical_url(self):
         esperado = "%s/programacao/" % settings.BASE_URL
         view = views.ProgramacaoView.as_view()
