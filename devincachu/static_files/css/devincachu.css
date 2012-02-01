@@ -7,6 +7,20 @@ body {
     margin-left: 5px;
 }
 
+.logotipos, .logotipos li {
+    list-style: none;
+    margin: 0;
+}
+
+.logotipos li:first-child {
+    margin-top: 15px;
+}
+
+.logotipos li:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+
 #github-ribbon img {
     position: fixed;
     right: 0;
