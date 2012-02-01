@@ -30,3 +30,15 @@ body {
 h1:not(:first-child) {
     margin-top: 20px;
 }
+
+#img-captacao {
+    float: right;
+    margin-right: 10px;
+    text-align: center;
+    width: 90px;
+}
+
+#img-captacao span {
+    display: block;
+    font-size: 10px;
+}
