@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block coluna_central %}
-    <h1>{{ palestra.titulo }}</h1>
+    <h1 id="titulo-palestra">{{ palestra.titulo }}</h1>
     <div class="horario"><strong>Horário:</strong> {{ palestra.inicio|time:"H:i" }} - {{ palestra.termino|time:"H:i" }}</div>
     <div id="gplus" class="social"><div class="g-plusone" data-size="medium"></div></div>
     <div id="fb" class="social"><div class="fb-like" data-send="false" data-layout="button_count" data-width="45" data-show-faces="false"></div></div>

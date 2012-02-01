@@ -59,3 +59,7 @@ div#twitter {
 .descricao {
     clear: both;
 }
+
+#titulo-palestra {
+    font-size: 32px;
+}
