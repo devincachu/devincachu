@@ -4,7 +4,7 @@ import unittest
 from django.conf import settings
 from django.core import management
 from django.test import client
-from django.views.generic import detail, list as vlist
+from django.views.generic import list as vlist
 from lxml import html
 
 from palestras import models, views
