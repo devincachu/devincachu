@@ -11,8 +11,9 @@ class DestaqueAdmin(admin.ModelAdmin):
     form = forms.DestaqueAdminForm
 
     def save_model(self, request, obj, form, change):
-        obj.autor = request.user
-        obj.save()
+        if not change:
+            obj.autor = request.user
+            obj.save()
 
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)

@@ -17,6 +17,11 @@ class DestaqueAdminTestCase(unittest.TestCase):
             cls.user.set_password('123')
             cls.user.save()
 
+        cls.user2, created = auth_models.User.objects.get_or_create(username='devincachu2', email='devincachu@devincachu.com.br')
+        if created:
+            cls.user.set_password('123')
+            cls.user.save()
+
         cls.destaque_persistido = models.Destaque.objects.create(titulo=u"Dev in Cachu 2012", conteudo=u"Se inscreva!", autor=cls.user)
         cls.chamada_persistida = models.Chamada.objects.create(titulo=u"Inscrições abertas", conteudo=u"Bla", autor=cls.user, url_link="/inscricao/", titulo_veja_mais=u"Se inscreva agora!")
 
@@ -55,7 +60,14 @@ class DestaqueAdminTestCase(unittest.TestCase):
         self.assertIn('titulo', admin.DestaqueAdmin.search_fields)
 
     def test_deve_gravar_usuario_logado_como_autor_de_destaque(self):
-        self.admin.save_model(self.request, self.destaque, None, None)
+        self.admin.save_model(self.request, self.destaque, None, False)
+        self.assertEquals(self.user, self.destaque.autor)
+
+    def test_deve_manter_usuario_da_insercao_quando_estiver_fazendo_update(self):
+        self.admin.save_model(self.request, self.destaque, None, False)
+
+        self.request.user = self.user2
+        self.admin.save_model(self.request, self.destaque, None, True)
         self.assertEquals(self.user, self.destaque.autor)
 
     def test_deve_excluir_chamadas_da_listagem(self):
