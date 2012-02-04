@@ -34,3 +34,7 @@ class Configuracao(models.Model):
 
     def __unicode__(self):
         return u"Configuração das inscrições do Dev in Cachu 2012"
+
+    class Meta:
+        verbose_name = u"Configuração das inscrições"
+        verbose_name_plural = verbose_name

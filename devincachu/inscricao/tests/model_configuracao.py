@@ -33,3 +33,9 @@ class ConfiguracaoTestCase(unittest.TestCase):
     def test__unicode__deve_retornar_informando_que_eh_model_de_configuracao_de_inscricao(self):
         configuracao = models.Configuracao.objects.get()
         self.assertEquals(u"Configuração das inscrições do Dev in Cachu 2012", unicode(configuracao))
+
+    def test_verbose_name_deve_ter_acento_e_cedilha(self):
+        self.assertEquals(u"Configuração das inscrições", models.Configuracao._meta.verbose_name)
+
+    def test_verbose_name_plural_deve_ser_igual_verbose_name(self):
+        self.assertEquals(models.Configuracao._meta.verbose_name, models.Configuracao._meta.verbose_name_plural)
