@@ -1,4 +1,6 @@
-{% extends "flatpages/default.html" %}
+{% extends "base.html" %}
+
+{% block title %}Inscrição | {{ block.super }}{% endblock %}
 
 {% block meta %}
     <link rel="canonical" href="{{ BASE_URL }}/inscricao/" />
@@ -7,6 +9,9 @@
 {% endblock %}
 
 {% block og %}
-    {{ block.super }}
+    <meta property="og:title" content="Inscreva-se no Dev in Cachu 2012" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ BASE_URL }}/inscricao/" />
+    <meta property="og:image" content="{{ STATIC_URL }}img/logo-devincachu-facebook.png" />
     <meta property="og:description" content="Inscreva-se no Dev in Cachu 2012" />
 {% endblock %}
