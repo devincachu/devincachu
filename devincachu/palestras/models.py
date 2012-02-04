@@ -57,4 +57,6 @@ class Palestra(models.Model):
 
 
 roan.purge("/palestrantes/").on_save(Palestrante)
+roan.purge("/palestrantes/").on_delete(Palestrante)
 roan.purge("/programacao/").on_save(Palestra)
+roan.purge("/programacao/").on_delete(Palestra)
