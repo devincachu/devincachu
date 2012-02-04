@@ -9,3 +9,4 @@ roan==0.1
 PIL==1.1.7
 slimit==0.5.5
 cssmin==0.1.4
+PyYAML==3.10
