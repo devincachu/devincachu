@@ -23,3 +23,6 @@ class Participante(models.Model):
     tamanho_camiseta = models.CharField(max_length=2, verbose_name=u"Tamanho da camiseta", choices=TAMANHOS_DE_CAMISETA)
     instituicao_ensino = models.CharField(max_length=100, verbose_name=u"Instituição de ensino (para estudantes)", blank=True, null=True)
     empresa = models.CharField(max_length=100, verbose_name=u"Empresa onde trabalha", blank=True, null=True)
+
+    def __unicode__(self):
+        return self.nome

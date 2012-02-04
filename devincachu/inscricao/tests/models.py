@@ -144,3 +144,11 @@ class ParticipanteTestCase(unittest.TestCase):
     def test_empresa_deve_ter_verbose_name_explicitando_que_eh_um_campo_para_pessoas_que_trabalham(self):
         field = models.Participante._meta.get_field_by_name("empresa")[0]
         self.assertEquals(u"Empresa onde trabalha", field.verbose_name)
+
+    def test__repr__deve_ter_nome(self):
+        participante = models.Participante(nome=u"Francisco Souza")
+        self.assertEquals(u"<Participante: Francisco Souza>", repr(participante))
+
+    def test__unicode__deve_ser_o_nome(self):
+        participante = models.Participante(nome=u"Francisco Souza")
+        self.assertEquals(u"Francisco Souza", unicode(participante))
