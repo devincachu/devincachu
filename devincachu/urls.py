@@ -5,6 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 from destaques import views as dviews
+from inscricao import views as iviews
 from palestras import views as pviews
 
 from purger import connect
@@ -15,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^palestrantes/$', pviews.PalestrantesView.as_view(), name='palestrantes'),
     url(r'^programacao/$', pviews.ProgramacaoView.as_view(), name='programacao'),
     url(r'^programacao/(?P<palestrantes>.*)/(?P<slug>[\w-]+)/$', pviews.PalestraView.as_view(), name='palestra'),
+    url(r'^inscricao/$', iviews.InscricaoView.as_view(), name='inscricao'),
     url(r'^$', dviews.IndexView.as_view(), name='index'),
 )
 
