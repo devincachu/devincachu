@@ -1,1 +1,1 @@
-from inscricao.tests.models import *
+from inscricao.tests.model_participante import *
