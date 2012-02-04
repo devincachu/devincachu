@@ -26,3 +26,11 @@ class Participante(models.Model):
 
     def __unicode__(self):
         return self.nome
+
+
+class Configuracao(models.Model):
+    valor_inscricao = models.FloatField(verbose_name=u"Valor da inscrição")
+    inscricoes_abertas = models.BooleanField()
+
+    def __unicode__(self):
+        return u"Configuração das inscrições do Dev in Cachu 2012"
