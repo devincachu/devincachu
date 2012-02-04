@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     'core',
     'destaques',
     'palestras',
+    'inscricao',
 )
 
 LOGGING = {
