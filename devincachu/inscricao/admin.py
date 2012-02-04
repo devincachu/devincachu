@@ -6,10 +6,10 @@ from inscricao import models
 
 class ConfiguracaoAdmin(admin.ModelAdmin):
 
-    def has_add_permission(self, request):
+    def has_add_permission(self, *args, **kwargs):
         return False
 
-    def has_delete_permission(self, request):
+    def has_delete_permission(self, *args, **kwargs):
         return False
 
 
