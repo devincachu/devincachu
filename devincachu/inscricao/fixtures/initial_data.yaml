@@ -1,0 +1,5 @@
+- model: inscricao.Configuracao
+  pk: 1
+  fields:
+    valor_inscricao: 25.0
+    inscricoes_abertas: 0
