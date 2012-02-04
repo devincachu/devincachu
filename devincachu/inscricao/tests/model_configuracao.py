@@ -24,11 +24,24 @@ class ConfiguracaoTestCase(unittest.TestCase):
         self.assertEquals(u"Valor da inscrição", field.verbose_name)
 
     def test_deve_ter_campo_informando_se_a_inscricao_esta_aberta(self):
-        self.assertIn("inscricoes_abertas", self.field_names)
+        self.assertIn("status", self.field_names)
 
-    def test_inscricoes_abertas_deve_ser_BooleanField(self):
-        field = models.Configuracao._meta.get_field_by_name("inscricoes_abertas")[0]
-        self.assertIsInstance(field, django_models.BooleanField)
+    def test_status_deve_ser_do_tipo_CharField(self):
+        field = models.Configuracao._meta.get_field_by_name("status")[0]
+        self.assertIsInstance(field, django_models.CharField)
+
+    def test_status_deve_ter_no_maximo_10_caracteres(self):
+        field = models.Configuracao._meta.get_field_by_name("status")[0]
+        self.assertEquals(10, field.max_length)
+
+    def test_status_deve_ser_fechadas_abertas_ou_encerradas(self):
+        esperado = (
+            (u"fechadas", u"Fechadas (inscrições ainda não abriram)"),
+            (u"abertas", u"Inscrições abertas"),
+            (u"encerradas", u"Inscrições encerradas"),
+        )
+        field = models.Configuracao._meta.get_field_by_name("status")[0]
+        self.assertEquals(esperado, field.choices)
 
     def test__unicode__deve_retornar_informando_que_eh_model_de_configuracao_de_inscricao(self):
         configuracao = models.Configuracao.objects.get()

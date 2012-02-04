@@ -29,8 +29,14 @@ class Participante(models.Model):
 
 
 class Configuracao(models.Model):
+    STATUS = (
+        (u"fechadas", u"Fechadas (inscrições ainda não abriram)"),
+        (u"abertas", u"Inscrições abertas"),
+        (u"encerradas", u"Inscrições encerradas"),
+    )
+
     valor_inscricao = models.FloatField(verbose_name=u"Valor da inscrição")
-    inscricoes_abertas = models.BooleanField()
+    status = models.CharField(max_length=10, choices=STATUS)
 
     def __unicode__(self):
         return u"Configuração das inscrições do Dev in Cachu 2012"
