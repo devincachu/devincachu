@@ -135,6 +135,16 @@ LOGGING = {
     }
 }
 
+PAGSEGURO = {
+    'email': 'ps@devincachu.com.br',
+    'charset': 'UTF-8',
+    'token': 'abacaxi',
+    'currency': 'BRL',
+    'itemId1': '0001',
+    'itemDescription1': u'Inscrição no Dev in Cachu 2012',
+    'itemQuantity1': 1,
+}
+
 try:
     from settings_local import *
 except ImportError:
