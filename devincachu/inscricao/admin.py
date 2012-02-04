@@ -9,6 +9,9 @@ class ConfiguracaoAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
 
+    def has_delete_permission(self, request):
+        return False
+
 
 class ParticipanteAdmin(admin.ModelAdmin):
     list_display = (u"nome", u"sexo", u"email", u"empresa", u"instituicao_ensino", u"tamanho_camiseta", u"confirmado",)

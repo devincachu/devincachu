@@ -23,3 +23,7 @@ class ConfiguracaoAdminTestCase(unittest.TestCase):
     def test_nao_deve_ser_possivel_adicionar_uma_instancia_pelo_admin(self):
         cadmin = admin.ConfiguracaoAdmin(models.Configuracao.objects.get(), None)
         self.assertFalse(cadmin.has_add_permission(self.request))
+
+    def test_nao_deve_ser_possivel_apagar_uma_instancia_pelo_admin(self):
+        cadmin = admin.ConfiguracaoAdmin(models.Configuracao.objects.get(), None)
+        self.assertFalse(cadmin.has_delete_permission(self.request))
