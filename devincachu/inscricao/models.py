@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import roan
+
 from django.db import models
 
 
@@ -44,3 +46,5 @@ class Configuracao(models.Model):
     class Meta:
         verbose_name = u"Configuração das inscrições"
         verbose_name_plural = verbose_name
+
+roan.purge("/inscricao/").on_save(Configuracao)
