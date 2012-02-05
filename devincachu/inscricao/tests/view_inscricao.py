@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
+from django.template import response
 from django.test import client
 
 from inscricao import forms, models, views
@@ -58,3 +59,33 @@ class ViewInscricaoInscricoesAbertasTestCase(unittest.TestCase):
     def test_deve_incluir_configuracao_no_contexto(self):
         context_data = self.response.context_data
         self.assertEquals(self.configuracao, context_data["configuracao"])
+
+
+class ViewInscricaoInscricoesAbertasComDadosInvalidosNoFormularioTestCase(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.dados = {
+            "nome": "",
+            "nome_cracha": "",
+            "sexo": "M",
+            "email": "contato@devincachu.com.br",
+            "tamanho_camiseta": "",
+            "instituicao_ensino": "",
+            "empresa": "",
+        }
+        factory = client.RequestFactory()
+        request = factory.post("/inscricoes/", cls.dados)
+
+        view = views.InscricaoView()
+        cls.response = view.post(request)
+
+    def test_deve_retornar_um_TemplateResponse(self):
+        self.assertIsInstance(self.response, response.TemplateResponse)
+
+    def test_deve_renderizar_template_inscricoes_abertas(self):
+        self.assertEquals("inscricoes_abertas.html", self.response.template_name)
+
+    def test_formulario_do_contexto_deve_ter_dados_preenchidos(self):
+        form = self.response.context_data["form"]
+        self.assertEquals(self.dados.items(), form.data.items())

@@ -12,10 +12,20 @@ class InscricaoView(base.View):
         u"encerradas": "inscricoes_encerradas.html",
     }
 
+    def __init__(self, *args, **kwargs):
+        super(InscricaoView, self).__init__(*args, **kwargs)
+        self._configuracao = None
+
+    @property
+    def configuracao(self):
+        if not self._configuracao:
+            self._configuracao = models.Configuracao.objects.get()
+
+        return self._configuracao
+
     def get(self, request):
-        configuracao = models.Configuracao.objects.get()
-        contexto = self.obter_contexto(configuracao)
-        return response.TemplateResponse(request, self.templates[configuracao.status], contexto)
+        contexto = self.obter_contexto(self.configuracao)
+        return response.TemplateResponse(request, self.templates[self.configuracao.status], contexto)
 
     def obter_contexto(self, configuracao):
         status = configuracao.status
@@ -26,3 +36,9 @@ class InscricaoView(base.View):
     def obter_contexto_inscricoes_abertas(self, configuracao):
         form = forms.ParticipanteForm()
         return {"form": form, "configuracao": configuracao}
+
+    def post(self, request):
+        form = forms.ParticipanteForm(request.POST)
+        if not form.is_valid():
+            contexto = {"form": form, "configuracao": self.configuracao}
+            return response.TemplateResponse(request, "inscricoes_abertas.html", contexto)
