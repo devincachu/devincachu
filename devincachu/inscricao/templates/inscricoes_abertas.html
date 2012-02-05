@@ -1,0 +1,25 @@
+{% extends "inscricao_base.html" %}
+
+{% block h1 %}Inscreva-se no Dev in Cachu 2012{% endblock %}
+
+{% block conteudo_inscricao %}
+    <p class="descricao">Preencha o formulário abaixo para se inscrever no Dev in Cachu. Na próxima página você poderá ir para a página de pagamento do PagSeguro. Campos em negrito são de preenchimento obrigatório.</p>
+
+    <p>
+        <strong>Valor da inscrição:</strong> R$ {{ configuracao.valor_inscricao|floatformat:2 }}.
+    </p>
+
+    <p class="disclaimer"><strong>Atenção:</strong> Sua inscrição só estará confirmada após o pagamento da taxa.</p>
+
+    <form action="" method="post" accept-charset="utf-8" id="form-inscricao">
+        {% csrf_token %}
+        {% for field in form %}
+            <p class="clearfix {{ field.css_classes }}">{{ field.label_tag }}{{ field }}</p>
+        {% endfor %}
+        <p class="botoes">
+            <button type="submit" class="btn primary">Enviar dados</button>
+            <button type="reset" class="btn">Cancelar</button>
+        </p>
+    </form>
+{% endblock %}
+
