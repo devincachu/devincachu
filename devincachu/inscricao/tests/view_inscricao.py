@@ -41,9 +41,9 @@ class ViewInscricaoInscricoesAbertasTestCase(unittest.TestCase):
         factory = client.RequestFactory()
         request = factory.get("/inscricoes/")
 
-        configuracao = models.Configuracao.objects.get()
-        configuracao.status = "abertas"
-        configuracao.save()
+        cls.configuracao = models.Configuracao.objects.get()
+        cls.configuracao.status = "abertas"
+        cls.configuracao.save()
 
         view = views.InscricaoView()
         cls.response = view.get(request)
@@ -54,3 +54,7 @@ class ViewInscricaoInscricoesAbertasTestCase(unittest.TestCase):
     def test_deve_incluir_instancia_de_ParticipanteForm_no_contexto(self):
         context_data = self.response.context_data
         self.assertIsInstance(context_data["form"], forms.ParticipanteForm)
+
+    def test_deve_incluir_configuracao_no_contexto(self):
+        context_data = self.response.context_data
+        self.assertEquals(self.configuracao, context_data["configuracao"])

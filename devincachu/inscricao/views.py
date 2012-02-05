@@ -21,8 +21,8 @@ class InscricaoView(base.View):
         status = configuracao.status
         nome_do_metodo = "obter_contexto_inscricoes_%s" % status
         metodo = getattr(self, nome_do_metodo, None)
-        return metodo and metodo() or {}
+        return metodo and metodo(configuracao) or {}
 
-    def obter_contexto_inscricoes_abertas(self):
+    def obter_contexto_inscricoes_abertas(self, configuracao):
         form = forms.ParticipanteForm()
-        return {"form": form}
+        return {"form": form, "configuracao": configuracao}
