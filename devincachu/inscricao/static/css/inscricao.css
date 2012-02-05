@@ -1,11 +1,9 @@
-#form-inscricao label {
-    clear: left;
-    margin-right: 10px;
-    width: 250px;
+#form-inscricao {
+    margin-top: 30px;
 }
 
-#form-inscricao p {
-    margin-bottom: 10px;
+#form-inscricao .botoes {
+    margin: 15px 0 0 260px;
 }
 
 #form-inscricao .obrigatorio label {
@@ -16,6 +14,12 @@
     margin-right: 5px;
 }
 
-#form-inscricao .botoes {
-    margin: 15px 0 0 260px;
+#form-inscricao label {
+    clear: left;
+    margin-right: 10px;
+    width: 250px;
+}
+
+#form-inscricao p {
+    margin-bottom: 10px;
 }
