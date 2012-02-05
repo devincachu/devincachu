@@ -14,7 +14,10 @@
     <form action="{% url inscricao %}" method="post" accept-charset="utf-8" id="form-inscricao">
         {% csrf_token %}
         {% for field in form %}
-            <p class="clearfix {{ field.css_classes }}">{{ field.label_tag }}{{ field }}</p>
+        <p class="clearfix {{ field.css_classes }}">
+            {{ field.label_tag }}{{ field }}
+            {{ field.errors }}
+        </p>
         {% endfor %}
         <p class="botoes">
             <button type="submit" class="btn primary">Enviar dados</button>
