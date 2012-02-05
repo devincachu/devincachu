@@ -39,6 +39,10 @@ class ParticipanteTestCase(unittest.TestCase):
         self.assertTrue(field.blank)
         self.assertTrue(field.null)
 
+    def test_nome_no_cracha_deve_ter_verbose_name_com_acento(self):
+        field = models.Participante._meta.get_field_by_name("nome_cracha")[0]
+        self.assertEquals(u"Nome no crachá", field.verbose_name)
+
     def test_deve_ter_campo_sexo(self):
         self.assertIn("sexo", self.field_names)
 
