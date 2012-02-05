@@ -11,3 +11,4 @@ slimit==0.5.5
 cssmin==0.1.4
 PyYAML==3.10
 requests==0.10.1
+lxml==2.3.2
