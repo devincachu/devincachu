@@ -136,6 +136,7 @@ LOGGING = {
 }
 
 PAGSEGURO = {
+    'url': 'https://ws.pagseguro.uol.com.br/v2/checkout',
     'email': 'ps@devincachu.com.br',
     'charset': 'UTF-8',
     'token': 'abacaxi',
