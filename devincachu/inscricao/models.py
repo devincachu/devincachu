@@ -18,7 +18,7 @@ class Participante(models.Model):
     )
 
     nome = models.CharField(max_length=100)
-    nome_cracha = models.CharField(max_length=100, blank=True, null=True)
+    nome_cracha = models.CharField(max_length=100, verbose_name=u"Nome no crachá", blank=True, null=True)
     sexo = models.CharField(max_length=1, choices=SEXOS)
     email = models.EmailField(max_length=100)
     confirmado = models.BooleanField(default=False)

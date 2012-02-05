@@ -30,9 +30,9 @@ LANGUAGE_CODE = 'pt-br'
 
 SITE_ID = 1
 
-USE_I18N = False
+USE_I18N = True
 
-USE_L10N = False
+USE_L10N = True
 
 MEDIA_ROOT = os.path.join(ROOT, 'media')
 MEDIA_URL = '/media/'
