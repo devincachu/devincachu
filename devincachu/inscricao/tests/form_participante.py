@@ -21,4 +21,4 @@ class ParticipanteFormTestCase(unittest.TestCase):
         self.assertEquals("obrigatorio", forms.ParticipanteForm.required_css_class)
 
     def test_deve_ter_estilo_para_campos_com_erro(self):
-        self.assertEquals("erro", forms.ParticipanteForm.error_css_class)
+        self.assertEquals("error", forms.ParticipanteForm.error_css_class)

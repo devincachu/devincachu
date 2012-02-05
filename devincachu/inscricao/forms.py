@@ -5,7 +5,7 @@ from inscricao import models
 
 
 class ParticipanteForm(forms.ModelForm):
-    error_css_class = u"erro"
+    error_css_class = u"error"
     required_css_class = u"obrigatorio"
 
     class Meta:
