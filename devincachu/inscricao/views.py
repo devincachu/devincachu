@@ -2,7 +2,7 @@
 from django.template import response
 from django.views.generic import base
 
-from inscricao import models
+from inscricao import forms, models
 
 
 class InscricaoView(base.View):
@@ -14,4 +14,15 @@ class InscricaoView(base.View):
 
     def get(self, request):
         configuracao = models.Configuracao.objects.get()
-        return response.TemplateResponse(request, self.templates[configuracao.status])
+        contexto = self.obter_contexto(configuracao)
+        return response.TemplateResponse(request, self.templates[configuracao.status], contexto)
+
+    def obter_contexto(self, configuracao):
+        status = configuracao.status
+        nome_do_metodo = "obter_contexto_inscricoes_%s" % status
+        metodo = getattr(self, nome_do_metodo, None)
+        return metodo and metodo() or {}
+
+    def obter_contexto_inscricoes_abertas(self):
+        form = forms.ParticipanteForm()
+        return {"form": form}
