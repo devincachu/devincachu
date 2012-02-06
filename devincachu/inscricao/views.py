@@ -132,7 +132,7 @@ class Notificacao(base.View, MailerMixin):
         self.enviar_email_cancelamento(participante)
 
     def consultar_transacao(self, codigo_transacao):
-        url = "%s/%s?email=%s&token=%s" % (settings.PAGSEGURO_TRANSATIONS, codigo_transacao, settings.PAGSEGURO["email"], settings.PAGSEGURO["token"])
+        url = "%s/%s?email=%s&token=%s" % (settings.PAGSEGURO_TRANSACTIONS, codigo_transacao, settings.PAGSEGURO["email"], settings.PAGSEGURO["token"])
 
         response = requests.get(url)
         if response.ok:
