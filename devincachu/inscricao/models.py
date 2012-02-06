@@ -30,6 +30,14 @@ class Participante(models.Model):
         return self.nome
 
 
+class Checkout(models.Model):
+    codigo = models.CharField(max_length=100)
+    participante = models.ForeignKey(Participante)
+
+    def __unicode__(self):
+        return "%s (%s - %s)" % (self.codigo, self.participante.nome, self.participante.email)
+
+
 class Configuracao(models.Model):
     STATUS = (
         (u"fechadas", u"Fechadas (inscrições ainda não abriram)"),
