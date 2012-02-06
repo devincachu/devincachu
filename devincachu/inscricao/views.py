@@ -47,7 +47,7 @@ class InscricaoView(base.View):
         return {"form": form, "configuracao": configuracao}
 
     def enviar_email(self, assunto, corpo, destinatarios):
-        mail.send_mail(assunto, corpo, "contato@devincachu.com.br", destinatarios, fail_silently=False)
+        mail.send_mail(assunto, corpo, "contato@devincachu.com.br", destinatarios, fail_silently=True)
 
     def enviar_email_sucesso(self, checkout):
         conteudo = loader.render_to_string("email_aguardando.html", {"checkout": checkout})
