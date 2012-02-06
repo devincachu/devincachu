@@ -33,7 +33,7 @@ class AdminParticipanteTestCase(unittest.TestCase):
         self.assertIn("tamanho_camiseta", admin.ParticipanteAdmin.list_display)
 
     def test_deve_exibir_status_na_listagem(self):
-        self.assertIn("confirmado", admin.ParticipanteAdmin.list_display)
+        self.assertIn("status", admin.ParticipanteAdmin.list_display)
 
     def test_deve_permitir_buscar_pelo_nome(self):
         self.assertIn("nome", admin.ParticipanteAdmin.search_fields)
@@ -48,4 +48,4 @@ class AdminParticipanteTestCase(unittest.TestCase):
         self.assertIn("tamanho_camiseta", admin.ParticipanteAdmin.list_filter)
 
     def test_deve_permitir_filtrar_pelo_status(self):
-        self.assertIn("confirmado", admin.ParticipanteAdmin.list_filter)
+        self.assertIn("status", admin.ParticipanteAdmin.list_filter)

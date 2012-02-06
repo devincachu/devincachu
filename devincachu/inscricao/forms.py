@@ -10,4 +10,4 @@ class ParticipanteForm(forms.ModelForm):
 
     class Meta:
         model = models.Participante
-        exclude = ("confirmado",)
+        exclude = ("status",)

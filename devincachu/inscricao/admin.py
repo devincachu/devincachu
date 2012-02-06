@@ -28,8 +28,8 @@ class ConfiguracaoAdmin(admin.ModelAdmin):
 
 
 class ParticipanteAdmin(admin.ModelAdmin):
-    list_display = (u"nome", u"sexo", u"email", u"empresa", u"instituicao_ensino", u"tamanho_camiseta", u"confirmado",)
-    list_filter = (u"tamanho_camiseta", u"sexo", u"confirmado",)
+    list_display = (u"nome", u"sexo", u"email", u"empresa", u"instituicao_ensino", u"tamanho_camiseta", u"status",)
+    list_filter = (u"tamanho_camiseta", u"sexo", u"status",)
     search_fields = (u"nome", u"email",)
 
 admin.site.register(models.Checkout, CheckoutAdmin)

@@ -15,7 +15,7 @@ class ParticipanteFormTestCase(unittest.TestCase):
         self.assertEquals(models.Participante, forms.ParticipanteForm.Meta.model)
 
     def test_nao_deve_trazer_campo_confirmado_do_model(self):
-        self.assertIn("confirmado", forms.ParticipanteForm.Meta.exclude)
+        self.assertIn("status", forms.ParticipanteForm.Meta.exclude)
 
     def test_deve_ter_estilo_para_campos_obrigatorios(self):
         self.assertEquals("obrigatorio", forms.ParticipanteForm.required_css_class)

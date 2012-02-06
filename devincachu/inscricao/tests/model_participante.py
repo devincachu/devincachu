@@ -77,16 +77,30 @@ class ParticipanteTestCase(unittest.TestCase):
         field = models.Participante._meta.get_field_by_name("email")[0]
         self.assertTrue(field.unique)
 
-    def test_deve_ter_campo_booleano_informando_se_inscricao_esta_confirmada(self):
-        self.assertIn("confirmado", self.field_names)
+    def test_deve_ter_campo_status(self):
+        self.assertIn("status", self.field_names)
 
-    def test_campo_confirmado_deve_ser_BooleanField(self):
-        field = models.Participante._meta.get_field_by_name("confirmado")[0]
-        self.assertIsInstance(field, django_models.BooleanField)
+    def test_campo_status_deve_ser_do_tipo_CharField(self):
+        field = models.Participante._meta.get_field_by_name("status")[0]
+        self.assertIsInstance(field, django_models.CharField)
 
-    def test_valor_padrao_do_campo_confirmado_deve_ser_False(self):
-        field = models.Participante._meta.get_field_by_name("confirmado")[0]
-        self.assertEquals(False, field.default)
+    def test_campo_status_deve_ter_no_maximo_20_caracteres(self):
+        field = models.Participante._meta.get_field_by_name("status")[0]
+        self.assertEquals(20, field.max_length)
+
+    def test_campo_stauts_deve_ser_AGUARDANDO_por_padrao(self):
+        field = models.Participante._meta.get_field_by_name("status")[0]
+        self.assertEquals(u"AGUARDANDO", field.default)
+
+    def test_campo_status_deve_ter_choices_adequados(self):
+        esperado = (
+            (u'AGUARDANDO', u'Aguardando pagamento'),
+            (u'CONFIRMADO', u'Confirmado'),
+            (u'CANCELADO', u'Cancelado'),
+        )
+
+        field = models.Participante._meta.get_field_by_name("status")[0]
+        self.assertEquals(esperado, field.choices)
 
     def test_deve_ter_campo_para_tamanho_de_camiseta(self):
         self.assertIn("tamanho_camiseta", self.field_names)
