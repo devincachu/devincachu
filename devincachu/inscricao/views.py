@@ -3,6 +3,7 @@ import logging
 
 import requests
 
+from django import http
 from django.conf import settings
 from django.core import mail
 from django.template import loader, response
@@ -14,7 +15,13 @@ from lxml import etree
 logger = logging.getLogger('devincachu.inscricoes')
 
 
-class InscricaoView(base.View):
+class MailerMixin(object):
+
+    def enviar_email(self, assunto, corpo, destinatarios):
+        mail.send_mail(assunto, corpo, "contato@devincachu.com.br", destinatarios, fail_silently=True)
+
+
+class Inscricao(base.View, MailerMixin):
     templates = {
         u"fechadas": "inscricoes_fechadas.html",
         u"abertas": "inscricoes_abertas.html",
@@ -22,7 +29,7 @@ class InscricaoView(base.View):
     }
 
     def __init__(self, *args, **kwargs):
-        super(InscricaoView, self).__init__(*args, **kwargs)
+        super(Inscricao, self).__init__(*args, **kwargs)
         self._configuracao = None
 
     @property
@@ -46,9 +53,6 @@ class InscricaoView(base.View):
         form = forms.ParticipanteForm()
         return {"form": form, "configuracao": configuracao}
 
-    def enviar_email(self, assunto, corpo, destinatarios):
-        mail.send_mail(assunto, corpo, "contato@devincachu.com.br", destinatarios, fail_silently=True)
-
     def enviar_email_sucesso(self, checkout):
         conteudo = loader.render_to_string("email_aguardando.html", {"checkout": checkout})
         assunto = u"[Dev in Cachu 2012] Inscrição recebida"
@@ -57,14 +61,14 @@ class InscricaoView(base.View):
     def enviar_email_falha(self, participante):
         conteudo = loader.render_to_string("email_falha.html", {"participante": participante})
         assunto = u"[Dev in Cachu 2012] Inscrição recebida"
-        self.enviar_email(assunto,conteudo, [participante.email, "contato@devincachu.com.br"])
+        self.enviar_email(assunto, conteudo, [participante.email, "contato@devincachu.com.br"])
 
     def gerar_cobranca(self, participante):
         headers = {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
         payload = settings.PAGSEGURO
         payload["itemAmount1"] = "%.2f" % self.configuracao.valor_inscricao
         payload["reference"] = "%s" % participante.pk
-        response = requests.post(settings.PAGSEGURO_GATEWAY, data=payload, headers=headers)
+        response = requests.post(settings.PAGSEGURO_CHECKOUT, data=payload, headers=headers)
         if response.ok:
             dom = etree.fromstring(response.content)
             codigo_checkout = dom.xpath("//code")[0].text
@@ -91,3 +95,59 @@ class InscricaoView(base.View):
 
         contexto = {"form": form, "configuracao": self.configuracao}
         return response.TemplateResponse(request, "inscricoes_abertas.html", contexto)
+
+
+class Notificacao(base.View, MailerMixin):
+
+    def __init__(self, *args, **kwargs):
+        super(Notificacao, self).__init__(*args, **kwargs)
+        self.metodos_por_status = {
+            3: self.inscricao_paga,
+            7: self.inscricao_cancelada,
+        }
+
+    def enviar_email_confirmacao(self, participante):
+        assunto = u"[Dev in Cachu 2012] Inscrição confirmada"
+        conteudo = loader.render_to_string("inscricao_confirmada.txt", {"participante": participante})
+        destinatarios = [participante.email]
+        self.enviar_email(assunto, conteudo, destinatarios)
+
+    def inscricao_paga(self, referencia):
+        participante = models.Participante.objects.get(pk=referencia)
+        participante.status = u"CONFIRMADO"
+        participante.save()
+
+        self.enviar_email_confirmacao(participante)
+
+    def enviar_email_cancelamento(self, participante):
+        assunto = u"[Dev in Cachu 2012] Inscrição cancelada"
+        conteudo = loader.render_to_string("inscricao_cancelada.txt", {"participante": participante})
+        destinatarios = [participante.email]
+        self.enviar_email_cancelamento(assunto, conteudo, destinatarios)
+
+    def inscricao_cancelada(self, referencia):
+        participante = models.Participante.objects.get(pk=referencia)
+        participante.status = u"CANCELADO"
+        participante.save()
+        self.enviar_email_cancelamento(participante)
+
+    def consultar_transacao(self, codigo_transacao):
+        url = "%s/%s?email=%s&token=%s" % (settings.PAGSEGURO_TRANSATIONS, codigo_transacao, settings.PAGSEGURO["email"], settings.PAGSEGURO["token"])
+        response = requests.get(url)
+        if response.ok:
+            dom = etree.fromstring(response.content)
+            status_transacao = int(dom.xpath("//status")[0].text)
+            referencia = int(dom.xpath("//reference")[0].text)
+            return status_transacao, referencia
+
+        return None, None
+
+    def post(self, request):
+        codigo_notificacao = request.POST["notificationCode"]
+        status, referencia = self.consultar_transacao(codigo_notificacao)
+        metodo = self.metodos_por_status.get(status)
+
+        if metodo:
+            metodo(referencia)
+
+        return http.HttpResponse("OK")

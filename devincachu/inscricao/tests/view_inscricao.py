@@ -19,7 +19,7 @@ class ViewInscricaoInscricoesFechadasTestCase(unittest.TestCase):
         configuracao.status = "fechadas"
         configuracao.save()
 
-        view = views.InscricaoView()
+        view = views.Inscricao()
         cls.response = view.get(request)
 
     def test_deve_ter_dicionario_com_templates_para_cada_status(self):
@@ -28,7 +28,7 @@ class ViewInscricaoInscricoesFechadasTestCase(unittest.TestCase):
             u"abertas": "inscricoes_abertas.html",
             u"encerradas": "inscricoes_encerradas.html",
         }
-        self.assertEquals(esperado, views.InscricaoView.templates)
+        self.assertEquals(esperado, views.Inscricao.templates)
 
     def test_deve_renderizar_template_inscricoes_fechadas_para_status_inscricoes_fechadas(self):
         self.assertEquals(u"inscricoes_fechadas.html", self.response.template_name)
@@ -48,7 +48,7 @@ class ViewInscricaoInscricoesAbertasTestCase(unittest.TestCase):
         cls.configuracao.status = "abertas"
         cls.configuracao.save()
 
-        view = views.InscricaoView()
+        view = views.Inscricao()
         cls.response = view.get(request)
 
     def test_deve_renderizar_template_inscricoes_abertas_para_status_inscricoes_abertas(self):
@@ -79,7 +79,7 @@ class ViewInscricaoInscricoesAbertasComDadosInvalidosNoFormularioTestCase(unitte
         factory = client.RequestFactory()
         request = factory.post("/inscricoes/", cls.dados)
 
-        view = views.InscricaoView()
+        view = views.Inscricao()
         cls.response = view.post(request)
 
     def test_deve_retornar_um_TemplateResponse(self):
@@ -108,7 +108,7 @@ class ViewInscricaoInscricoesAbertasComDadosValidosTestCase(unittest.TestCase):
         }
         factory = client.RequestFactory()
         request = factory.post("/inscricoes/", cls.dados)
-        view = views.InscricaoView()
+        view = views.Inscricao()
         view.gerar_cobranca = lambda p: MOCKED_CHECKOUT_CODE
         view.enviar_email_falha = lambda c: None
         view.enviar_email_sucesso = lambda c: None
@@ -152,7 +152,7 @@ class ViewInscricaoInscricoesAbertasFalhaComunicacaoPagSeguroTestCase(unittest.T
         }
         factory = client.RequestFactory()
         request = factory.post("/inscricoes/", cls.dados)
-        view = views.InscricaoView()
+        view = views.Inscricao()
         view.gerar_cobranca = lambda p: None
         cls.response = view.post(request)
 
