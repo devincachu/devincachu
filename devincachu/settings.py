@@ -126,7 +126,7 @@ LOGGING = {
             'class': 'django.utils.log.AdminEmailHandler'
         },
         'inscricoes': {
-            'level': 'WARNING',
+            'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': 'inscricoes.log',
             'maxBytes': '2048',
@@ -157,7 +157,9 @@ PAGSEGURO = {
     'itemQuantity1': 1,
 }
 
-PAGSEGURO_GATEWAY = 'https://ws.pagseguro.uol.com.br/v2/checkout'
+PAGSEGURO_BASE = 'https://ws.pagseguro.uol.com.br/v2'
+PAGSEGURO_CHECKOUT = '%s/checkout' % PAGSEGURO_BASE
+PAGSEGURO_TRANSATIONS = '%s/transations/notifications' % PAGSEGURO_BASE
 
 try:
     from settings_local import *
