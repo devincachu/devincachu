@@ -32,3 +32,18 @@
 #form-inscricao ul.errorlist li {
     color: #B94A48;
 }
+
+#url-pagseguro {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #EEE;
+    border-radius: 3px;
+    display: block;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+#imagem-pagseguro {
+    margin: 20px 0;
+    text-align: center;
+}

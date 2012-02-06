@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Inscrição efetuada com sucesso | {{ block.super }}{% endblock %}
+
+{% block coluna_central %}
+    <h1>Inscrição efetuada com sucesso</h1>
+
+    <p>Já recebemos os dados da sua inscrição, agora é só pagar e a sua vaga estará garantida! Para pagar sua inscrição, clique no botão abaixo:</p>
+
+    <p id="imagem-pagseguro"><a href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code={{ checkout.codigo }}" title="Pagar minha inscrição"><img src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/205x30-pagar.gif" width="205" height="30" /></a></p>
+
+    <p>Ou cole esse link no seu navegador: <em id="url-pagseguro">https://pagseguro.uol.com.br/v2/checkout/payment.html?code={{ checkout.codigo }}</em></p>
+
+    <p>Este link também foi enviado para o seu e-mail. Em caso de dúvidas, por favor entre em <a href="/contato/" title="Entre em contato com os organizadores do Dev in Cachu 2012">contato</a> conosco.</p>
+{% endblock %}

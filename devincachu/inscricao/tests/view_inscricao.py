@@ -6,6 +6,8 @@ from django.test import client
 
 from inscricao import forms, models, views
 
+MOCKED_CHECKOUT_CODE = "E4B1F4E7D3D3E0D1144ABF9A9D6DFD49"
+
 
 class ViewInscricaoInscricoesFechadasTestCase(unittest.TestCase):
 
@@ -89,3 +91,73 @@ class ViewInscricaoInscricoesAbertasComDadosInvalidosNoFormularioTestCase(unitte
     def test_formulario_do_contexto_deve_ter_dados_preenchidos(self):
         form = self.response.context_data["form"]
         self.assertEquals(self.dados.items(), form.data.items())
+
+
+class ViewInscricaoInscricoesAbertasComDadosValidosTestCase(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.dados = {
+            "nome": "Francisco Souza",
+            "nome_cracha": "Chico",
+            "sexo": "M",
+            "email": "f@souza.cc",
+            "tamanho_camiseta": "G",
+            "instituicao_ensino": u"Estácio de Sá",
+            "empresa": "Globo.com",
+        }
+        factory = client.RequestFactory()
+        request = factory.post("/inscricoes/", cls.dados)
+        view = views.InscricaoView()
+        view.gerar_cobranca = lambda p: MOCKED_CHECKOUT_CODE
+        cls.response = view.post(request)
+
+    @classmethod
+    def tearDownClass(cls):
+        models.Participante.objects.filter(**cls.dados).delete()
+
+    def test_deve_renderizar_template_inscricao_confirmada(self):
+        self.assertEquals("aguardando_pagamento.html", self.response.template_name)
+
+    def test_deve_cadastrar_participante_no_banco_de_dados(self):
+        participante = models.Participante.objects.get(**self.dados)
+        self.assertEquals(participante.nome, self.dados["nome"])
+
+    def test_deve_criar_checkout_no_banco_com_codigo_e_participante_cadastro(self):
+        participante = models.Participante.objects.get(**self.dados)
+        checkout = models.Checkout.objects.get(participante=participante)
+        self.assertEquals(MOCKED_CHECKOUT_CODE, checkout.codigo)
+
+    def test_deve_incluir_checkout_no_contexto(self):
+        context_data = self.response.context_data
+        participante = models.Participante.objects.get(**self.dados)
+        checkout = models.Checkout.objects.get(participante=participante)
+        self.assertEquals(checkout, context_data["checkout"])
+
+
+class ViewInscricaoInscricoesAbertasFalhaComunicacaoPagSeguroTestCase(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.dados = {
+            "nome": "Francisco Souza",
+            "nome_cracha": "Chico",
+            "sexo": "M",
+            "email": "f@souza.cc",
+            "tamanho_camiseta": "G",
+            "instituicao_ensino": u"Estácio de Sá",
+            "empresa": "Globo.com",
+        }
+        factory = client.RequestFactory()
+        request = factory.post("/inscricoes/", cls.dados)
+        view = views.InscricaoView()
+        view.gerar_cobranca = lambda p: None
+        cls.response = view.post(request)
+
+    def test_deve_renderizar_template_falha_comunicacao_pagseguro(self):
+        self.assertEquals(u"falha_comunicacao_pagseguro.html", self.response.template_name)
+
+    def test_deve_incluir_participante_no_contexto(self):
+        participante = models.Participante.objects.get(**self.dados)
+        context_data = self.response.context_data
+        self.assertEquals(participante, context_data["participante"])

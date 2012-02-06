@@ -1,8 +1,16 @@
 # -*- coding: utf-8 -*-
+import logging
+
+import requests
+
+from django.conf import settings
 from django.template import response
 from django.views.generic import base
 
 from inscricao import forms, models
+from lxml import etree
+
+logger = logging.getLogger('devincachu.inscricoes')
 
 
 class InscricaoView(base.View):
@@ -37,8 +45,32 @@ class InscricaoView(base.View):
         form = forms.ParticipanteForm()
         return {"form": form, "configuracao": configuracao}
 
+    def gerar_cobranca(self, participante):
+        headers = {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
+        payload = settings.PAGSEGURO
+        payload["itemAmount1"] = "%.2f" % self.configuracao.valor_inscricao
+        response = requests.post(settings.PAGSEGURO_GATEWAY, data=payload, headers=headers)
+        if response.ok:
+            dom = etree.fromstring(response.content)
+            codigo_checkout = dom.xpath("//code")[0].text
+            return codigo_checkout
+        else:
+            logger.error("\n\n\n########## Erro na inscrição do participante %d - %s (%s) ##########" % (participante.pk, participante.nome, participante.email))
+            logger.error("Erro na comunicação com PagSeguro: %s - %s" % (response.status_code, response.content))
+            logger.error("#################################################################\n\n\n")
+            return None
+
     def post(self, request):
         form = forms.ParticipanteForm(request.POST)
-        if not form.is_valid():
-            contexto = {"form": form, "configuracao": self.configuracao}
-            return response.TemplateResponse(request, "inscricoes_abertas.html", contexto)
+        if form.is_valid():
+            participante = form.save()
+            codigo_checkout = self.gerar_cobranca(participante)
+
+            if codigo_checkout:
+                checkout = models.Checkout.objects.create(codigo=codigo_checkout, participante=participante)
+                return response.TemplateResponse(request, "aguardando_pagamento.html", {"checkout": checkout})
+
+            return response.TemplateResponse(request, "falha_comunicacao_pagseguro.html", {"participante": participante})
+
+        contexto = {"form": form, "configuracao": self.configuracao}
+        return response.TemplateResponse(request, "inscricoes_abertas.html", contexto)
