@@ -4,7 +4,8 @@ import logging
 import requests
 
 from django.conf import settings
-from django.template import response
+from django.core import mail
+from django.template import loader, response
 from django.views.generic import base
 
 from inscricao import forms, models
@@ -45,6 +46,19 @@ class InscricaoView(base.View):
         form = forms.ParticipanteForm()
         return {"form": form, "configuracao": configuracao}
 
+    def enviar_email(self, assunto, corpo, destinatarios):
+        mail.send_mail(assunto, corpo, "contato@devincachu.com.br", destinatarios, fail_silently=False)
+
+    def enviar_email_sucesso(self, checkout):
+        conteudo = loader.render_to_string("email_aguardando.html", {"checkout": checkout})
+        assunto = u"[Dev in Cachu 2012] Inscrição recebida"
+        self.enviar_email(assunto, conteudo, [checkout.participante.email])
+
+    def enviar_email_falha(self, participante):
+        conteudo = loader.render_to_string("email_falha.html", {"participante": participante})
+        assunto = u"[Dev in Cachu 2012] Inscrição recebida"
+        self.enviar_email(assunto,conteudo, [participante.email, "contato@devincachu.com.br"])
+
     def gerar_cobranca(self, participante):
         headers = {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
         payload = settings.PAGSEGURO
@@ -68,8 +82,10 @@ class InscricaoView(base.View):
 
             if codigo_checkout:
                 checkout = models.Checkout.objects.create(codigo=codigo_checkout, participante=participante)
+                self.enviar_email_sucesso(checkout)
                 return response.TemplateResponse(request, "aguardando_pagamento.html", {"checkout": checkout})
 
+            self.enviar_email_falha(participante)
             return response.TemplateResponse(request, "falha_comunicacao_pagseguro.html", {"participante": participante})
 
         contexto = {"form": form, "configuracao": self.configuracao}

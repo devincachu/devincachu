@@ -110,6 +110,8 @@ class ViewInscricaoInscricoesAbertasComDadosValidosTestCase(unittest.TestCase):
         request = factory.post("/inscricoes/", cls.dados)
         view = views.InscricaoView()
         view.gerar_cobranca = lambda p: MOCKED_CHECKOUT_CODE
+        view.enviar_email_falha = lambda c: None
+        view.enviar_email_sucesso = lambda c: None
         cls.response = view.post(request)
 
     @classmethod
