@@ -136,7 +136,6 @@ LOGGING = {
 }
 
 PAGSEGURO = {
-    'url': 'https://ws.pagseguro.uol.com.br/v2/checkout',
     'email': 'ps@devincachu.com.br',
     'charset': 'UTF-8',
     'token': 'abacaxi',
@@ -145,6 +144,8 @@ PAGSEGURO = {
     'itemDescription1': u'Inscrição no Dev in Cachu 2012',
     'itemQuantity1': 1,
 }
+
+PAGSEGURO_GATEWAY = 'https://ws.pagseguro.uol.com.br/v2/checkout'
 
 try:
     from settings_local import *
