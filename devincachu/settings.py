@@ -124,6 +124,13 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'inscricoes': {
+            'level': 'WARNING',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'inscricoes.log',
+            'maxBytes': '2048',
+            'backupCount': '3',
         }
     },
     'loggers': {
@@ -132,6 +139,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'devincachu.inscricoes': {
+            'handlers': ['inscricoes',],
+            'level': 'INFO',
+            'propagate': False,
+        }
     }
 }
 
