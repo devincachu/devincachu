@@ -143,11 +143,13 @@ class Notificacao(base.View, MailerMixin):
         return None, None
 
     def post(self, request):
-        codigo_notificacao = request.POST["notificationCode"]
-        status, referencia = self.consultar_transacao(codigo_notificacao)
-        metodo = self.metodos_por_status.get(status)
+        codigo_notificacao = request.POST.get("notificationCode")
 
-        if metodo:
-            metodo(referencia)
+        if codigo_notificacao:
+            status, referencia = self.consultar_transacao(codigo_notificacao)
+            metodo = self.metodos_por_status.get(status)
+
+            if metodo:
+                metodo(referencia)
 
         return http.HttpResponse("OK")

@@ -16,8 +16,8 @@ class NotificacaoTestCase(unittest.TestCase):
             "notificationType": "transation",
         }
 
-        factory = client.RequestFactory()
-        cls.request = factory.post("/notificacao/", cls.dados)
+        cls.factory = client.RequestFactory()
+        cls.request = cls.factory.post("/notificacao/", cls.dados)
 
     def setUp(self):
         self.participante = models.Participante.objects.create(
@@ -48,6 +48,25 @@ class NotificacaoTestCase(unittest.TestCase):
         view.consultar_transacao = lambda x: (3, self.participante.pk)
         view.enviar_email_confirmacao = lambda p: None
         response = view.post(self.request)
+        self.assertEquals("OK", response.content)
+
+    def test_apenas_retornar_OK_quando_der_erro_no_response(self):
+        view = views.Notificacao()
+        view.consultar_transacao = lambda x: (None, None)
+        response = view.post(self.request)
+        self.assertEquals("OK", response.content)
+
+    def test_apenas_retornar_OK_quando_status_for_diferente_de_3_e_7(self):
+        view = views.Notificacao()
+        view.consultar_transacao = lambda x: (2, self.participante.pk)
+        view.enviar_email_confirmacao = lambda p: None
+        response = view.post(self.request)
+        self.assertEquals("OK", response.content)
+
+    def test_deve_retornar_OK_mesmo_se_nao_tiver_notificationCode(self):
+        request = self.factory.post("/notificacao/", {})
+        view = views.Notificacao()
+        response = view.post(request)
         self.assertEquals("OK", response.content)
 
     def test_deve_mudar_status_de_participante_caso_a_transacao_enviada_seja_confirmada(self):
