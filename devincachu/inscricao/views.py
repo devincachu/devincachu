@@ -108,7 +108,7 @@ class Notificacao(base.View, MailerMixin):
 
     def enviar_email_confirmacao(self, participante):
         assunto = u"[Dev in Cachu 2012] Inscrição confirmada"
-        conteudo = loader.render_to_string("inscricao_confirmada.txt", {"participante": participante})
+        conteudo = loader.render_to_string("inscricao_confirmada.html", {"participante": participante})
         destinatarios = [participante.email]
         self.enviar_email(assunto, conteudo, destinatarios)
 
@@ -121,7 +121,7 @@ class Notificacao(base.View, MailerMixin):
 
     def enviar_email_cancelamento(self, participante):
         assunto = u"[Dev in Cachu 2012] Inscrição cancelada"
-        conteudo = loader.render_to_string("inscricao_cancelada.txt", {"participante": participante})
+        conteudo = loader.render_to_string("inscricao_cancelada.html", {"participante": participante})
         destinatarios = [participante.email]
         self.enviar_email_cancelamento(assunto, conteudo, destinatarios)
 
