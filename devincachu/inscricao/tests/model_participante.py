@@ -73,9 +73,8 @@ class ParticipanteTestCase(unittest.TestCase):
         field = models.Participante._meta.get_field_by_name("email")[0]
         self.assertEquals(100, field.max_length)
 
-    def test_email_deve_ser_unique(self):
-        field = models.Participante._meta.get_field_by_name("email")[0]
-        self.assertTrue(field.unique)
+    def test_email_e_status_devem_ser_unique_juntos(self):
+        self.assertEquals((u'email', u'status',), models.Participante._meta.unique_together[0])
 
     def test_deve_ter_campo_status(self):
         self.assertIn("status", self.field_names)
