@@ -63,6 +63,7 @@ class InscricaoView(base.View):
         headers = {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
         payload = settings.PAGSEGURO
         payload["itemAmount1"] = "%.2f" % self.configuracao.valor_inscricao
+        payload["reference"] = "%s" % participante.pk
         response = requests.post(settings.PAGSEGURO_GATEWAY, data=payload, headers=headers)
         if response.ok:
             dom = etree.fromstring(response.content)
