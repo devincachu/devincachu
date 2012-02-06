@@ -133,17 +133,23 @@ class Notificacao(base.View, MailerMixin):
 
     def consultar_transacao(self, codigo_transacao):
         url = "%s/%s?email=%s&token=%s" % (settings.PAGSEGURO_TRANSATIONS, codigo_transacao, settings.PAGSEGURO["email"], settings.PAGSEGURO["token"])
+
+        logger.info(u"INFO: consultando status com url %s" % url)
         response = requests.get(url)
         if response.ok:
             dom = etree.fromstring(response.content)
             status_transacao = int(dom.xpath("//status")[0].text)
             referencia = int(dom.xpath("//reference")[0].text)
+
+            logger.info(u"INFO: Retornando status %d e referencia %d" % (status_transacao, referencia))
             return status_transacao, referencia
 
         return None, None
 
     def post(self, request):
         codigo_notificacao = request.POST.get("notificationCode")
+
+        logger.info(u"INFO: recebendo nofiticação do pagseguro: %s" % str(request.POST))
 
         if codigo_notificacao:
             status, referencia = self.consultar_transacao(codigo_notificacao)
