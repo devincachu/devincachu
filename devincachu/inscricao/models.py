@@ -20,7 +20,7 @@ class Participante(models.Model):
     nome = models.CharField(max_length=100)
     nome_cracha = models.CharField(max_length=100, verbose_name=u"Nome no crachá", blank=True, null=True)
     sexo = models.CharField(max_length=1, choices=SEXOS)
-    email = models.EmailField(max_length=100)
+    email = models.EmailField(max_length=100, unique=True)
     confirmado = models.BooleanField(default=False)
     tamanho_camiseta = models.CharField(max_length=2, verbose_name=u"Tamanho da camiseta", choices=TAMANHOS_DE_CAMISETA)
     instituicao_ensino = models.CharField(max_length=100, verbose_name=u"Instituição de ensino (para estudantes)", blank=True, null=True)
