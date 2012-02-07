@@ -132,9 +132,13 @@ class Notificacao(base.View, MailerMixin):
         self.enviar_email_cancelamento(participante)
 
     def consultar_transacao(self, codigo_transacao):
-        url = "%s/%s?email=%s&token=%s" % (settings.PAGSEGURO_TRANSACTIONS, codigo_transacao, settings.PAGSEGURO["email"], settings.PAGSEGURO["token"])
+        url_transacao = "%s/%s?email=%s&token=%s" % (settings.PAGSEGURO_TRANSACTIONS, codigo_transacao, settings.PAGSEGURO["email"], settings.PAGSEGURO["token"])
+        url_notificacao = "%s/%s?email=%s&token=%s" % (settings.PAGSEGURO_TRANSACTIONS_NOTIFICATIONS, codigo_transacao, settings.PAGSEGURO["email"], settings.PAGSEGURO["token"])
 
-        response = requests.get(url)
+        response = requests.get(url_transacao)
+        if not response.ok:
+            response = requests.get(url_notificacao)
+
         if response.ok:
             dom = etree.fromstring(response.content)
             status_transacao = int(dom.xpath("//status")[0].text)
@@ -144,7 +148,8 @@ class Notificacao(base.View, MailerMixin):
 
         logger.error(u"\n\n")
         logger.error(u"ERROR: Erro ao fazer requisição para o PagSeguro")
-        logger.error(u"url requisitada: %s" % url)
+        logger.error(u"url requisitada (transação): %s" % url_transacao)
+        logger.error(u"url requisitada (notificação): %s" % url_notificacao)
         logger.error(u"código da transação: %s" % codigo_transacao)
         logger.error(u"Response obtido: %s\n%s" % (response.status_code, response.content))
         logger.error(u"\n\n")
