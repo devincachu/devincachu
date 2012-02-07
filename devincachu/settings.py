@@ -159,7 +159,7 @@ PAGSEGURO = {
 
 PAGSEGURO_BASE = 'https://ws.pagseguro.uol.com.br/v2'
 PAGSEGURO_CHECKOUT = '%s/checkout' % PAGSEGURO_BASE
-PAGSEGURO_TRANSACTIONS = '%s/transactions/notifications' % PAGSEGURO_BASE
+PAGSEGURO_TRANSACTIONS = '%s/transactions' % PAGSEGURO_BASE
 
 try:
     from settings_local import *
