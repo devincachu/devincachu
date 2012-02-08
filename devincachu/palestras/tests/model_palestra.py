@@ -55,9 +55,9 @@ class ModelPalestraTestCase(unittest.TestCase):
         field = models.Palestra._meta.get_field_by_name("descricao")[0]
         self.assertIsInstance(field, django_models.CharField)
 
-    def test_descricao_deve_ter_no_maximo_1000_caracteres(self):
+    def test_descricao_deve_ter_no_maximo_2000_caracteres(self):
         field = models.Palestra._meta.get_field_by_name("descricao")[0]
-        self.assertEquals(1000, field.max_length)
+        self.assertEquals(2000, field.max_length)
 
     def test_descricao_deve_ter_verbose_name_com_caracteres_especiais(self):
         field = models.Palestra._meta.get_field_by_name("descricao")[0]
