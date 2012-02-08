@@ -20,6 +20,10 @@ body {
     margin-bottom: 15px;
 }
 
+.logotipos li:last-child {
+    margin-bottom: 5px;
+}
+
 
 #github-ribbon img {
     position: fixed;
