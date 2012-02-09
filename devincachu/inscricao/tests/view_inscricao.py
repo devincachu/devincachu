@@ -70,6 +70,7 @@ class ViewInscricaoInscricoesAbertasComDadosInvalidosNoFormularioTestCase(unitte
         cls.dados = {
             "nome": "",
             "nome_cracha": "",
+            "cidade": "Rio de Janeiro/RJ",
             "sexo": "M",
             "email": "contato@devincachu.com.br",
             "tamanho_camiseta": "",
@@ -90,7 +91,7 @@ class ViewInscricaoInscricoesAbertasComDadosInvalidosNoFormularioTestCase(unitte
 
     def test_formulario_do_contexto_deve_ter_dados_preenchidos(self):
         form = self.response.context_data["form"]
-        self.assertEquals(self.dados.items(), form.data.items())
+        self.assertEquals(sorted(self.dados.items(), key=lambda x: x[0]), sorted(form.data.items(), key=lambda x: x[0]))
 
 
 class ViewInscricaoInscricoesAbertasComDadosValidosTestCase(unittest.TestCase):
@@ -100,6 +101,7 @@ class ViewInscricaoInscricoesAbertasComDadosValidosTestCase(unittest.TestCase):
         cls.dados = {
             "nome": "Francisco Souza",
             "nome_cracha": "Chico",
+            "cidade": "Rio de Janeiro/RJ",
             "sexo": "M",
             "email": "f@souza.cc",
             "tamanho_camiseta": "G",
@@ -144,6 +146,7 @@ class ViewInscricaoInscricoesAbertasFalhaComunicacaoPagSeguroTestCase(unittest.T
         cls.dados = {
             "nome": "Francisco Souza",
             "nome_cracha": "Chico",
+            "cidade": "Rio de Janeiro/RJ",
             "sexo": "M",
             "email": "f@souza.cc",
             "tamanho_camiseta": "G",

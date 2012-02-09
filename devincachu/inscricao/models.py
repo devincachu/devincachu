@@ -25,6 +25,7 @@ class Participante(models.Model):
 
     nome = models.CharField(max_length=100)
     nome_cracha = models.CharField(max_length=100, verbose_name=u"Nome no crachá", blank=True, null=True)
+    cidade = models.CharField(max_length=255, verbose_name=u"Cidade/Estado")
     sexo = models.CharField(max_length=1, choices=SEXOS)
     email = models.EmailField(max_length=100)
     status = models.CharField(max_length=20, choices=STATUS, default=u'AGUARDANDO')

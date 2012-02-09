@@ -166,6 +166,21 @@ class ParticipanteTestCase(unittest.TestCase):
         field = models.Participante._meta.get_field_by_name("empresa")[0]
         self.assertEquals(u"Empresa onde trabalha", field.verbose_name)
 
+    def test_deve_ter_cidade_estado(self):
+        self.assertIn("cidade", self.field_names)
+
+    def test_cidade_estado_deve_ser_CharField(self):
+        field = models.Participante._meta.get_field_by_name("cidade")[0]
+        self.assertIsInstance(field, django_models.CharField)
+
+    def test_cidade_estado_deve_ter_no_maximo_255_caracteres(self):
+        field = models.Participante._meta.get_field_by_name("cidade")[0]
+        self.assertEquals(255, field.max_length)
+
+    def test_cidade_estado_deve_ter_verbose_name_com_barra(self):
+        field = models.Participante._meta.get_field_by_name("cidade")[0]
+        self.assertEquals(u"Cidade/Estado", field.verbose_name)
+
     def test__repr__deve_ter_nome(self):
         participante = models.Participante(nome=u"Francisco Souza")
         self.assertEquals(u"<Participante: Francisco Souza>", repr(participante))
