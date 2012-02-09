@@ -17,6 +17,9 @@ class AdminParticipanteTestCase(unittest.TestCase):
     def test_deve_exibir_nome_na_listagem(self):
         self.assertIn("nome", admin.ParticipanteAdmin.list_display)
 
+    def test_deve_exibir_cidade_na_listagem(self):
+        self.assertIn("cidade", admin.ParticipanteAdmin.list_display)
+
     def test_deve_exibir_sexo_na_listagem(self):
         self.assertIn("sexo", admin.ParticipanteAdmin.list_display)
 
