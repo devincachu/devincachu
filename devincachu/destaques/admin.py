@@ -13,7 +13,8 @@ class DestaqueAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         if not change:
             obj.autor = request.user
-            obj.save()
+
+        obj.save()
 
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)
