@@ -30,8 +30,8 @@
             {% for palestrante in palestrantes %}
                 <li>
                     <h3>{{ palestrante.nome }}</h3>
+                    <img src="{{ MEDIA_URL }}{{ palestrante.foto }}" alt="{{ palestrante.nome }}" width="100" height="100" align="right" />
                     {{ palestrante.minicurriculo|markdown }}
-                    <img src="{{ MEDIA_URL }}{{ palestrante.foto }}" alt="{{ palestrante.nome }}" width="100" height="100" />
 
                     <div class="links-palestrante">
                         {% if palestrante.blog %}
