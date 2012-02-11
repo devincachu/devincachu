@@ -100,6 +100,10 @@ class ModelPalestraTestCase(unittest.TestCase):
         field = models.Palestra._meta.get_field_by_name("palestrantes")[0]
         self.assertTrue(field.blank)
 
+    def test_palestrantes_deve_ter_related_name_palestras(self):
+        field = models.Palestra._meta.get_field_by_name("palestrantes")[0]
+        self.assertEquals(u"palestras", field.rel.related_name)
+
     def test_nomes_palestrantes_deve_retornar_nomes_dos_palestrantes_com_virgula_e_e(self):
         palestra = models.Palestra.objects.get(pk=1)
         self.assertEquals(u"Hannibal Lecter e Vito Corleone", palestra.nomes_palestrantes())

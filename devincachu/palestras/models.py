@@ -26,7 +26,7 @@ class Palestra(models.Model):
     descricao = models.CharField(max_length=2000, verbose_name=u"Descrição")
     inicio = models.TimeField(verbose_name=u"Horário de início")
     termino = models.TimeField(verbose_name=u"Horário de término")
-    palestrantes = models.ManyToManyField(Palestrante, blank=True)
+    palestrantes = models.ManyToManyField(Palestrante, blank=True, related_name="palestras")
 
     def nomes_palestrantes(self, palestrantes=None):
         palestrantes = palestrantes or self.palestrantes.order_by("nome")
