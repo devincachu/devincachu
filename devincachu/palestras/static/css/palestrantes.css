@@ -23,7 +23,7 @@ ul.palestrantes li img {
     float: right;
 }
 
-ul.palestrantes li .links-palestrante {
+ul.palestrantes li div {
     clear: left;
 }
 
