@@ -24,7 +24,7 @@
     </div>
 
     {% with palestra.palestrantes.all as palestrantes %}
-        <h2>Palestrante{{ palestrantes.length|pluralize}}</h2>
+        <h2>Palestrant{{ palestrantes|length|pluralize:"e,es"}}</h2>
 
         <ul class="palestrantes">
             {% for palestrante in palestrantes %}
