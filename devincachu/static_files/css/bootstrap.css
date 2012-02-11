@@ -2458,3 +2458,12 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
   -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
   box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 }
+.nav li.dropdown:hover ul.dropdown-menu {
+    background-color: #222;
+    display: block;
+    margin-top: 30px;
+}
+
+.nav li.dropdown:hover ul.dropdown-menu li a {
+    font-size: 15px;
+}
