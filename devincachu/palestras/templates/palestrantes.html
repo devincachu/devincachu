@@ -32,7 +32,7 @@
                         <strong>Palestra{{ palestrante.palestras.all|length|pluralize }}: </strong>
                         {% for palestra in palestrante.palestras.all %}
                             <a href="{{ palestra.get_absolute_url }}" title="{{ palestra.titulo }}">{{ palestra.titulo }}</a>
-                            {% if not forloop.last %}, {% endif %}
+                            {% if not forloop.last %}, {% else %}.{% endif %}
                         {% endfor %}
                     </div>
                 {% endif %}
