@@ -118,10 +118,10 @@ class ParticipanteTestCase(unittest.TestCase):
 
     def test_tamanho_de_camiseta_deve_ter_options_limitadas(self):
         esperado = (
-            (u'P', u'P'),
-            (u'M', u'M'),
-            (u'G', u'G'),
-            (u'GG', u'GG'),
+            (u'P', u'P (53cm x 71cm)'),
+            (u'M', u'M (56cm x 74cm)'),
+            (u'G', u'G (58cm x 76cm)'),
+            (u'GG', u'GG (62cm x 80cm)'),
         )
         field = models.Participante._meta.get_field_by_name("tamanho_camiseta")[0]
         self.assertEquals(esperado, field.choices)

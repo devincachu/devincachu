@@ -6,10 +6,10 @@ from django.db import models
 
 class Participante(models.Model):
     TAMANHOS_DE_CAMISETA = (
-        (u'P', u'P'),
-        (u'M', u'M'),
-        (u'G', u'G'),
-        (u'GG', u'GG'),
+        (u'P', u'P (53cm x 71cm)'),
+        (u'M', u'M (56cm x 74cm)'),
+        (u'G', u'G (58cm x 76cm)'),
+        (u'GG', u'GG (62cm x 80cm)'),
     )
 
     SEXOS = (
