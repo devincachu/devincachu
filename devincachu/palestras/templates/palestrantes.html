@@ -35,10 +35,10 @@
                 {% endif %}
                 <div class="links-palestrante">
                     {% if palestrante.blog %}
-                        <a href="{{ palestrante.blog }}" rel="nofollow" target="_blank" title="Blog de {{ palestrante.nome }}">Blog</a>
+                        <a href="{{ palestrante.blog }}" rel="nofollow" title="Blog de {{ palestrante.nome }}">Blog</a>
                     {% endif %}
                     {% if palestrante.twitter %}
-                        <a href="http://twitter.com/{{ palestrante.twitter|cut:"@" }}" rel="nofollow" target="_blank" title="{{ palestrante.nome }} no Twitter">Twitter</a>
+                        <a href="http://twitter.com/{{ palestrante.twitter|cut:"@" }}" rel="nofollow" title="{{ palestrante.nome }} no Twitter">Twitter</a>
                     {% endif %}
                 </div>
             </li>
