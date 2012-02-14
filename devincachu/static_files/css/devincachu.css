@@ -10,6 +10,7 @@ body {
 .logotipos, .logotipos li {
     list-style: none;
     margin: 0;
+    text-align: center;
 }
 
 .logotipos li:first-child {
