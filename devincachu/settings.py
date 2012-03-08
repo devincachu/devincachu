@@ -125,6 +125,13 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
         },
+        'django_error': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'devincachu_djerror.log',
+            'maxBytes': '1024',
+            'backupCount': '1',
+        },
         'inscricoes': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
@@ -135,7 +142,7 @@ LOGGING = {
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['django_error'],
             'level': 'ERROR',
             'propagate': True,
         },
