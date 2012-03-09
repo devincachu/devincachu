@@ -21,6 +21,7 @@ class Participante(models.Model):
         (u'AGUARDANDO', u'Aguardando pagamento'),
         (u'CONFIRMADO', u'Confirmado'),
         (u'CANCELADO', u'Cancelado'),
+        (u'CORTESIA', u'Cortesia'),
     )
 
     nome = models.CharField(max_length=100)

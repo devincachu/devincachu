@@ -96,6 +96,7 @@ class ParticipanteTestCase(unittest.TestCase):
             (u'AGUARDANDO', u'Aguardando pagamento'),
             (u'CONFIRMADO', u'Confirmado'),
             (u'CANCELADO', u'Cancelado'),
+            (u'CORTESIA', u'Cortesia'),
         )
 
         field = models.Participante._meta.get_field_by_name("status")[0]
