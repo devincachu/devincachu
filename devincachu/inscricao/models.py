@@ -23,7 +23,8 @@ class Participante(models.Model):
         (u'CANCELADO', u'Cancelado'),
         (u'CORTESIA', u'Cortesia'),
         (u'PALESTRANTE', u'Palestrante'),
-        (u'ORGANIZACAO', u'Organização')
+        (u'ORGANIZACAO', u'Organização'),
+        (u'CARAVANA', u'Caravana'),
     )
 
     nome = models.CharField(max_length=100)

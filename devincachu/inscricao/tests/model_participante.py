@@ -98,7 +98,8 @@ class ParticipanteTestCase(unittest.TestCase):
             (u'CANCELADO', u'Cancelado'),
             (u'CORTESIA', u'Cortesia'),
             (u'PALESTRANTE', u'Palestrante'),
-            (u'ORGANIZACAO', u'Organização')
+            (u'ORGANIZACAO', u'Organização'),
+            (u'CARAVANA', u'Caravana'),
         )
 
         field = models.Participante._meta.get_field_by_name("status")[0]
