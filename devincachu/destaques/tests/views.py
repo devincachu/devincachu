@@ -39,9 +39,9 @@ class IndexViewTestCase(unittest.TestCase):
         for destaque in destaques:
             self.assertNotIsInstance(destaque, models.Chamada)
 
-    def test_metodo_obter_destaque_deve_trazer_no_maximo_dez_destaques(self):
+    def test_metodo_obter_destaque_deve_trazer_no_maximo_quatorze_destaques(self):
         destaques = self.view.obter_destaques()
-        self.assertEquals(10, len(destaques))
+        self.assertEquals(14, len(destaques))
 
     def test_metodo_obter_destaque_deve_trazer_destaques_mais_recentes(self):
         esperado = [
@@ -55,6 +55,10 @@ class IndexViewTestCase(unittest.TestCase):
             u"Bill Gates confirma participação no Dev in Cachu 2014",
             u"Palestra sobre C++",
             u"Palestra sobre Java",
+            u"Palestra sobre C#",
+            u"Palestra sobre Python",
+            u"Bill Gates confirma participação no Dev in Cachu 2013",
+            u"Bill Gates confirma participação no Dev in Cachu 2012",
         ]
 
         destaques = [d.titulo for d in self.view.obter_destaques()]

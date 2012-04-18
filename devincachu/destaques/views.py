@@ -9,7 +9,7 @@ from destaques import models
 class IndexView(base.View):
 
     def obter_destaques(self):
-        return models.Destaque.objects.select_related().filter(chamada__isnull=True).order_by('-data')[:10]
+        return models.Destaque.objects.select_related().filter(chamada__isnull=True).order_by('-data')[:14]
 
     def obter_chamada(self):
         chamadas = models.Chamada.objects.select_related().order_by('-data')[:1]
