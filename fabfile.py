@@ -62,6 +62,7 @@ def reload_nginx():
 
 def clean():
     run("su -m root -c 'rm -rf /usr/local/etc/nginx/cache/data/devincachu/*'")
+    reload_nginx()
 
 
 def createsuperuser():
