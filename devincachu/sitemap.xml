@@ -78,14 +78,19 @@
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.devincachu.com.br/programacao/almir-mendes/andre-tagliati/arduino-project-brincadeira-de-gente-grande/</loc>
+  <loc>http://www.devincachu.com.br/programacao/loiane-groner/desenvolvendo-aplicacoes-ria-com-extjs-4/</loc>
   <changefreq>daily</changefreq>
-  <priority>0.80</priority>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.devincachu.com.br/programacao/almir-mendes/arduino-project-brincadeira-de-gente-grande/</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>http://www.devincachu.com.br/programacao/magno-machado-paulo/injecao-de-dependencias/</loc>
   <changefreq>daily</changefreq>
-  <priority>0.80</priority>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>http://www.devincachu.com.br/programacao/francisco-souza/sessao-de-lighting-talks/</loc>
