@@ -1,0 +1,23 @@
+{% extends "flatpages/default.html" %}
+
+{% block meta %}
+    <link rel="canonical" href="{{ BASE_URL }}/vagas/" />
+    <meta name="description" content="Buscando oportunidades na área de desenvolvimento de softwares? Veja algumas vagas de nossos patrocinadores e como trabalhar na Globo.com, Giran ou ThoughtWorks!" />
+    <meta name="keywords" content="devincachu, dev in cachu 2012, vagas, desenvolvimento de software, oportunidades, giran, thoughtworks, globo.com" />
+{% endblock %}
+
+{% block og %}
+    {{ block.super }}
+    <meta property="og:description" content="Buscando oportunidades na área de desenvolvimento de softwares? Veja algumas vagas de nossos patrocinadores e como trabalhar na Globo.com, Giran ou ThoughtWorks!" />
+{% endblock %}
+
+{% block coluna_central %}
+    <h1>{{ flatpage.title }}</h1>
+    <div id="twitter" class="home-social"><a href="https://twitter.com/share" class="twitter-share-button" data-via="devincachu" data-hashtags="devincachu">Tweet</a></div>
+    <div id="fb" class="home-social"><div class="fb-like" data-send="false" data-layout="button_count" data-width="45" data-show-faces="false"></div></div>
+    <div id="gplus" class="home-social"><div class="g-plusone" data-size="medium"></div></div>
+
+    <div class="conteudo">
+        {{ block.super }}
+    </div>
+{% endblock %}

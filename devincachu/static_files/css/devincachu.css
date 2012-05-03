@@ -2,6 +2,10 @@ body {
     padding-top: 60px;
 }
 
+.conteudo {
+    clear: both;
+}
+
 .idealizadores {
     list-style-position: inside;
     margin-left: 5px;
