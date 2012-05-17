@@ -1,0 +1,36 @@
+- model: inscricao.Participante
+  pk: 1
+  fields:
+    nome: Mariazinha
+    nome_cracha: Mariazinha
+    cidade: "Cachoeiro de Itapemirim"
+    sexo: F
+    status: AGUARDANDO
+    tamanho_camiseta: GG
+
+- model: inscricao.Participante
+  pk: 2
+  fields:
+    nome: Joaozinho
+    nome_cracha: Joaozinho
+    cidade: "Cachoeiro de Itapemirim"
+    sexo: M
+    status: CONFIRMADO
+    tamanho_camiseta: GG
+
+- model: inscricao.Participante
+  pk: 3
+  fields:
+    nome: Pedrinho
+    nome_cracha: Drinho
+    cidade: Alegre
+    sexo: M
+    status: CORTESIA
+    tamanho_camiseta: M
+
+- model: inscricao.Certificado
+  pk: 1
+  fields:
+    codigo: 2012080439
+    hash: 40bd001563085fc35165329ea1ff5c5ecbdbbeef
+    participante: 2
