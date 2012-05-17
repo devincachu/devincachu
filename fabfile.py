@@ -56,13 +56,13 @@ def graceful_gunicorn():
         run('kill -HUP %s' % pid)
 
 
-def reload_nginx():
-    run("su -m root -c '/usr/local/etc/rc.d/nginx reload'")
+def restart_nginx():
+    run("su -m root -c '/usr/local/etc/rc.d/nginx restart'")
 
 
 def clean():
     run("su -m root -c 'rm -rf /usr/local/etc/nginx/cache/data/devincachu/*'")
-    reload_nginx()
+    restart_nginx()
 
 
 def createsuperuser():
