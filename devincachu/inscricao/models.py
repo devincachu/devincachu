@@ -52,6 +52,15 @@ class Checkout(models.Model):
         return "%s (%s - %s)" % (self.codigo, self.participante.nome, self.participante.email)
 
 
+class Certificado(models.Model):
+    participante = models.ForeignKey(Participante)
+    codigo = models.CharField(max_length=14)
+    hash = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return "%s (%s)" % (self.codigo, self.participante.nome)
+
+
 class Configuracao(models.Model):
     STATUS = (
         (u"fechadas", u"Fechadas (inscrições ainda não abriram)"),
