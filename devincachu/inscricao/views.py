@@ -7,7 +7,7 @@ from django import http
 from django.conf import settings
 from django.core import mail
 from django.template import loader, response
-from django.views.generic import base
+from django.views.generic import base, detail
 
 from inscricao import forms, models
 from lxml import etree
@@ -167,3 +167,10 @@ class Notificacao(base.View, MailerMixin):
                 metodo(referencia)
 
         return http.HttpResponse("OK")
+
+
+class Certificado(detail.DetailView):
+    context_object_name = u"certificado"
+    queryset = models.Certificado.objects.select_related("participante")
+    slug_field = u"hash"
+    template_name = u"certificado.html"

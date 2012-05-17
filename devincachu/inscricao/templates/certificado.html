@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dev in Cachu 2012 | Certificado de participação de {{ certificado.participante.nome }}</title>
+        <style>
+            @page landscape {
+                size: landscape;
+            }
+
+            body {
+                font-family: Arial;
+                font-size: 22px;
+                text-align: center;
+                padding: 0;
+            }
+
+            h1 {
+                font-size: 50px;
+                text-transform: uppercase;
+            }
+
+            #certificado {
+                border: 1px solid #000;
+                border-radius: 5px;
+                margin: auto;
+                padding: 20px 40px;
+                width: 920px;
+            }
+
+            p.texto {
+                margin: 70px 0 100px;
+            }
+
+            p.assinatura {
+                display: inline-block;
+                font-size: 18px;
+                margin: 0 30px 0 200px;
+                width: 300px;
+            }
+
+            p.validacao {
+                display: inline-block;
+                font-size: 13px;
+                text-align: left;
+                width: 380px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="certificado">
+            <div class="logo"><img src="{{ STATIC_URL }}img/dev-in-cachu-2012.png" width="400" height="149" alt="Dev in Cachu 2012" /></div>
+            <h1>Certificado</h1>
+            <p class="texto">Certificamos que <strong>{{ certificado.participante.nome }}</strong> participou do Dev in Cachu 2012, no dia 05 de Maio de 2012, com uma carga horária total de 8 horas.</p>
+            <p class="validacao">Para confirmar a validade deste certificado, acesse a URL <strong>http://2012.devincachu.com.br/certificado/</strong> e digite o código <strong>{{ certificado.codigo }}</strong>.</p>
+            <p class="assinatura"><strong>Francisco Antônio da Silva Souza</strong><br />Organizador do evento</p>
+        </div>
+    </body>
+</html>
