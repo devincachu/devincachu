@@ -45,6 +45,17 @@ class CertificadoTestCase(unittest.TestCase):
         field, _, _, _ = models.Certificado._meta.get_field_by_name("hash")
         self.assertEqual(100, field.max_length)
 
+    def test_deve_ter_campo_horas(self):
+        self.assertIn("horas", self.field_names)
+
+    def test_horas_deve_ser_integer(self):
+        field, _, _, _ = models.Certificado._meta.get_field_by_name("horas")
+        self.assertIsInstance(field, django_models.IntegerField)
+
+    def test_horas_deve_ser_8_por_padrao(self):
+        field, _, _, _ = models.Certificado._meta.get_field_by_name("horas")
+        self.assertEquals(8, field.default)
+
     def test_unicode_deve_retornar_codigo_e_nome_do_participante(self):
         p = models.Participante(nome=u"Francisco Souza")
         c = models.Certificado(codigo=u"2012080439", participante=p)

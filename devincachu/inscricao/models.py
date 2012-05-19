@@ -56,6 +56,7 @@ class Certificado(models.Model):
     participante = models.ForeignKey(Participante)
     codigo = models.CharField(max_length=14)
     hash = models.CharField(max_length=100)
+    horas = models.IntegerField(default=8)
 
     def __unicode__(self):
         return "%s (%s)" % (self.codigo, self.participante.nome)
