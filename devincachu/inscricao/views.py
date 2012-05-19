@@ -174,3 +174,10 @@ class Certificado(detail.DetailView):
     queryset = models.Certificado.objects.select_related("participante")
     slug_field = u"hash"
     template_name = u"certificado.html"
+
+
+class ValidacaoCertificado(base.View):
+
+    def get(self, request):
+        form = forms.ValidacaoCertificado()
+        return response.TemplateResponse(request, "form_validacao_certificado.html", {"form": form})

@@ -47,3 +47,16 @@
     margin: 20px 0;
     text-align: center;
 }
+
+#certificado {
+    margin-top: 20px;
+}
+
+#certificado input {
+    display: inline-block;
+}
+
+#certificado button {
+    display: inline-block;
+    margin-left: 10px;
+}

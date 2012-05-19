@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Validação de certificado | {{ block.super }}{% endblock %}
+
+{% block meta %}
+    <link rel="canonical" href="{{ BASE_URL }}/certificado/validar/" />
+    <meta name="description" content="Validação de certificado do Dev in Cachu 2012" />
+    <meta name="keywords" content="devincachu, dev in cachu 2012, certificado" />
+{% endblock %}
+
+{% block og %}
+    <meta property="og:title" content="Validação de certificado" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ BASE_URL }}/certificado/validar/" />
+    <meta property="og:image" content="{{ STATIC_URL }}img/logo-devincachu-facebook.png" />
+    <meta property="og:description" content="Página para confirmar a validade de um certificado do Dev in Cachu 2012" />
+{% endblock %}
+
+{% block coluna_central %}
+    <h1>Validação de certificado</h1>
+
+    <p>Informe o código presente no certificado para assegurar a validade do mesmo:</p>
+
+    <form action="" method="post" accept-charset="utf-8" id="certificado">
+        {% csrf_token %}
+        <input type="number" name="{{ form.codigo.name }}" maxlength="30" size="30" />
+        <button type="submit" class="btn primary">Ok</submit>
+    </form>
+{% endblock %}
