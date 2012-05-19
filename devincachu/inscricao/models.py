@@ -54,8 +54,8 @@ class Checkout(models.Model):
 
 class Certificado(models.Model):
     participante = models.ForeignKey(Participante)
-    codigo = models.CharField(max_length=14)
-    hash = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=14, unique=True)
+    hash = models.CharField(max_length=100, unique=True)
     horas = models.IntegerField(default=8)
 
     def __unicode__(self):

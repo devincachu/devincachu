@@ -34,6 +34,10 @@ class CertificadoTestCase(unittest.TestCase):
         field, _, _, _ = models.Certificado._meta.get_field_by_name("codigo")
         self.assertEqual(14, field.max_length)
 
+    def test_codigo_deve_ser_unique(self):
+        field, _, _, _ = models.Certificado._meta.get_field_by_name("codigo")
+        self.assertTrue(field.unique)
+
     def test_deve_ter_campo_hash(self):
         self.assertIn("hash", self.field_names)
 
@@ -44,6 +48,10 @@ class CertificadoTestCase(unittest.TestCase):
     def test_hash_deve_ter_no_maximo_100_caracteres(self):
         field, _, _, _ = models.Certificado._meta.get_field_by_name("hash")
         self.assertEqual(100, field.max_length)
+
+    def test_hash_deve_ser_unique(self):
+        field, _, _, _ = models.Certificado._meta.get_field_by_name("hash")
+        self.assertTrue(field.unique)
 
     def test_deve_ter_campo_horas(self):
         self.assertIn("horas", self.field_names)
