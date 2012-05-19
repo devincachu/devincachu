@@ -11,3 +11,8 @@ class ParticipanteForm(forms.ModelForm):
     class Meta:
         model = models.Participante
         exclude = ("status",)
+
+
+class ValidacaoCertificado(forms.Form):
+    codigo = forms.CharField(max_length=30)
+    error_css_class = u"error"
