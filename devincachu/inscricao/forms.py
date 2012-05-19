@@ -16,3 +16,10 @@ class ParticipanteForm(forms.ModelForm):
 class ValidacaoCertificado(forms.Form):
     codigo = forms.CharField(max_length=30)
     error_css_class = u"error"
+
+    def obter_certificado(self):
+        if self.is_valid():
+            try:
+                return models.Certificado.objects.get(codigo=self.cleaned_data["codigo"])
+            except models.Certificado.DoesNotExist:
+                return None
