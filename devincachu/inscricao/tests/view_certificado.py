@@ -5,7 +5,7 @@ from django.views.generic import base, detail
 from django.template import response
 from django.test import client
 
-from inscricao import forms, views
+from inscricao import forms, models, views
 
 
 class ViewCertificadoTestCase(test.TestCase):
@@ -50,16 +50,11 @@ class ValidacaoCertificado(test.TestCase):
     def test_deve_herdar_de_view(self):
         assert issubclass(views.ValidacaoCertificado, base.View)
 
-    def test_metodo_get_deve_retornar_template_response(self):
-        request = self.factory.get("/certificado/validar")
-        v = views.ValidacaoCertificado()
-        r = v.get(request)
-        self.assertIsInstance(r, response.TemplateResponse)
-
     def test_metodo_get_deve_renderizar_template_form_validacao_certificado(self):
         request = self.factory.get("/certificado/validar")
         v = views.ValidacaoCertificado()
         r = v.get(request)
+        self.assertIsInstance(r, response.TemplateResponse)
         self.assertEqual("form_validacao_certificado.html", r.template_name)
 
     def test_metodo_get_deve_incluir_instancia_do_formulario_no_contexto(self):
@@ -68,3 +63,30 @@ class ValidacaoCertificado(test.TestCase):
         r = v.get(request)
         form = r.context_data["form"]
         self.assertIsInstance(form, forms.ValidacaoCertificado)
+
+    def test_metodo_post_deve_renderizar_template_certificado_valido_se_o_codigo_estiver_correto(self):
+        request = self.factory.post("/certificado/validar", {"codigo": "2012080439"})
+        v = views.ValidacaoCertificado()
+        r = v.post(request)
+        self.assertIsInstance(r, response.TemplateResponse)
+        self.assertEqual("certificado_valido.html", r.template_name)
+
+    def test_metodo_post_deve_trazer_certificado_no_contexto_da_resposta_se_o_codigo_estiver_correto(self):
+        request = self.factory.post("/certificado/validar", {"codigo": "2012080439"})
+        v = views.ValidacaoCertificado()
+        r = v.post(request)
+        esperado = models.Certificado.objects.all()[0]
+        obtido = r.context_data["certificado"]
+        self.assertEqual(esperado, obtido)
+
+    def test_post_renderiza_o_template_de_formulario_com_mensagem_caso_nao_seja_possivel_encontrar_certificado(self):
+        inputs = ({}, {"codigo": ""}, {"codigo": "123ble"})
+        for input in inputs:
+            request = self.factory.post("/certificado/validar", input)
+            v = views.ValidacaoCertificado()
+            r = v.post(request)
+            self.assertEqual("form_validacao_certificado.html", r.template_name)
+            form = r.context_data["form"]
+            self.assertIsInstance(form, forms.ValidacaoCertificado)
+            msg = r.context_data["msg"]
+            self.assertEqual(u"Código inválido, verifique o valor digitado", msg)

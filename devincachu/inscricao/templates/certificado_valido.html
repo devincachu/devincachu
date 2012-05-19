@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Validação de certificado | {{ block.super }}{% endblock %}
+{% block title %}Certificado válido | {{ block.super }}{% endblock %}
 
 {% block meta %}
     <link rel="canonical" href="{{ BASE_URL }}/certificado/validar/" />
@@ -17,17 +17,9 @@
 {% endblock %}
 
 {% block coluna_central %}
-    <h1>Validação de certificado</h1>
+    <h1>Certificado válido</h1>
 
-    <p>Informe o código presente no certificado para assegurar a validade do mesmo:</p>
+    <p>Este certificado é válido! <strong>{{ certificado.participante.nome }}</strong> participou do Dev in Cachu 2012, com uma carga horária total de <strong>{{ certificado.horas }} horas</strong>.</p>
 
-    {% if msg %}
-        <div class="disclaimer">{{ msg }}</div>
-    {% endif %}
-
-    <form action="" method="post" accept-charset="utf-8" id="certificado">
-        {% csrf_token %}
-        {{ form.codigo }}
-        <button type="submit" class="btn primary">Ok</submit>
-    </form>
+    <p>Em caso de qualquer dúvida, por favor entre em contato com a organização do Dev in Cachu 2012 através do e-mail contato@devincachu.com.br.</p>
 {% endblock %}

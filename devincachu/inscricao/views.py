@@ -181,3 +181,16 @@ class ValidacaoCertificado(base.View):
     def get(self, request):
         form = forms.ValidacaoCertificado()
         return response.TemplateResponse(request, "form_validacao_certificado.html", {"form": form})
+
+    def post(self, request):
+        contexto = {}
+        form = forms.ValidacaoCertificado(request.POST)
+        cert = form.obter_certificado()
+        if cert is None:
+            contexto["msg"] = u"Código inválido, verifique o valor digitado"
+            contexto["form"] = form
+            template_name = "form_validacao_certificado.html"
+        else:
+            contexto["certificado"] = cert
+            template_name = "certificado_valido.html"
+        return response.TemplateResponse(request, template_name, contexto)
