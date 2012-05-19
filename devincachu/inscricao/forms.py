@@ -20,6 +20,6 @@ class ValidacaoCertificado(forms.Form):
     def obter_certificado(self):
         if self.is_valid():
             try:
-                return models.Certificado.objects.get(codigo=self.cleaned_data["codigo"])
+                return models.Certificado.objects.select_related("participante").get(codigo=self.cleaned_data["codigo"])
             except models.Certificado.DoesNotExist:
                 return None
