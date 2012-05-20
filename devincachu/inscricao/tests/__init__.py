@@ -3,6 +3,7 @@ from inscricao.tests.admin_configuracao import *
 from inscricao.tests.admin_participante import *
 from inscricao.tests.form_certificado import *
 from inscricao.tests.form_participante import *
+from inscricao.tests.mailer_mixin import *
 from inscricao.tests.model_certificado import *
 from inscricao.tests.model_checkout import *
 from inscricao.tests.model_configuracao import *
