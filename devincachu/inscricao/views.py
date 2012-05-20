@@ -15,7 +15,7 @@ from lxml import etree
 logger = logging.getLogger('devincachu.inscricoes')
 
 
-class MailerMixin(object):
+class MailerMixin():
 
     def enviar_email(self, assunto, corpo, destinatarios):
         mail.send_mail(assunto, corpo, "contato@devincachu.com.br", destinatarios, fail_silently=True)
