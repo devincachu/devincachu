@@ -49,3 +49,23 @@ class FormValidacaoCertificadoTestCase(unittest.TestCase):
         form = forms.ValidacaoCertificado({"codigo": "123bla"})
         obtido = form.obter_certificado()
         self.assertEqual(None, obtido)
+
+
+class FormBuscaCertificadoTestCase(unittest.TestCase):
+
+    def test_deve_ser_um_form(self):
+        assert issubclass(forms.BuscarCertificado, django_forms.Form)
+
+    def test_error_css_class_deve_ser_error(self):
+        self.assertEqual(u"error", forms.BuscarCertificado.error_css_class)
+
+    def test_deve_ter_campo_codigo_email(self):
+        self.assertIn("email", forms.BuscarCertificado.base_fields)
+
+    def test_campo_email_deve_ser_EmailField(self):
+        f = forms.BuscarCertificado.base_fields["email"]
+        self.assertIsInstance(f, django_forms.EmailField)
+
+    def test_campo_email_deve_ter_no_maximo_100_caracteres(self):
+        f = forms.BuscarCertificado.base_fields["email"]
+        self.assertEqual(100, f.max_length)

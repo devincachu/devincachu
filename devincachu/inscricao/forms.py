@@ -23,3 +23,8 @@ class ValidacaoCertificado(forms.Form):
                 return models.Certificado.objects.select_related("participante").get(codigo=self.cleaned_data["codigo"])
             except models.Certificado.DoesNotExist:
                 return None
+
+
+class BuscarCertificado(forms.Form):
+    email = forms.EmailField(max_length=100)
+    error_css_class = u"error"
