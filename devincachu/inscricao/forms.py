@@ -28,3 +28,10 @@ class ValidacaoCertificado(forms.Form):
 class BuscarCertificado(forms.Form):
     email = forms.EmailField(max_length=100)
     error_css_class = u"error"
+
+    def obter_certificado(self):
+        if self.is_valid():
+            try:
+                return models.Certificado.objects.select_related("participante").get(participante__email=self.cleaned_data["email"])
+            except models.Certificado.DoesNotExist:
+                return None
