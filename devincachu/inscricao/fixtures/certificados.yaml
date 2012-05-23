@@ -3,6 +3,7 @@
   fields:
     nome: Mariazinha
     nome_cracha: Mariazinha
+    email: mariazinha@devincachu.com.br
     cidade: "Cachoeiro de Itapemirim"
     sexo: F
     status: AGUARDANDO
@@ -13,6 +14,7 @@
   fields:
     nome: Joaozinho
     nome_cracha: Joaozinho
+    email: joaozinho@devincachu.com.br
     cidade: "Cachoeiro de Itapemirim"
     sexo: M
     status: CONFIRMADO
@@ -23,6 +25,7 @@
   fields:
     nome: Pedrinho
     nome_cracha: Drinho
+    email: pedrinho@devincachu.com.br
     cidade: Alegre
     sexo: M
     status: CORTESIA
