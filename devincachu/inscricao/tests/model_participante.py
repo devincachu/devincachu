@@ -192,3 +192,15 @@ class ParticipanteTestCase(unittest.TestCase):
     def test__unicode__deve_ser_o_nome(self):
         participante = models.Participante(nome=u"Francisco Souza")
         self.assertEquals(u"Francisco Souza", unicode(participante))
+
+    def test_presente_retorna_falso_se_o_status_for_cancelado_ou_aguardando(self):
+        p1 = models.Participante(status="CANCELADO")
+        self.assertFalse(p1.presente)
+        p2 = models.Participante(status="AGUARDANDO")
+        self.assertFalse(p2.presente)
+
+    def test_presente_retorna_verdadeiro_se_o_status_for_confirmado_cortesia_palestrante_caravana_organizacao(self):
+        statuses = (u'CONFIRMADO', u'CORTESIA', u'PALESTRANTE', u'ORGANIZACAO', u'CARAVANA')
+        for status in statuses:
+            p = models.Participante(status=status)
+            self.assertTrue(p.presente)

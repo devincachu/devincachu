@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
+from django.core import management
 from django.db import models as django_models
 
 from inscricao import models
@@ -68,3 +69,26 @@ class CertificadoTestCase(unittest.TestCase):
         p = models.Participante(nome=u"Francisco Souza")
         c = models.Certificado(codigo=u"2012080439", participante=p)
         self.assertEqual(u"2012080439 (Francisco Souza)", unicode(c))
+
+
+class GeracaoCertificadoTestCase(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        management.call_command("loaddata", "certificados.yaml", verbosity=0)
+
+    @classmethod
+    def tearDownClass(cls):
+        management.call_command("flush", interactive=False, verbosity=0)
+
+    def test_gerar_certificado_cria_certificado_para_participante_presente(self):
+        participante = models.Participante.objects.get(pk=3)
+        certificado = models.Certificado.gerar_certificado(participante)
+        self.assertIsNotNone(certificado.pk)
+        self.assertEqual(8, certificado.horas)
+        self.assertEqual(participante, certificado.participante)
+
+    def test_gerar_certificado_retorna_None_se_o_participante_nao_esteve_no_evento(self):
+        participante = models.Participante.objects.get(pk=1)
+        certificado = models.Certificado.gerar_certificado(participante)
+        self.assertIsNone(certificado)

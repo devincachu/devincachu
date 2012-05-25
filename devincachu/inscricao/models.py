@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+import datetime
+import hashlib
+import random
+
 import roan
 
 from django.db import models
@@ -40,6 +44,10 @@ class Participante(models.Model):
     def __unicode__(self):
         return self.nome
 
+    @property
+    def presente(self):
+        return self.status not in (u'CANCELADO', u'AGUARDANDO')
+
     class Meta:
         unique_together = ((u'email', u'status',),)
 
@@ -60,6 +68,26 @@ class Certificado(models.Model):
 
     def __unicode__(self):
         return "%s (%s)" % (self.codigo, self.participante.nome)
+
+    @classmethod
+    def gerar_certificado(cls, participante):
+        if participante.presente:
+            cert = Certificado(participante=participante, horas=8)
+            cert.codigo = cls._calcular_codigo(participante)
+            cert.hash = cls._calcular_hash(participante)
+            cert.save()
+            return cert
+
+    @classmethod
+    def _calcular_codigo(cls, participante):
+        return "2012%04d%04d" % (random.randint(1, 9999), participante.pk)
+
+    @classmethod
+    def _calcular_hash(cls, participante):
+        rand = random.randint(1, 9999)
+        now = datetime.datetime.now()
+        bstr = "%s%s%04d%s" % (participante.nome, participante.email, rand, now.isoformat())
+        return hashlib.sha1(bstr).hexdigest()
 
 
 class Configuracao(models.Model):
