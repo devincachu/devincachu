@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^inscricao/$', iviews.Inscricao.as_view(), name='inscricao'),
     url(r'^notificacao/$', csrf.csrf_exempt(iviews.Notificacao.as_view()), name='notificacao'),
     url(r'^certificado/validar/$', iviews.ValidacaoCertificado.as_view(), name='validacao_certificado'),
+    url(r'^certificado/$', iviews.BuscarCertificado.as_view(), name='busca_certificado'),
     url(r'^certificado/(?P<slug>[0-9a-f]+)/$', iviews.Certificado.as_view(), name='certificado'),
     url(r'^$', dviews.IndexView.as_view(), name='index'),
 )

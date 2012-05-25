@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django import test
+from django import http, test
 from django.core import management
 from django.views.generic import base, detail
 from django.template import response
@@ -90,3 +90,70 @@ class ValidacaoCertificado(test.TestCase):
             self.assertIsInstance(form, forms.ValidacaoCertificado)
             msg = r.context_data["msg"]
             self.assertEqual(u"Código inválido, verifique o valor digitado", msg)
+
+
+class BuscarCertificadoViewTestCase(test.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        management.call_command("loaddata", "certificados.yaml", verbosity=0)
+        cls.factory = test.RequestFactory()
+
+    @classmethod
+    def tearDownClass(cls):
+        management.call_command("flush", interactive=False, verbosity=0)
+
+    def test_deve_herdar_de_base_view(self):
+        assert issubclass(views.BuscarCertificado, base.View)
+
+    def test_deve_retornar_template_response_no_metodo_get(self):
+        request = self.factory.get("/certificado/")
+        view = views.BuscarCertificado()
+        resp = view.get(request)
+        self.assertIsInstance(resp, response.TemplateResponse)
+
+    def test_deve_renderizar_template_de_formulario_de_busca_de_certificado(self):
+        request = self.factory.get("/certificado/")
+        view = views.BuscarCertificado()
+        resp = view.get(request)
+        self.assertEqual("form_busca_certificado.html", resp.template_name)
+
+    def test_deve_incluir_uma_instancia_do_formulario_no_context(self):
+        request = self.factory.get("/certificado/")
+        view = views.BuscarCertificado()
+        resp = view.get(request)
+        self.assertIsInstance(resp.context_data["form"], forms.BuscarCertificado)
+
+    def test_post_deve_redirecionar_para_pagina_do_certificado(self):
+        certificado = models.Certificado.objects.get(pk=1)
+        request = self.factory.post("/certificado/", {"email": "joaozinho@devincachu.com.br"})
+        view = views.BuscarCertificado()
+        resp = view.post(request)
+        self.assertIsInstance(resp, http.HttpResponseRedirect)
+        self.assertEqual("/certificado/%s/" % certificado.hash, resp["Location"])
+
+    def test_post_deve_criar_certificado_no_banco_de_dados_caso_nao_exista_e_redirecionar_para_o_mesmo(self):
+        request = self.factory.post("/certificado/", {"email": "pedrinho@devincachu.com.br"})
+        view = views.BuscarCertificado()
+        resp = view.post(request)
+        self.assertIsInstance(resp, http.HttpResponseRedirect)
+        certificado = models.Certificado.objects.get(participante__email="pedrinho@devincachu.com.br")
+        self.assertEqual("/certificado/%s/" % certificado.hash, resp["Location"])
+
+    def test_post_deve_retornar_pagina_com_formulario_caso_email_nao_seja_de_participante_presente_com_mensagem(self):
+        request = self.factory.post("/certificado/", {"email": "mariazinha@devincachu.com.br"})
+        view = views.BuscarCertificado()
+        resp = view.post(request)
+        self.assertIsInstance(resp, response.TemplateResponse)
+        self.assertEqual("form_busca_certificado.html", resp.template_name)
+        msg = u"Você está inscrito, porém sua inscrição não foi confirmada. Logo, você não tem direito a certificado."
+        self.assertEqual(msg, resp.context_data["msg"])
+
+    def test_post_deve_retornar_pagina_com_formulario_caso_email_nao_esteja_inscrito(self):
+        request = self.factory.post("/certificado/", {"email": "patricinha@devincachu.com.br"})
+        view = views.BuscarCertificado()
+        resp = view.post(request)
+        self.assertIsInstance(resp, response.TemplateResponse)
+        self.assertEqual("form_busca_certificado.html", resp.template_name)
+        msg = u"E-mail não encontrado. Certifique-se de que você digitou o e-mail corretamente."
+        self.assertEqual(msg, resp.context_data["msg"])

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Busca e geração de certificado | {{ block.super }}{% endblock %}
+
+{% block meta %}
+    <link rel="canonical" href="{{ BASE_URL }}/certificado/" />
+    <meta name="description" content="Busca e geração de certificado do Dev in Cachu 2012" />
+    <meta name="keywords" content="devincachu, dev in cachu 2012, certificado" />
+{% endblock %}
+
+{% block og %}
+    <meta property="og:title" content="Busca e geração de certificado" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ BASE_URL }}/certificado/" />
+    <meta property="og:image" content="{{ STATIC_URL }}img/logo-devincachu-facebook.png" />
+    <meta property="og:description" content="Página para buscar e gerar um certificado do Dev in Cachu 2012" />
+{% endblock %}
+
+{% block coluna_central %}
+    <h1>Busca e geração de certificado</h1>
+
+    <p>Informe o seu e-mail abaixo para ver seu certificado! O certificado será exibido em formato HTML, e poderá salvo ou impresso. <strong>Lembre-se de utilizar o mesmo e-mail que você utilizou para se inscrever no evento.</strong></p>
+
+    {% if msg %}
+        <div class="disclaimer">{{ msg }}</div>
+    {% endif %}
+
+    <form action="" method="post" accept-charset="utf-8" id="certificado">
+        {% csrf_token %}
+        {{ form.email }}
+        <button type="submit" class="btn primary">Ok</submit>
+    </form>
+{% endblock %}

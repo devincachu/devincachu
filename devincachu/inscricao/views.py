@@ -5,7 +5,7 @@ import requests
 
 from django import http
 from django.conf import settings
-from django.core import mail
+from django.core import mail, urlresolvers
 from django.template import loader, response
 from django.views.generic import base, detail
 
@@ -194,3 +194,27 @@ class ValidacaoCertificado(base.View):
             contexto["certificado"] = cert
             template_name = "certificado_valido.html"
         return response.TemplateResponse(request, template_name, contexto)
+
+
+class BuscarCertificado(base.View):
+
+    def get(self, request):
+        form = forms.BuscarCertificado()
+        return response.TemplateResponse(request, "form_busca_certificado.html", {"form": form})
+
+    def post(self, request):
+        msg = None
+        form = forms.BuscarCertificado(request.POST)
+        cert = form.obter_certificado()
+        if cert is None:
+            email = form.cleaned_data["email"]
+            try:
+                participante = models.Participante.objects.get(email=email)
+                cert = models.Certificado.gerar_certificado(participante)
+            except models.Participante.DoesNotExist:
+                cert = None
+                msg = u"E-mail não encontrado. Certifique-se de que você digitou o e-mail corretamente."
+        if cert is not None:
+            return http.HttpResponseRedirect(urlresolvers.reverse("certificado", kwargs={"slug": cert.hash}))
+        msg = msg or u"Você está inscrito, porém sua inscrição não foi confirmada. Logo, você não tem direito a certificado."
+        return response.TemplateResponse(request, "form_busca_certificado.html", {"form": form, "msg": msg})
