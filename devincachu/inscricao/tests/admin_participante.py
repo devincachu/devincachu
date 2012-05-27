@@ -53,6 +53,9 @@ class AdminParticipanteTestCase(unittest.TestCase):
     def test_deve_exibir_status_na_listagem(self):
         self.assertIn("status", admin.ParticipanteAdmin.list_display)
 
+    def test_deve_exibir_se_estava_presente(self):
+        self.assertIn("presente", admin.ParticipanteAdmin.list_display)
+
     def test_deve_permitir_buscar_pelo_nome(self):
         self.assertIn("nome", admin.ParticipanteAdmin.search_fields)
 
@@ -67,6 +70,9 @@ class AdminParticipanteTestCase(unittest.TestCase):
 
     def test_deve_permitir_filtrar_pelo_status(self):
         self.assertIn("status", admin.ParticipanteAdmin.list_filter)
+
+    def test_deve_permitir_filtrar_os_presentes(self):
+        self.assertIn("presente", admin.ParticipanteAdmin.list_filter)
 
     def test_action_confirma_presenca(self):
         factory = client.RequestFactory()

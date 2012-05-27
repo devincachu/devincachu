@@ -33,8 +33,8 @@ confirmar_presenca.short_description = u"Confirmar presença"
 
 
 class ParticipanteAdmin(admin.ModelAdmin):
-    list_display = (u"nome", u"cidade", u"sexo", u"email", u"empresa", u"instituicao_ensino", u"tamanho_camiseta", u"status",)
-    list_filter = (u"tamanho_camiseta", u"sexo", u"status",)
+    list_display = (u"nome", u"cidade", u"sexo", u"email", u"empresa", u"instituicao_ensino", u"tamanho_camiseta", u"presente", u"status",)
+    list_filter = (u"tamanho_camiseta", u"sexo", u"status", u"presente")
     search_fields = (u"nome", u"email",)
     actions = (confirmar_presenca,)
 
