@@ -27,10 +27,16 @@ class ConfiguracaoAdmin(admin.ModelAdmin):
         return False
 
 
+def confirmar_presenca(modeladmin, request, queryset):
+    queryset.update(status=u"PRESENTE")
+confirmar_presenca.short_description = u"Confirmar presença"
+
+
 class ParticipanteAdmin(admin.ModelAdmin):
     list_display = (u"nome", u"cidade", u"sexo", u"email", u"empresa", u"instituicao_ensino", u"tamanho_camiseta", u"status",)
     list_filter = (u"tamanho_camiseta", u"sexo", u"status",)
     search_fields = (u"nome", u"email",)
+    actions = (confirmar_presenca,)
 
 admin.site.register(models.Checkout, CheckoutAdmin)
 admin.site.register(models.Configuracao, ConfiguracaoAdmin)
