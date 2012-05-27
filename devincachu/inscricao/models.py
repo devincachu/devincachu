@@ -29,6 +29,7 @@ class Participante(models.Model):
         (u'PALESTRANTE', u'Palestrante'),
         (u'ORGANIZACAO', u'Organização'),
         (u'CARAVANA', u'Caravana'),
+        (u'PRESENTE', u'Presente'),
     )
 
     nome = models.CharField(max_length=100)
@@ -46,7 +47,7 @@ class Participante(models.Model):
 
     @property
     def presente(self):
-        return self.status not in (u'CANCELADO', u'AGUARDANDO')
+        return self.status == u'PRESENTE'
 
     class Meta:
         unique_together = ((u'email', u'status',),)
