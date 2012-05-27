@@ -28,7 +28,7 @@ class ConfiguracaoAdmin(admin.ModelAdmin):
 
 
 def confirmar_presenca(modeladmin, request, queryset):
-    queryset.update(status=u"PRESENTE")
+    queryset.update(presente=True)
 confirmar_presenca.short_description = u"Confirmar presença"
 
 

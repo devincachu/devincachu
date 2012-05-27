@@ -29,7 +29,6 @@ class Participante(models.Model):
         (u'PALESTRANTE', u'Palestrante'),
         (u'ORGANIZACAO', u'Organização'),
         (u'CARAVANA', u'Caravana'),
-        (u'PRESENTE', u'Presente'),
     )
 
     nome = models.CharField(max_length=100)
@@ -41,13 +40,10 @@ class Participante(models.Model):
     tamanho_camiseta = models.CharField(max_length=2, verbose_name=u"Tamanho da camiseta", choices=TAMANHOS_DE_CAMISETA)
     instituicao_ensino = models.CharField(max_length=100, verbose_name=u"Instituição de ensino (para estudantes)", blank=True, null=True)
     empresa = models.CharField(max_length=100, verbose_name=u"Empresa onde trabalha", blank=True, null=True)
+    presente = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.nome
-
-    @property
-    def presente(self):
-        return self.status == u'PRESENTE'
 
     class Meta:
         unique_together = ((u'email', u'status',),)

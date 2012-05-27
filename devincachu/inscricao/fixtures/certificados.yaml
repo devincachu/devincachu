@@ -17,8 +17,9 @@
     email: joaozinho@devincachu.com.br
     cidade: "Cachoeiro de Itapemirim"
     sexo: M
-    status: PRESENTE
+    status: CONFIRMADO
     tamanho_camiseta: GG
+    presente: 1
 
 - model: inscricao.Participante
   pk: 3
@@ -28,8 +29,9 @@
     email: pedrinho@devincachu.com.br
     cidade: Alegre
     sexo: M
-    status: PRESENTE
+    status: CORTESIA
     tamanho_camiseta: M
+    presente: 1
 
 - model: inscricao.Certificado
   pk: 1
