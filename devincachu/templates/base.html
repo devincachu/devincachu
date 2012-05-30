@@ -52,8 +52,13 @@
                                     <li><a href="{% url palestrantes %}" title="Conheça os palestrantes do Dev in Cachu 2012">Palestrantes</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/vagas/" title="Oportunidades de trabalho na Giran, Globo.com e Thoughtworks!">Oportunidades</a></li>
-                            <li><a href="/patrocinio/" title="Patrocine o Dev in Cachu 2012!">Patrocínio</a></li>
+                            <li class="dropdown">
+                                <a href="{% url busca_certificado %}" title="Gerar/buscar certificado">Certificado</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url busca_certificado %}" title="Gerar/buscar certificado">Geração/busca de certificado</a></li>
+                                    <li><a href="{% url validacao_certificado %}" title="Validar certificado">Validação de certificado</a></li>
+                                </ul>
+                            </li>
                             <li><a href="/contato/" title="Entre em contato com a organização do Dev in Cachu 2012">Contato</a></li>
                             <li><a href="/2011" title="Veja o site da edição passada do Dev in Cachu">/2011</a></li>
                         </ul>
