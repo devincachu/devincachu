@@ -157,3 +157,12 @@ class BuscarCertificadoViewTestCase(test.TestCase):
         self.assertEqual("form_busca_certificado.html", resp.template_name)
         msg = u"E-mail não encontrado. Certifique-se de que você digitou o e-mail corretamente."
         self.assertEqual(msg, resp.context_data["msg"])
+
+    def test_post_deve_retornar_pagina_com_formulario_caso_formulario_nao_seja_valido(self):
+        request = self.factory.post("/certificado/", {"email": ""})
+        view = views.BuscarCertificado()
+        resp = view.post(request)
+        self.assertIsInstance(resp, response.TemplateResponse)
+        self.assertEqual("form_busca_certificado.html", resp.template_name)
+        msg = u"O campo e-mail é obrigatório e deve ser um e-mail válido."
+        self.assertEqual(msg, resp.context_data["msg"])

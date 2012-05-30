@@ -206,7 +206,7 @@ class BuscarCertificado(base.View):
         msg = None
         form = forms.BuscarCertificado(request.POST)
         cert = form.obter_certificado()
-        if cert is None:
+        if cert is None and form.is_valid():
             email = form.cleaned_data["email"]
             try:
                 participante = models.Participante.objects.get(email=email)
@@ -214,6 +214,8 @@ class BuscarCertificado(base.View):
             except models.Participante.DoesNotExist:
                 cert = None
                 msg = u"E-mail não encontrado. Certifique-se de que você digitou o e-mail corretamente."
+        if not form.is_valid():
+            msg = u"O campo e-mail é obrigatório e deve ser um e-mail válido."
         if cert is not None:
             return http.HttpResponseRedirect(urlresolvers.reverse("certificado", kwargs={"slug": cert.hash}))
         msg = msg or u"Você está inscrito, porém sua inscrição não foi confirmada. Logo, você não tem direito a certificado."
