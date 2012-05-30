@@ -35,6 +35,14 @@ class ViewCertificadoTestCase(test.TestCase):
             v = views.Certificado()
             self.assertEqual("Joaozinho", v.queryset[0].participante.nome)
 
+    def test_deve_ficar_no_cache_por_1_ano(self):
+        certificado = models.Certificado.objects.get(pk=1)
+        factory = client.RequestFactory()
+        request = factory.get("/certificado/%s/" % certificado.hash)
+        v = views.Certificado()
+        resp = v.dispatch(request, slug=certificado.hash)
+        self.assertEqual("max-age=31536000", resp["Cache-Control"])
+
 
 class ValidacaoCertificado(test.TestCase):
 
