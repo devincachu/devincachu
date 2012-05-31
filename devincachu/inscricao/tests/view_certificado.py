@@ -154,7 +154,7 @@ class BuscarCertificadoViewTestCase(test.TestCase):
         resp = view.post(request)
         self.assertIsInstance(resp, response.TemplateResponse)
         self.assertEqual("form_busca_certificado.html", resp.template_name)
-        msg = u"Você está inscrito, porém sua inscrição não foi confirmada. Logo, você não tem direito a certificado."
+        msg = u"E-mail não encontrado. Certifique-se de que você digitou o e-mail corretamente. Caso você considere essa mensagem incorreta, por favor entre em contato conosco"
         self.assertEqual(msg, resp.context_data["msg"])
 
     def test_post_deve_retornar_pagina_com_formulario_caso_email_nao_esteja_inscrito(self):
@@ -163,7 +163,7 @@ class BuscarCertificadoViewTestCase(test.TestCase):
         resp = view.post(request)
         self.assertIsInstance(resp, response.TemplateResponse)
         self.assertEqual("form_busca_certificado.html", resp.template_name)
-        msg = u"E-mail não encontrado. Certifique-se de que você digitou o e-mail corretamente."
+        msg = u"E-mail não encontrado. Certifique-se de que você digitou o e-mail corretamente. Caso você considere essa mensagem incorreta, por favor entre em contato conosco"
         self.assertEqual(msg, resp.context_data["msg"])
 
     def test_post_deve_retornar_pagina_com_formulario_caso_formulario_nao_seja_valido(self):

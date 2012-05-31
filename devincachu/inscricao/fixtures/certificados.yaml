@@ -33,6 +33,18 @@
     tamanho_camiseta: M
     presente: 1
 
+- model: inscricao.Participante
+  pk: 4
+  fields:
+    nome: Pedrinho Danado
+    nome_cracha: Pedro
+    email: pedrinho@devincachu.com.br
+    cidade: Alegre
+    sexo: M
+    status: AGUARDANDO
+    tamanho_camiseta: M
+    presente: 0
+
 - model: inscricao.Certificado
   pk: 1
   fields:
