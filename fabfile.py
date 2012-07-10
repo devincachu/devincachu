@@ -5,7 +5,7 @@ from fabric.api import cd, env, run, settings
 
 env.root = os.path.dirname(__file__)
 env.app = os.path.join(env.root, 'devincachu')
-env.base_dir = '/usr/home/devincachu'
+env.base_dir = 'home/devincachu'
 env.project_root = os.path.join(env.base_dir, 'devincachu')
 env.app_root = os.path.join(env.project_root, 'devincachu')
 env.virtualenv = os.path.join(env.project_root, 'env')
@@ -57,7 +57,7 @@ def graceful_gunicorn():
 
 
 def restart_nginx():
-    run("su -m root -c '/usr/local/etc/rc.d/nginx restart'")
+    run("su -m root -c '/usr/local/bin/nginx -s restart'")
 
 
 def clean():
