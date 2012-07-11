@@ -5,7 +5,7 @@ from fabric.api import cd, env, run, settings
 
 env.root = os.path.dirname(__file__)
 env.app = os.path.join(env.root, 'devincachu')
-env.base_dir = 'home/devincachu'
+env.base_dir = '/home/devincachu'
 env.project_root = os.path.join(env.base_dir, 'devincachu')
 env.app_root = os.path.join(env.project_root, 'devincachu')
 env.virtualenv = os.path.join(env.project_root, 'env')
