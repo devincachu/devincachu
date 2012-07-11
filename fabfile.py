@@ -57,7 +57,7 @@ def graceful_gunicorn():
 
 
 def restart_nginx():
-    run("su -m root -c '/usr/local/bin/nginx -s restart'")
+    run("su -m root -c '/usr/local/sbin/nginx -s reopen'")
 
 
 def clean():
