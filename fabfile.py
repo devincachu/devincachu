@@ -10,6 +10,8 @@ env.project_root = os.path.join(env.base_dir, 'devincachu')
 env.app_root = os.path.join(env.project_root, 'devincachu')
 env.virtualenv = os.path.join(env.project_root, 'env')
 env.shell = '/bin/sh -c'
+env.hosts = ['2012.devincachu.com.br']
+env.user = 'devincachu'
 
 
 def update_app():
