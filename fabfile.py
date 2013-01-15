@@ -43,7 +43,7 @@ def syncdb():
 
 def start_gunicorn():
     with cd(env.app_root):
-        run('%(virtualenv)s/bin/gunicorn_django --pid=gunicorn.pid --daemon --workers=3 --access-logfile=devincachu_access.log --error-logfile=devincachu_error.log --bind=unix:/tmp/devincachu.sock' % env)
+        run('%(virtualenv)s/bin/gunicorn_django --pid=gunicorn.pid --daemon --workers=3 --access-logfile=devincachu_access.log --error-logfile=devincachu_error.log --bind=127.0.0.1:8888' % env)
 
 
 def stop_gunicorn():
