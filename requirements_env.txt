@@ -4,7 +4,7 @@ django_htmlmin==0.5
 MySQL-Python==1.2.3
 gunicorn==0.13.4
 Markdown==2.0.3
-python-memcached==1.4.8
+python-memcached==1.48
 roan==0.1
 PIL==1.1.7
 slimit==0.5.5
